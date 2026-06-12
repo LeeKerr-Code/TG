@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>T&G Content Manager</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --gold: #A07C30;
+  --gold-light: #C9A55A;
+  --deep: #0F0D0C;
+  --warm: #F0E8DC;
+  --warm2: #E8DDD0;
+  --muted: #5A5450;
+  --border: #D8D0C4;
+  --white: #FEFCF9;
+  --navy: #3D5070;
+  --success: #4A7C59;
+  --danger: #8B3A3A;
+  --sidebar-w: 260px;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: #F2EDE6;
+  color: var(--deep);
+  min-height: 100vh;
+  display: flex;
+  overflow-x: hidden;
+}
+
+/* ── SIDEBAR ── */
+.sidebar {
+  width: var(--sidebar-w);
+  min-height: 100vh;
+  background: var(--deep);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  left: 0; top: 0; bottom: 0;
+  z-index: 100;
+  overflow-y: auto;
+}
+
+.sidebar-brand {
+  padding: 28px 24px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.sidebar-brand-top {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.9);
+}
+.sidebar-brand-top .amp { color: var(--gold); font-style: italic; font-weight: 400; }
+.sidebar-brand-rule {
+  width: 100%; height: 1px;
+  background: linear-gradient(to right, var(--gold), transparent);
+  margin: 5px 0;
+}
+.sidebar-brand-sub {
+  font-size: 8px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.sidebar-label {
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.28);
+  padding: 20px 24px 8px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 24px;
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.55);
+  cursor: pointer;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  transition: all 0.15s;
+  border-left: 2px solid transparent;
+  text-decoration: none;
+}
+.nav-item:hover { color: rgba(255,255,255,0.88); background: rgba(255,255,255,0.04); }
+.nav-item.active { color: rgba(255,255,255,0.95); background: rgba(160,124,48,0.12); border-left-color: var(--gold); }
+.nav-item-icon { font-size: 14px; width: 18px; text-align: center; flex-shrink: 0; }
+
+.sidebar-footer {
+  margin-top: auto;
+  padding: 20px 24px;
+  border-top: 1px solid rgba(255,255,255,0.07);
+}
+.sidebar-footer p { font-size: 11px; color: rgba(255,255,255,0.3); line-height: 1.6; }
+
+/* ── MAIN ── */
+.main {
+  margin-left: var(--sidebar-w);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.topbar {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.topbar-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; color: var(--deep); }
+.topbar-title span { color: var(--gold); font-style: italic; }
+.topbar-actions { display: flex; gap: 10px; align-items: center; }
+
+.btn {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  padding: 9px 20px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-radius: 2px;
+}
+.btn-primary { background: var(--navy); color: #fff; }
+.btn-primary:hover { background: var(--gold); }
+.btn-gold { background: var(--gold); color: #fff; }
+.btn-gold:hover { background: #8a6820; }
+.btn-outline { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+.btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+.btn-danger { background: transparent; color: var(--danger); border: 1px solid rgba(139,58,58,0.3); }
+.btn-danger:hover { background: var(--danger); color: #fff; }
+.btn-sm { padding: 6px 14px; font-size: 10px; }
+
+/* ── CONTENT AREA ── */
+.content { padding: 32px 36px; flex: 1; }
+
+/* ── PANEL ── */
+.panel {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  margin-bottom: 20px;
+}
+.panel-header {
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.panel-title {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 500;
+}
+.panel-body { padding: 24px; }
+
+/* ── FORM ELEMENTS ── */
+.field { margin-bottom: 20px; }
+.field:last-child { margin-bottom: 0; }
+.label {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--deep);
+  font-weight: 500;
+  margin-bottom: 7px;
+}
+.label-hint { font-size: 10px; color: var(--muted); text-transform: none; letter-spacing: 0; font-weight: 400; margin-left: 6px; }
+.input, .textarea, .select {
+  width: 100%;
+  background: #F8F3EE;
+  border: 1px solid var(--border);
+  padding: 10px 14px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  color: var(--deep);
+  outline: none;
+  transition: border-color 0.2s;
+  border-radius: 2px;
+}
+.input:focus, .textarea:focus, .select:focus { border-color: var(--gold); background: #fff; }
+.textarea { min-height: 100px; resize: vertical; line-height: 1.7; }
+.textarea-tall { min-height: 160px; }
+.input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.input-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+
+/* ── SECTION TABS ── */
+.section-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+  background: var(--white);
+  overflow-x: auto;
+}
+.section-tab {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 14px 22px;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: var(--muted);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  white-space: nowrap;
+  transition: all 0.15s;
+}
+.section-tab:hover { color: var(--deep); }
+.section-tab.active { color: var(--gold); border-bottom-color: var(--gold); font-weight: 500; }
+
+/* ── DASHBOARD ── */
+.dash-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+.stat-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  padding: 22px 24px;
+  border-radius: 2px;
+}
+.stat-card-label { font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.stat-card-value { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 300; color: var(--deep); line-height: 1; }
+.stat-card-value span { font-size: 18px; color: var(--gold); }
+.stat-card-sub { font-size: 11px; color: var(--muted); margin-top: 6px; }
+
+.page-list-item {
+  display: flex;
+  align-items: center;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+  gap: 14px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.page-list-item:last-child { border-bottom: none; }
+.page-list-item:hover { background: #F8F3EE; }
+.page-icon {
+  width: 36px; height: 36px;
+  border: 1px solid rgba(160,124,48,0.25);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px;
+  flex-shrink: 0;
+  color: var(--gold);
+}
+.page-name { font-size: 14px; font-weight: 500; color: var(--deep); }
+.page-file { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.page-arrow { margin-left: auto; color: var(--muted); font-size: 12px; }
+
+/* ── TOAST ── */
+.toast-container { position: fixed; bottom: 28px; right: 28px; z-index: 999; display: flex; flex-direction: column; gap: 10px; }
+.toast {
+  background: var(--deep);
+  color: rgba(255,255,255,0.88);
+  padding: 13px 20px;
+  font-size: 13px;
+  border-left: 3px solid var(--gold);
+  border-radius: 2px;
+  min-width: 260px;
+  animation: slideIn 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.toast.success { border-left-color: #4A7C59; }
+.toast.error { border-left-color: var(--danger); }
+@keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+
+/* ── AI ASSIST ── */
+.ai-bar {
+  background: linear-gradient(135deg, #1A1614 0%, #2A2420 100%);
+  border: 1px solid rgba(160,124,48,0.2);
+  padding: 16px 20px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+  margin-bottom: 20px;
+  border-radius: 2px;
+}
+.ai-bar-label { font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+.ai-input {
+  flex: 1;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 10px 14px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  color: rgba(255,255,255,0.88);
+  outline: none;
+  border-radius: 2px;
+  width: 100%;
+}
+.ai-input:focus { border-color: var(--gold); }
+.ai-input::placeholder { color: rgba(255,255,255,0.3); }
+.ai-btn {
+  background: var(--gold);
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  white-space: nowrap;
+  border-radius: 2px;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.ai-btn:hover { background: #8a6820; }
+.ai-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.ai-spinner { display: inline-block; width: 12px; height: 12px; border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: spin 0.7s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── PREVIEW PANE ── */
+.preview-frame {
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  background: var(--white);
+  overflow: hidden;
+}
+.preview-bar {
+  background: #F2EDE6;
+  border-bottom: 1px solid var(--border);
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.preview-dot { width: 10px; height: 10px; border-radius: 50%; }
+.preview-url {
+  flex: 1;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 4px 12px;
+  font-size: 11px;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* ── SECTION EDITOR ── */
+.section-block {
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  margin-bottom: 12px;
+  background: var(--white);
+  transition: border-color 0.2s;
+}
+.section-block:hover { border-color: rgba(160,124,48,0.4); }
+.section-block-header {
+  display: flex;
+  align-items: center;
+  padding: 13px 18px;
+  gap: 12px;
+  cursor: pointer;
+  user-select: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+.section-block.open .section-block-header { border-bottom-color: var(--border); }
+.section-block-handle { color: var(--muted); font-size: 13px; cursor: grab; }
+.section-block-type { font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); background: rgba(160,124,48,0.08); padding: 3px 8px; border-radius: 2px; }
+.section-block-title { font-size: 13px; font-weight: 500; color: var(--deep); flex: 1; }
+.section-block-toggle { color: var(--muted); font-size: 11px; transition: transform 0.2s; }
+.section-block.open .section-block-toggle { transform: rotate(180deg); }
+.section-block-body { padding: 20px; display: none; }
+.section-block.open .section-block-body { display: block; }
+
+/* ── FIELD GROUPS ── */
+.field-group {
+  background: #F8F3EE;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+.field-group-label {
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ── SAVED INDICATOR ── */
+.save-status { font-size: 11px; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+.save-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--border); }
+.save-dot.saved { background: #4A7C59; }
+.save-dot.unsaved { background: #C08A30; }
+
+/* ── MOBILE SIDEBAR TOGGLE ── */
+.sidebar-toggle { display: none; position: fixed; bottom: 20px; right: 20px; z-index: 200; background: var(--deep); color: #fff; border: none; width: 48px; height: 48px; border-radius: 50%; font-size: 18px; cursor: pointer; }
+
+@media (max-width: 900px) {
+  .sidebar { transform: translateX(-100%); transition: transform 0.3s; }
+  .sidebar.open { transform: translateX(0); }
+  .main { margin-left: 0; }
+  .dash-grid { grid-template-columns: 1fr 1fr; }
+  .input-row, .input-row-3 { grid-template-columns: 1fr; }
+  .sidebar-toggle { display: flex; align-items: center; justify-content: center; }
+  .content { padding: 20px 18px; }
+  .topbar { padding: 14px 18px; }
+}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-brand">
+    <div class="sidebar-brand-top">Turner <span class="amp">&amp;</span> Goldrich</div>
+    <div class="sidebar-brand-rule"></div>
+    <div class="sidebar-brand-sub">Content Manager</div>
+  </div>
+
+  <div class="sidebar-label">Overview</div>
+  <button class="nav-item active" onclick="showView('dashboard')">
+    <span class="nav-item-icon">⊞</span> Dashboard
+  </button>
+
+  <div class="sidebar-label">Pages</div>
+  <button class="nav-item" onclick="showView('homepage')">
+    <span class="nav-item-icon">⌂</span> Homepage
+  </button>
+  <button class="nav-item" onclick="showView('about')">
+    <span class="nav-item-icon">◎</span> About
+  </button>
+  <button class="nav-item" onclick="showView('aesthetics')">
+    <span class="nav-item-icon">✦</span> Aesthetics
+  </button>
+  <button class="nav-item" onclick="showView('services')">
+    <span class="nav-item-icon">⬡</span> Services
+  </button>
+  <button class="nav-item" onclick="showView('specials')">
+    <span class="nav-item-icon">◈</span> Specials
+  </button>
+  <button class="nav-item" onclick="showView('downloads')">
+    <span class="nav-item-icon">↓</span> Downloads
+  </button>
+  <button class="nav-item" onclick="showView('contact')">
+    <span class="nav-item-icon">◻</span> Contact
+  </button>
+
+  <div class="sidebar-label">Settings</div>
+  <button class="nav-item" onclick="showView('global')">
+    <span class="nav-item-icon">◉</span> Global Settings
+  </button>
+
+  <div class="sidebar-footer">
+    <p>Changes are saved to your browser and exported as updated HTML files ready to upload.</p>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="topbar">
+    <div class="topbar-title" id="topbarTitle">Dashboard <span>Overview</span></div>
+    <div class="topbar-actions">
+      <div class="save-status"><div class="save-dot saved" id="saveDot"></div><span id="saveLabel">All changes saved</span></div>
+      <button class="btn btn-outline btn-sm" onclick="previewSite()">Preview Site</button>
+      <button class="btn btn-primary btn-sm" onclick="exportAll()">Export HTML Files</button>
+    </div>
+  </div>
+
+  <div class="content" id="contentArea">
+    <!-- Views injected here -->
+  </div>
+</div>
+
+<!-- TOAST CONTAINER -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- MOBILE TOGGLE -->
+<button class="sidebar-toggle" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
+
+<script>
+// ─── STATE ───────────────────────────────────────────────────────────────────
+const state = {
+  global: {
+    labName: 'Turner & Goldrich',
+    tagline: 'Dental Laboratory · Est. 1973',
+    phone: '+44 (0)20 7625 4591',
+    email: 'turnergoldrich@yahoo.co.uk',
+    address: 'Elite House Office 1, Unit 8 The Courtyard, 100 Villiers Road, London NW2 5PJ',
+  },
+  homepage: {
+    heroEyebrow: 'Est. 1973',
+    heroTitle: 'Blending hand skills with technology,',
+    heroTitleItalic: 'we create art so your patients can smile.',
+    heroSub: 'Turner & Goldrich are elite dental implant specialists dedicated to the craft of smile restoration — where clinical precision meets artistic vision, every time.',
+    heroCta: 'Book a Consultation',
+    stat1Num: '20+', stat1Label: 'Years Experience',
+    stat2Num: '3k+', stat2Label: 'Implants Placed',
+    stat3Num: '98%', stat3Label: 'Satisfaction',
+    trustItem1: 'GDC Registered Practice',
+    trustItem2: 'Interest-Free Finance',
+    trustItem3: 'Same-Day Consultations',
+    trustItem4: 'Lifetime Aftercare Guarantee',
+    servicesTitle: 'Our services',
+    aboutTitle: "London's trusted implant specialists",
+    aboutBody1: 'Turner & Goldrich is an elite dental implant practice based in the heart of North London. We have been dedicated to restoring smiles for over two decades, combining surgical expertise with an unwavering commitment to patient comfort and care.',
+    aboutBody2: 'Our principal specialists hold advanced qualifications in implantology and undergo continuous professional development to bring you the very latest in implant technology. Every treatment plan is designed around you — your anatomy, your goals, your life.',
+    ctaTitle: 'Ready to begin your journey?',
+    ctaBody: 'Book a no-obligation consultation and take the first step towards the smile you deserve. Our team will get back to you within one working day.',
+    testimonial1Name: 'Catherine W.', testimonial1Text: 'Turner & Goldrich restored not just my smile, but my confidence. After years of hiding my teeth, I finally feel like myself again.',
+    testimonial2Name: 'Margaret T.', testimonial2Text: 'I was nervous for years about getting implants, but the team at Turner & Goldrich made the whole experience straightforward and reassuring.',
+    testimonial3Name: 'David R.', testimonial3Text: 'From the first consultation to the final fitting, I was in excellent hands. The standard of care here is truly exceptional.',
+  },
+  about: {
+    heroEyebrow: 'Est. 1973',
+    heroTitle: 'The laboratory',
+    heroSub: 'Over fifty years of specialist crown and bridge work — built on craftsmanship, precision and long-lasting partnerships with dentists across London and beyond.',
+    storyTitle: 'A laboratory built on trust',
+    storyBody1: 'Turner and Goldrich was founded by David Turner and Shraga Goldrich in 1973 and since that time has been specialising in crown and bridge work. We have over the years, become a highly respected and reputable laboratory and have maintained a long list of regular clients during those years for whom cosmetic work is our speciality.',
+    storyBody2: 'After 12 years in Harley Street, the laboratory re-located to St. John\'s Wood, North West London. Preyesh Khatri has been with Turner and Goldrich since 2000 and has always maintained an important position at the lab and since October 2011 has become Managing Director, and recently relocated to Willesden Green.',
+    storyBody3: 'The aim of the laboratory from the beginning was to produce high quality, custom-made dental appliances according to the required prescription, which will satisfy all technical, anatomical and aesthetic criteria. We have a specialist team of dedicated Dental Technicians, all of whom are registered with the GDC and all of whom have over fifteen years of experience.',
+    storyBody4: 'The laboratory does work for dental surgeons throughout the London area, the British Isles, including the Channel Islands.',
+    highlightText: 'As we are a manufacturer of custom-made products, keeping up-to-date with the latest developments in Dentistry helps us maintain a high standard, especially as the dental field is constantly changing and evolving.',
+    clientsTitle: 'Partnerships that last decades',
+    clientsBody1: 'We have a very loyal client base that has been established over the laboratory\'s 40 years of providing a consistent service. Our continued success is based on our provision of excellent service which is only possible through good communications between us and our dentists.',
+    clientsBody2: 'We welcome new clients to join us and our team in providing patients with restorations that they are happy with. Some cases require us working together from the very beginning, helping with treatment planning, materials to be used and ideas on the best type of restoration for each individual case.',
+    clientsBody3: 'We pride ourselves in achieving long-lasting relationships built with our current clients, and endeavour to do so with all our new clients as well.',
+  },
+  aesthetics: {
+    heroTitle: 'Not just technicians — artists, designers and creators',
+    heroSub: 'Aesthetics is a branch of philosophy dealing with the nature of art, beauty, and taste. In support of the eye of the beholder, we specialise in art, beauty and taste in our technical abilities and expertise for all things beautiful in our aesthetic dentistry.',
+    body1: 'Be it a single restoration, an implant crown or a full-arch reconstruction, we offer various solutions which provide patients with amazing aesthetics, resulting in many cases, a life-changing experience for the patient.',
+    body2: 'Our master ceramists are able to layer porcelain with different internal colours, to achieve the subtle nuances seen in natural dentition. This attention to detail plays a large part in harmonising a patient\'s facial element to a cosmetic treatment which comes from years of observation and experience.',
+    body3: 'For these cases, we offer processes which include a consultation with the patient, shade taking, diagnostic wax-ups, porcelain build-ups and final colouration. We provide to our clients a professional outcome with positive aesthetic conclusions for their patients.',
+    quote: 'After all, we are not just Dental Technicians, but Artists, Designers and Creators.',
+    caseStudy: 'Lower Implant Section — Metal fused to porcelain, part of a complete reconstruction',
+  },
+  specials: {
+    heroTitle: 'Specials for our clients',
+    heroSub: 'With the expansion of Turner & Goldrich in 2015, we are offering to our existing clients and new clients monthly specials to help increase the private sectors of dentistry, both yours and ours.',
+    currentOffer: 'IPS e.max Layered Restorations',
+    normalPrice: '£120',
+    specialPrice: 'Coming Soon',
+    offerDesc: 'Single or multiple IPS e.max layered restorations at a special rate. Take advantage of our various special offers throughout the year.',
+    newsletterBody: 'Sign up for our e-mail newsletter that will keep you informed of what specials we are running and on what type of restoration. You will then be directly informed of what is on offer.',
+    signupNote: 'Please send your name, practice name and your email address.',
+  },
+  downloads: {
+    heroTitle: 'Laboratory downloads',
+    heroSub: 'Our laboratory work sheet acts as an Rx and an invoice all in one — making for easier accounting, filing and work-flow.',
+    doc1Title: '2020 Laboratory Work Sheet',
+    doc1Desc: 'Our laboratory work sheet acts as an Rx and an invoice all in one. This makes for easier accounting, filing and work-flow. We return your case with all your original information that includes the total cost. Download as JPEG, A4 format.',
+    doc1Link: 'https://www.turnergoldrich.com/download_labsheet/2020 LABSHEET.jpg',
+  },
+  contact: {
+    heroTitle: "We'd love to hear from you",
+    heroSub: 'Whether you\'re an existing client or looking to work with us for the first time, we welcome you. Get in touch and a member of our team will respond promptly.',
+    areasServed: 'The laboratory does work for dental surgeons throughout the London area, the British Isles, including the Channel Islands.',
+  }
+};
+
+// Load saved state
+try {
+  const saved = localStorage.getItem('tg_cms_state');
+  if (saved) Object.assign(state, JSON.parse(saved));
+} catch(e) {}
+
+function saveState() {
+  try {
+    localStorage.setItem('tg_cms_state', JSON.stringify(state));
+    document.getElementById('saveDot').className = 'save-dot saved';
+    document.getElementById('saveLabel').textContent = 'All changes saved';
+  } catch(e) {}
+}
+
+function markUnsaved() {
+  document.getElementById('saveDot').className = 'save-dot unsaved';
+  document.getElementById('saveLabel').textContent = 'Unsaved changes';
+}
+
+// ─── VIEWS ───────────────────────────────────────────────────────────────────
+const views = {
+
+  dashboard: () => `
+    <div class="dash-grid">
+      <div class="stat-card">
+        <div class="stat-card-label">Total Pages</div>
+        <div class="stat-card-value">7<span></span></div>
+        <div class="stat-card-sub">All editable below</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-label">Lab Founded</div>
+        <div class="stat-card-value">19<span>73</span></div>
+        <div class="stat-card-sub">Over 50 years trading</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-label">Contact</div>
+        <div class="stat-card-value" style="font-size:18px; margin-top:4px;">020<span style="font-size:14px"> 7625 4591</span></div>
+        <div class="stat-card-sub">Edit in Global Settings</div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header"><div class="panel-title">Pages — Click to Edit</div></div>
+      ${[
+        ['homepage','⌂','Homepage','turnergoldrich-reimagined.html','Hero, stats, services, testimonials, contact CTA'],
+        ['about','◎','About','about.html','Lab history, team, client relationships'],
+        ['aesthetics','✦','Aesthetics','aesthetics.html','Philosophy, process, case studies'],
+        ['services','⬡','Services','services.html','PFM, IPS e.max, Zirconia technical guidelines'],
+        ['specials','◈','Specials','specials.html','Current offers, newsletter signup'],
+        ['downloads','↓','Downloads','downloads.html','Lab sheet downloads'],
+        ['contact','◻','Contact','contact.html','Contact details, enquiry form'],
+      ].map(([view, icon, name, file, desc]) => `
+        <div class="page-list-item" onclick="showView('${view}')">
+          <div class="page-icon">${icon}</div>
+          <div>
+            <div class="page-name">${name}</div>
+            <div class="page-file">${file} &nbsp;·&nbsp; ${desc}</div>
+          </div>
+          <div class="page-arrow">→</div>
+        </div>
+      `).join('')}
+    </div>
+  `,
+
+  homepage: () => `
+    <div class="ai-bar">
+      <div style="flex:1">
+        <div class="ai-bar-label">✦ AI Writing Assistant</div>
+        <input class="ai-input" id="aiInput" placeholder="e.g. Rewrite the hero subtitle to be warmer and more welcoming…" onkeydown="if(event.key==='Enter')runAI()">
+      </div>
+      <button class="ai-btn" onclick="runAI()" id="aiBtn">
+        <span id="aiBtnText">Generate</span>
+      </button>
+    </div>
+
+    <div class="section-tabs" id="homeTabs">
+      ${['Hero','Stats & Trust','Services','About Section','Testimonials','Contact CTA'].map((t,i) =>
+        `<button class="section-tab${i===0?' active':''}" onclick="switchTab(this,'homeTab${i}')">${t}</button>`
+      ).join('')}
+    </div>
+
+    <div id="homeTab0" class="panel" style="margin-top:20px">
+      <div class="panel-header"><div class="panel-title">Hero Section</div><button class="btn btn-outline btn-sm" onclick="savePage('homepage')">Save</button></div>
+      <div class="panel-body">
+        ${field('Eyebrow label','homepage','heroEyebrow','Small text above headline')}
+        ${field('Main headline','homepage','heroTitle','Large display text')}
+        ${field('Subtitle / body text','homepage','heroSub','','textarea')}
+        ${field('CTA button text','homepage','heroCta')}
+      </div>
+    </div>
+
+    <div id="homeTab1" class="panel" style="display:none;margin-top:20px">
+      <div class="panel-header"><div class="panel-title">Stats &amp; Trust Bar</div><button class="btn btn-outline btn-sm" onclick="savePage('homepage')">Save</button></div>
+      <div class="panel-body">
+        <div class="field-group"><div class="field-group-label">Three Stats</div>
+          <div class="input-row-3">
+            ${miniField('Stat 1 Number','homepage','stat1Num')}
+            ${miniField('Stat 2 Number','homepage','stat2Num')}
+            ${miniField('Stat 3 Number','homepage','stat3Num')}
+          </div>
+          <div class="input-row-3" style="margin-top:10px">
+            ${miniField('Stat 1 Label','homepage','stat1Label')}
+            ${miniField('Stat 2 Label','homepage','stat2Label')}
+            ${miniField('Stat 3 Label','homepage','stat3Label')}
+          </div>
+        </div>
+        <div class="field-group"><div class="field-group-label">Trust Bar Items</div>
+          <div class="input-row">${miniField('Item 1','homepage','trustItem1')}${miniField('Item 2','homepage','trustItem2')}</div>
+          <div class="input-row" style="margin-top:10px">${miniField('Item 3','homepage','trustItem3')}${miniField('Item 4','homepage','trustItem4')}</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="homeTab2" class="panel" style="display:none;margin-top:20px">
+      <div class="panel-header"><div class="panel-title">Services Section</div><button class="btn btn-outline btn-sm" onclick="savePage('homepage')">Save</button></div>
+      <div class="panel-body">
+        ${field('Section title','homepage','servicesTitle')}
+        <p style="font-size:13px;color:var(--muted);margin-top:8px;">Individual service cards are managed in the <strong>Services</strong> page.</p>
+      </div>
+    </div>
+
+    <div id="homeTab3" class="panel" style="display:none;margin-top:20px">
+      <div class="panel-header"><div class="panel-title">About Section</div><button class="btn btn-outline btn-sm" onclick="savePage('homepage')">Save</button></div>
+      <div class="panel-body">
+        ${field('Section heading','homepage','aboutTitle')}
+        ${field('Paragraph 1','homepage','aboutBody1','','textarea')}
+        ${field('Paragraph 2','homepage','aboutBody2','','textarea')}
+      </div>
+    </div>
+
+    <div id="homeTab4" class="panel" style="display:none;margin-top:20px">
+      <div class="panel-header"><div class="panel-title">Testimonials</div><button class="btn btn-outline btn-sm" onclick="savePage('homepage')">Save</button></div>
+      <div class="panel-body">
+        <div class="field-group"><div class="field-group-label">Testimonial 1</div>
+          ${miniField('Patient name','homepage','testimonial1Name')}
+          <div class="field" style="margin-top:10px"><textarea class="textarea" rows="3" onchange="update('homepage','testimonial1Text',this.value)">${state.homepage.testimonial1Text}</textarea></div>
+        </div>
+        <div class="field-group"><div class="field-group-label">Testimonial 2</div>
+          ${miniField('Patient name','homepage','testimonial2Name')}
+          <div class="field" style="margin-top:10px"><textarea class="textarea" rows="3" onchange="update('homepage','testimonial2Text',this.value)">${state.homepage.testimonial2Text}</textarea></div>
+        </div>
+        <div class="field-group"><div class="field-group-label">Testimonial 3</div>
+          ${miniField('Patient name','homepage','testimonial3Name')}
+          <div class="field" style="margin-top:10px"><textarea class="textarea" rows="3" onchange="update('homepage','testimonial3Text',this.value)">${state.homepage.testimonial3Text}</textarea></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="homeTab5" class="panel" style="display:none;margin-top:20px">
+      <div class="panel-header"><div class="panel-title">Contact CTA</div><button class="btn btn-outline btn-sm" onclick="savePage('homepage')">Save</button></div>
+      <div class="panel-body">
+        ${field('CTA heading','homepage','ctaTitle')}
+        ${field('CTA body text','homepage','ctaBody','','textarea')}
+      </div>
+    </div>
+  `,
+
+  about: () => `
+    <div class="ai-bar">
+      <div style="flex:1">
+        <div class="ai-bar-label">✦ AI Writing Assistant</div>
+        <input class="ai-input" id="aiInput" placeholder="e.g. Make the client relationships section more personal and warm…" onkeydown="if(event.key==='Enter')runAI()">
+      </div>
+      <button class="ai-btn" onclick="runAI()" id="aiBtn"><span id="aiBtnText">Generate</span></button>
+    </div>
+
+    <div class="panel" style="margin-top:20px">
+      <div class="panel-header"><div class="panel-title">Page Hero</div><button class="btn btn-outline btn-sm" onclick="savePage('about')">Save</button></div>
+      <div class="panel-body">
+        ${field('Eyebrow','about','heroEyebrow')}
+        ${field('Page title','about','heroTitle')}
+        ${field('Subtitle','about','heroSub','','textarea')}
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header"><div class="panel-title">Our Story Section</div><button class="btn btn-outline btn-sm" onclick="savePage('about')">Save</button></div>
+      <div class="panel-body">
+        ${field('Section heading','about','storyTitle')}
+        ${field('Paragraph 1','about','storyBody1','','textarea tall')}
+        ${field('Paragraph 2','about','storyBody2','','textarea tall')}
+        ${field('Paragraph 3','about','storyBody3','','textarea tall')}
+        ${field('Paragraph 4','about','storyBody4','','textarea')}
+        ${field('Highlighted quote / callout','about','highlightText','Shown as a styled pullquote','textarea')}
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header"><div class="panel-title">About Our Clients Section</div><button class="btn btn-outline btn-sm" onclick="savePage('about')">Save</button></div>
+      <div class="panel-body">
+        ${field('Section heading','about','clientsTitle')}
+        ${field('Paragraph 1','about','clientsBody1','','textarea tall')}
+        ${field('Paragraph 2','about','clientsBody2','','textarea tall')}
+        ${field('Paragraph 3','about','clientsBody3','','textarea')}
+      </div>
+    </div>
+  `,
+
+  aesthetics: () => `
+    <div class="ai-bar">
+      <div style="flex:1">
+        <div class="ai-bar-label">✦ AI Writing Assistant</div>
+        <input class="ai-input" id="aiInput" placeholder="e.g. Make the philosophy section more poetic and aspirational…" onkeydown="if(event.key==='Enter')runAI()">
+      </div>
+      <button class="ai-btn" onclick="runAI()" id="aiBtn"><span id="aiBtnText">Generate</span></button>
+    </div>
+
+    <div class="panel" style="margin-top:20px">
+      <div class="panel-header"><div class="panel-title">Page Hero</div><button class="btn btn-outline btn-sm" onclick="savePage('aesthetics')">Save</button></div>
+      <div class="panel-body">
+        ${field('Page title','aesthetics','heroTitle')}
+        ${field('Subtitle','aesthetics','heroSub','','textarea')}
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header"><div class="panel-title">Main Content</div><button class="btn btn-outline btn-sm" onclick="savePage('aesthetics')">Save</button></div>
+      <div class="panel-body">
+        ${field('Paragraph 1','aesthetics','body1','','textarea')}
+        ${field('Paragraph 2','aesthetics','body2','','textarea tall')}
+        ${field('Paragraph 3','aesthetics','body3','','textarea')}
+        ${field('Signature quote','aesthetics','quote','Shown as a styled callout')}
+        ${field('Case study caption','aesthetics','caseStudy')}
+      </div>
+    </div>
+  `,
+
+  services: () => `
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-title">Services — Technical Content</div>
+        <div style="display:flex;gap:8px">
+          <button class="btn btn-outline btn-sm" onclick="savePage('services')">Save</button>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div style="padding:16px;background:#F8F3EE;border:1px solid var(--border);border-left:3px solid var(--gold);margin-bottom:20px;border-radius:2px;">
+          <p style="font-size:13px;line-height:1.7;color:var(--muted);">⚠️ The Services page contains <strong>technical clinical guidelines</strong> that must be reproduced verbatim from the original site. Use the AI assistant only to improve <em>introductory and descriptive</em> text — never alter clinical specifications, measurements, or material guidelines.</p>
+        </div>
+        <p style="font-size:13px;color:var(--muted);line-height:1.8;">The services page technical content (PFM, IPS e.max, Zirconia guidelines) is managed directly in <strong>services.html</strong> to preserve clinical accuracy. Use the button below to open it for editing, or use the AI assistant above for section introductions only.</p>
+        <div style="margin-top:20px;display:flex;gap:10px">
+          <a href="services.html" target="_blank" class="btn btn-primary btn-sm">Open services.html</a>
+          <a href="https://www.turnergoldrich.com/services.html" target="_blank" class="btn btn-outline btn-sm">View Original</a>
+        </div>
+      </div>
+    </div>
+  `,
+
+  specials: () => `
+    <div class="ai-bar">
+      <div style="flex:1">
+        <div class="ai-bar-label">✦ AI Writing Assistant</div>
+        <input class="ai-input" id="aiInput" placeholder="e.g. Write a more exciting description for the current e.max offer…" onkeydown="if(event.key==='Enter')runAI()">
+      </div>
+      <button class="ai-btn" onclick="runAI()" id="aiBtn"><span id="aiBtnText">Generate</span></button>
+    </div>
+
+    <div class="panel" style="margin-top:20px">
+      <div class="panel-header"><div class="panel-title">Page Hero</div><button class="btn btn-outline btn-sm" onclick="savePage('specials')">Save</button></div>
+      <div class="panel-body">
+        ${field('Page title','specials','heroTitle')}
+        ${field('Subtitle','specials','heroSub','','textarea')}
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header"><div class="panel-title">Current Special Offer</div><button class="btn btn-outline btn-sm" onclick="savePage('specials')">Save</button></div>
+      <div class="panel-body">
+        ${field('Offer name','specials','currentOffer','Shown as the main offer heading')}
+        <div class="input-row">
+          ${miniField('Normal price','specials','normalPrice')}
+          ${miniField('Special price / status','specials','specialPrice')}
+        </div>
+        ${field('Offer description','specials','offerDesc','','textarea')}
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header"><div class="panel-title">Newsletter Section</div><button class="btn btn-outline btn-sm" onclick="savePage('specials')">Save</button></div>
+      <div class="panel-body">
+        ${field('Newsletter body text','specials','newsletterBody','','textarea')}
+        ${field('Signup note','specials','signupNote')}
+      </div>
+    </div>
+  `,
+
+  downloads: () => `
+    <div class="panel">
+      <div class="panel-header"><div class="panel-title">Page Hero</div><button class="btn btn-outline btn-sm" onclick="savePage('downloads')">Save</button></div>
+      <div class="panel-body">
+        ${field('Page title','downloads','heroTitle')}
+        ${field('Subtitle','downloads','heroSub','','textarea')}
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header"><div class="panel-title">Download Item 1 — Lab Sheet</div><button class="btn btn-outline btn-sm" onclick="savePage('downloads')">Save</button></div>
+      <div class="panel-body">
+        ${field('Document title','downloads','doc1Title')}
+        ${field('Description','downloads','doc1Desc','','textarea tall')}
+        ${field('Download URL','downloads','doc1Link','Direct link to file')}
+      </div>
+    </div>
+  `,
+
+  contact: () => `
+    <div class="panel">
+      <div class="panel-header"><div class="panel-title">Page Hero</div><button class="btn btn-outline btn-sm" onclick="savePage('contact')">Save</button></div>
+      <div class="panel-body">
+        ${field('Page title','contact','heroTitle')}
+        ${field('Subtitle','contact','heroSub','','textarea')}
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header"><div class="panel-title">Contact Details</div><div style="font-size:11px;color:var(--muted)">Edit in Global Settings</div></div>
+      <div class="panel-body">
+        <div class="input-row">
+          <div class="field"><label class="label">Phone <span class="label-hint">(from global)</span></label><input class="input" value="${state.global.phone}" disabled></div>
+          <div class="field"><label class="label">Email <span class="label-hint">(from global)</span></label><input class="input" value="${state.global.email}" disabled></div>
+        </div>
+        <div class="field"><label class="label">Address <span class="label-hint">(from global)</span></label><input class="input" value="${state.global.address}" disabled></div>
+        <button class="btn btn-outline btn-sm" onclick="showView('global')" style="margin-top:4px">Edit in Global Settings →</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header"><div class="panel-title">Areas Served</div><button class="btn btn-outline btn-sm" onclick="savePage('contact')">Save</button></div>
+      <div class="panel-body">
+        ${field('Areas served text','contact','areasServed','','textarea')}
+      </div>
+    </div>
+  `,
+
+  global: () => `
+    <div class="panel">
+      <div class="panel-header"><div class="panel-title">Global Settings — Apply Across All Pages</div><button class="btn btn-gold btn-sm" onclick="saveGlobal()">Save Global Settings</button></div>
+      <div class="panel-body">
+        <div class="field-group"><div class="field-group-label">Lab Identity</div>
+          ${field('Laboratory name','global','labName','Appears in nav and footer')}
+          ${field('Tagline / descriptor','global','tagline','Below the name in nav')}
+        </div>
+        <div class="field-group"><div class="field-group-label">Contact Details</div>
+          <div class="input-row">
+            ${miniField('Phone number','global','phone')}
+            ${miniField('Email address','global','email')}
+          </div>
+          ${field('Full address','global','address')}
+        </div>
+        <div style="padding:16px;background:#F0E8DC;border-left:2px solid var(--gold);margin-top:8px;border-radius:2px;">
+          <p style="font-size:13px;color:var(--muted);line-height:1.7;">These settings update the nav wordmark, footer, and contact page automatically when you export.</p>
+        </div>
+      </div>
+    </div>
+  `
+};
+
+// ─── FIELD HELPERS ────────────────────────────────────────────────────────────
+function field(label, page, key, hint='', type='input') {
+  const val = (state[page][key] || '').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+  const hintHtml = hint ? `<span class="label-hint">${hint}</span>` : '';
+  if (type === 'input') {
+    return `<div class="field"><label class="label">${label}${hintHtml}</label><input class="input" value="${val}" oninput="update('${page}','${key}',this.value)"></div>`;
+  }
+  const cls = type.includes('tall') ? 'textarea textarea-tall' : 'textarea';
+  return `<div class="field"><label class="label">${label}${hintHtml}</label><textarea class="${cls}" oninput="update('${page}','${key}',this.value)">${val}</textarea></div>`;
+}
+
+function miniField(label, page, key) {
+  const val = (state[page][key] || '').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+  return `<div class="field"><label class="label">${label}</label><input class="input" value="${val}" oninput="update('${page}','${key}',this.value)"></div>`;
+}
+
+// ─── CORE FUNCTIONS ───────────────────────────────────────────────────────────
+function update(page, key, value) {
+  state[page][key] = value;
+  markUnsaved();
+}
+
+function showView(name) {
+  document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+  const btn = [...document.querySelectorAll('.nav-item')].find(el => el.textContent.trim().toLowerCase().includes(name === 'homepage' ? 'home' : name === 'global' ? 'global' : name));
+  if (btn) btn.classList.add('active');
+  const titles = { dashboard:'Dashboard', homepage:'Homepage', about:'About', aesthetics:'Aesthetics', services:'Services', specials:'Specials', downloads:'Downloads', contact:'Contact', global:'Global Settings' };
+  const subtitles = { dashboard:'Overview', homepage:'Edit Content', about:'Edit Content', aesthetics:'Edit Content', services:'Edit Content', specials:'Edit Content', downloads:'Edit Content', contact:'Edit Content', global:'Site-wide Settings' };
+  document.getElementById('topbarTitle').innerHTML = `${titles[name]} <span>${subtitles[name]}</span>`;
+  document.getElementById('contentArea').innerHTML = views[name]();
+  window.scrollTo(0,0);
+}
+
+function switchTab(el, tabId) {
+  el.closest('.section-tabs').querySelectorAll('.section-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  const panel = el.closest('.main').querySelector('.content');
+  panel.querySelectorAll('[id^="homeTab"]').forEach(t => t.style.display = 'none');
+  const target = document.getElementById(tabId);
+  if (target) target.style.display = '';
+}
+
+function savePage(page) {
+  saveState();
+  toast(`${page.charAt(0).toUpperCase()+page.slice(1)} saved ✓`, 'success');
+}
+
+function saveGlobal() {
+  saveState();
+  toast('Global settings saved — will apply on next export ✓', 'success');
+}
+
+// ─── AI ASSIST ────────────────────────────────────────────────────────────────
+async function runAI() {
+  const inputEl = document.getElementById('aiInput');
+  const btnEl = document.getElementById('aiBtn');
+  const btnText = document.getElementById('aiBtnText');
+  const prompt = inputEl.value.trim();
+  if (!prompt) { toast('Please describe what you\'d like help with', 'error'); return; }
+
+  btnEl.disabled = true;
+  btnText.innerHTML = '<span class="ai-spinner"></span> Writing…';
+
+  try {
+    const resp = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: `You are a professional copywriter for Turner & Goldrich, a prestigious London dental laboratory founded in 1973. 
+The lab specialises in crown and bridge work, PFM, IPS e.max, and Zirconia restorations. 
+Their tone is: refined, professional, warm, precise. Not overly salesy. 
+When rewriting content, preserve all factual/technical information exactly. 
+Return ONLY the rewritten text, no explanation or preamble.`,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+    const data = await resp.json();
+    const text = data.content?.find(b => b.type === 'text')?.text || '';
+    if (!text) throw new Error('No response');
+    showAIResult(text);
+  } catch(e) {
+    toast('AI assist failed — please try again', 'error');
+  }
+
+  btnEl.disabled = false;
+  btnText.textContent = 'Generate';
+}
+
+function showAIResult(text) {
+  // Remove any existing result
+  document.querySelectorAll('.ai-result').forEach(el => el.remove());
+  const div = document.createElement('div');
+  div.className = 'ai-result';
+  div.style.cssText = 'background:#1A1614;border:1px solid rgba(160,124,48,0.3);padding:20px;margin-bottom:20px;border-radius:2px;';
+  div.innerHTML = `
+    <div style="font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;">✦ AI Suggestion — Review and copy where needed</div>
+    <p style="font-size:14px;line-height:1.8;color:rgba(255,255,255,0.82);white-space:pre-wrap;">${text}</p>
+    <div style="display:flex;gap:10px;margin-top:14px;">
+      <button onclick="navigator.clipboard.writeText(\`${text.replace(/`/g,'\\`')}\`);toast('Copied to clipboard','success')" style="background:var(--gold);color:#fff;border:none;padding:8px 16px;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;border-radius:2px;">Copy Text</button>
+      <button onclick="this.closest('.ai-result').remove()" style="background:transparent;color:rgba(255,255,255,0.4);border:1px solid rgba(255,255,255,0.1);padding:8px 16px;font-size:11px;cursor:pointer;border-radius:2px;">Dismiss</button>
+    </div>`;
+  const aiBar = document.querySelector('.ai-bar');
+  aiBar.insertAdjacentElement('afterend', div);
+}
+
+// ─── EXPORT ───────────────────────────────────────────────────────────────────
+function exportAll() {
+  // Build a JSON summary of all changes for the user
+  const summary = JSON.stringify(state, null, 2);
+  const blob = new Blob([`// Turner & Goldrich CMS Export
+// Generated: ${new Date().toLocaleString()}
+// 
+// HOW TO USE:
+// This file contains all your edited content.
+// Send this file to your developer to apply the changes to your HTML files.
+// Or use the individual page exports below.
+//
+// YOUR CONTENT:
+${summary}`], {type:'text/plain'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'tg-content-export.json';
+  a.click();
+  URL.revokeObjectURL(url);
+
+  // Also build and download the about page as a demonstration
+  generateAndDownload();
+  toast('Content exported! Send tg-content-export.json to your developer ✓', 'success');
+}
+
+function generateAndDownload() {
+  // Build a simple text summary for each page
+  const lines = [];
+  lines.push('TURNER & GOLDRICH — CONTENT CHANGES SUMMARY');
+  lines.push('='.repeat(50));
+  lines.push('Generated: ' + new Date().toLocaleString());
+  lines.push('');
+  Object.entries(state).forEach(([page, fields]) => {
+    lines.push(`\n── ${page.toUpperCase()} ──`);
+    Object.entries(fields).forEach(([key, val]) => {
+      lines.push(`${key}: ${val}`);
+    });
+  });
+  const blob = new Blob([lines.join('\n')], {type:'text/plain'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'tg-content-summary.txt';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function previewSite() {
+  window.open('turnergoldrich-reimagined.html', '_blank');
+}
+
+// ─── TOAST ────────────────────────────────────────────────────────────────────
+function toast(msg, type='') {
+  const container = document.getElementById('toastContainer');
+  const el = document.createElement('div');
+  el.className = `toast ${type}`;
+  el.innerHTML = `<span>${msg}</span>`;
+  container.appendChild(el);
+  setTimeout(() => { el.style.opacity='0'; el.style.transition='opacity 0.4s'; setTimeout(()=>el.remove(),400); }, 3000);
+}
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+showView('dashboard');
+
+// Auto-save every 30 seconds
+setInterval(() => { saveState(); }, 30000);
+</script>
+</body>
+</html>

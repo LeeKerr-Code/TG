@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
+<meta name="supported-color-schemes" content="light">
+<title>Turner & Goldrich — Elite Dental Implant Specialists</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  /* Force light mode — prevent iOS/Android dark mode from overriding colours */
+  @media (prefers-color-scheme: dark) {
+    html { filter: none !important; }
+    body { background: #F0E8DC !important; color: #1A1614 !important; }
+    .hero-left, .hero, section, .section, .trust-bar, footer, nav { background-color: revert; }
+  }
+
+  :root {
+    --ivory: #F7F3EE;
+    --warm-white: #FEFCF9;
+    --soft-grey: #F2EEE9;
+    --charcoal: #1A1614;
+    --deep: #0F0D0C;
+    --gold: #A07C30;
+    --gold-light: #E8C87A;
+    --muted: #5A5450;
+    --border: #D8D0C4;
+    --accent-bg: #EDE6DB;
+    --navy-soft: #3D5070;
+  }
+
+  html { scroll-behavior: smooth; }
+  section[id], div[id] { scroll-margin-top: 82px; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #E8DDD0;
+    color: #1A1614;
+    font-size: 16px;
+    line-height: 1.75;
+    overflow-x: hidden;
+    color-scheme: light;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 18px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #F0E8DC;
+    backdrop-filter: blur(14px);
+    transition: padding 0.3s;
+    -webkit-backdrop-filter: blur(14px);
+  }
+  nav.scrolled { padding: 13px 60px; }
+
+  .nav-logo { display: flex; align-items: center; text-decoration: none; gap: 0; }
+  .nav-logo img { height: 46px; width: auto; display: block; }
+  .nav-wordmark {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+    gap: 2px;
+  }
+  .nav-wordmark-top {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #0F0D0C;
+  }
+  .nav-wordmark-top .amp {
+    color: #A07C30;
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: 0;
+    margin: 0 2px;
+  }
+  .nav-wordmark-rule {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, #A07C30, transparent);
+    margin: 3px 0;
+  }
+  .nav-wordmark-sub {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 8px;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: #A07C30;
+  }
+
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--charcoal); }
+
+  .nav-cta {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+    background: var(--navy-soft);
+    padding: 11px 24px;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+  .nav-cta:hover { background: var(--gold); }
+
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 6px;
+    background: none;
+    border: none;
+  }
+  .nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--charcoal); }
+
+  /* Mobile drawer */
+  .mobile-nav {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: var(--warm-white);
+    z-index: 99;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .mobile-nav.open { opacity: 1; pointer-events: all; }
+  .mobile-nav a {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px;
+    font-weight: 300;
+    color: var(--deep);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+  }
+  .mobile-nav a:hover { color: var(--gold); }
+  .mobile-nav .mobile-cta {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+    background: var(--navy-soft);
+    padding: 15px 40px;
+    border-radius: 2px;
+    margin-top: 8px;
+  }
+  .mobile-close {
+    position: absolute;
+    top: 20px; right: 20px;
+    font-size: 26px;
+    cursor: pointer;
+    color: var(--muted);
+    background: none;
+    border: none;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+    background: #F0E8DC;
+  }
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 56px 150px 60px;
+    position: relative;
+    background: #F0E8DC;
+    overflow: hidden;
+  }
+  .hero-bg-illustration {
+    position: absolute;
+    top: -8%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 110%;
+    max-width: 680px;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .hero-bg-illustration svg {
+    width: 100%;
+    height: auto;
+  }
+  .hero-left > *:not(.hero-bg-illustration) { position: relative; z-index: 1; }
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 26px;
+    height: 1px;
+    background: var(--gold);
+    flex-shrink: 0;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(38px, 3.8vw, 60px);
+    font-weight: 300;
+    line-height: 1.1;
+    color: #0F0D0C;
+    margin-bottom: 22px;
+    animation: fadeUp 0.8s 0.1s ease both;
+  }
+  .hero-title em { font-style: italic; color: var(--gold); }
+  .hero-sub {
+    font-size: 16px;
+    font-weight: 400;
+    color: #4A4540;
+    max-width: 420px;
+    line-height: 1.85;
+    margin-bottom: 42px;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    flex-wrap: wrap;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+  .btn-primary {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+    background: var(--navy-soft);
+    padding: 16px 34px;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: background 0.25s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--gold); }
+  .btn-ghost {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--charcoal);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: gap 0.2s;
+  }
+  .btn-ghost:hover { gap: 16px; }
+  .btn-ghost::after { content: '→'; font-size: 14px; }
+
+  .hero-stats {
+    position: absolute;
+    bottom: 54px;
+    left: 60px;
+    display: flex;
+    gap: 44px;
+    animation: fadeUp 0.8s 0.4s ease both;
+  }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--deep);
+    line-height: 1;
+  }
+  .stat-num span { color: var(--gold); font-size: 20px; }
+  .stat-label {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 5px;
+  }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+    background: var(--accent-bg);
+    min-height: 480px;
+  }
+  .hero-image-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(140deg, #EDE6DB 0%, #DDD0BC 50%, #CFC0A6 100%);
+  }
+  .hero-tooth-graphic {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .tooth-svg-wrap { animation: fadeUp 1s 0.3s ease both; }
+  .hero-badge {
+    position: absolute;
+    bottom: 50px;
+    left: -18px;
+    background: var(--warm-white);
+    padding: 16px 24px;
+    box-shadow: 0 5px 28px rgba(0,0,0,0.07);
+    border-left: 3px solid var(--gold);
+    animation: fadeLeft 0.8s 0.5s ease both;
+  }
+  .hero-badge-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--deep);
+  }
+  .hero-badge-sub {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-top: 3px;
+  }
+
+  .trust-bar-inline { display: none; }
+
+  /* ─── TRUST BAR ─── */
+  .trust-bar {
+    background: #E8DDD0;
+    border-top: 1px solid #D8D0C4;
+    border-bottom: 1px solid #D8D0C4;
+    padding: 18px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #2A2420;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .trust-icon {
+    width: 28px;
+    height: 28px;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold);
+    font-size: 10px;
+    flex-shrink: 0;
+  }
+  .trust-divider { width: 1px; height: 16px; background: var(--border); }
+
+  /* ─── SECTIONS ─── */
+  .section { padding: 80px 60px; background: #FEFCF9; }
+  .section-alt { background: #E8DDD0; }
+
+  .section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 56px;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .section-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-eyebrow::before {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 1px;
+    background: var(--gold);
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 3vw, 48px);
+    font-weight: 300;
+    line-height: 1.12;
+    color: var(--deep);
+    max-width: 500px;
+  }
+  .section-title em { font-style: italic; color: var(--gold); }
+
+  /* ─── SERVICES ─── */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+  }
+  .service-card {
+    background: #FEFCF9;
+    padding: 42px 38px;
+    transition: background 0.3s;
+    cursor: default;
+  }
+  .service-card:hover { background: var(--navy-soft); }
+  .service-card:hover .service-title { color: #ffffff; }
+  .service-card:hover .service-desc { color: rgba(255,255,255,0.82); }
+  .service-card:hover .service-num { color: rgba(255,255,255,0.5); }
+  .service-card:hover .service-link { color: var(--gold-light); }
+  .service-card:hover .service-bar { background: var(--gold-light); }
+
+  .service-icon {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    transition: transform 0.3s;
+  }
+  .service-card:hover .service-icon { transform: scale(1.08); }
+  .service-card:hover .service-icon svg * { stroke: #E8C87A !important; }
+  .service-card:hover .service-icon svg [fill="#A07C30"] { fill: #E8C87A !important; stroke: none !important; }
+
+  .service-title-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 13px;
+  }
+
+  .service-num {
+    letter-spacing: 0.1em;
+    margin-bottom: 14px;
+    font-family: 'Cormorant Garamond', serif;
+    transition: color 0.3s;
+  }
+  .service-bar { width: 26px; height: 2px; background: var(--border); margin-bottom: 20px; transition: background 0.3s; }
+  .service-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--deep);
+    margin-bottom: 0;
+    transition: color 0.3s;
+  }
+  .service-desc {
+    font-size: 14px;
+    font-weight: 400;
+    color: #4A4540;
+    line-height: 1.85;
+    margin-bottom: 24px;
+    transition: color 0.3s;
+  }
+  .service-link {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--charcoal);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  /* ─── ABOUT ─── */
+  .about-split { display: grid; grid-template-columns: 1fr 1fr; }
+  .about-visual {
+    background: transparent;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 32px 0;
+  }
+  .about-visual-inner {
+    width: 240px;
+    height: 260px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .about-content { padding: 66px 60px; display: flex; flex-direction: column; justify-content: center; }
+  #about { padding: 0; }
+  #about .about-content { padding: 80px 60px; }
+  .about-content p { font-size: 15px; font-weight: 400; color: #3A3530; line-height: 1.9; margin-bottom: 16px; }
+  .about-signature { font-family: 'Cormorant Garamond', serif; font-size: 25px; font-style: italic; color: var(--deep); margin-top: 6px; }
+  .about-signature-title { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-top: 3px; }
+
+  /* ─── PROCESS ─── */
+  .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; position: relative; }
+  .process-steps::before {
+    content: '';
+    position: absolute;
+    top: 40px; left: 40px; right: 40px;
+    height: 1px;
+    background: var(--border);
+    z-index: 0;
+  }
+  .process-step { padding: 0 28px 0 0; position: relative; z-index: 1; }
+  .process-dot {
+    width: 80px; height: 80px;
+    border: 1px solid #D8D0C4;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 26px;
+    background: #FEFCF9;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 300;
+    color: #A07C30;
+    transition: all 0.3s;
+  }
+  .process-step:hover .process-dot { background: var(--gold); color: white; border-color: var(--gold); }
+  .process-step-title { font-family: 'Cormorant Garamond', serif; font-size: 21px; font-weight: 400; color: #0F0D0C; margin-bottom: 10px; }
+  .process-step-desc { font-size: 14px; font-weight: 400; color: #4A4540; line-height: 1.85; }
+
+  /* ─── TESTIMONIALS ─── */
+  .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .testimonial-card { background: #F5EFE6; padding: 38px; border: 1px solid #D8D0C4; }
+  .testimonial-quote { font-family: 'Cormorant Garamond', serif; font-size: 52px; font-weight: 300; color: var(--gold); line-height: 0.6; margin-bottom: 16px; opacity: 0.5; }
+  .testimonial-text { font-size: 14px; font-weight: 400; color: #2A2420; line-height: 1.9; margin-bottom: 22px; font-style: italic; }
+  .testimonial-author { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--deep); }
+  .testimonial-stars { color: var(--gold); font-size: 11px; letter-spacing: 2px; margin-top: 4px; }
+
+  /* ─── CTA BAND ─── */
+  .cta-band {
+    background: #FEFCF9;
+    border-top: 1px solid #D8D0C4;
+    padding: 90px 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+  .cta-band-eyebrow {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 14px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .cta-band-eyebrow::before { content: ''; display: block; width: 20px; height: 1px; background: var(--gold); flex-shrink: 0; }
+  .cta-band-left p { font-size: 15px; font-weight: 400; color: #4A4540; line-height: 1.85; margin-top: 18px; max-width: 420px; }
+  .cta-band-right { background: #F5EFE6; border: 1px solid #D8D0C4; }
+  .contact-row { display: flex; align-items: flex-start; gap: 16px; padding: 20px 26px; border-bottom: 1px solid var(--border); }
+  .contact-row:last-of-type { border-bottom: none; }
+  .contact-icon { width: 36px; height: 36px; border: 1px solid var(--gold); display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 13px; flex-shrink: 0; margin-top: 2px; }
+  .contact-label { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
+  .contact-value { font-size: 15px; color: var(--deep); font-weight: 400; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: #E8DDD0;
+    border-top: 1px solid #D8D0C4;
+    padding: 48px 60px 36px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+    text-align: center;
+  }
+  .footer-links { display: flex; gap: 28px; list-style: none; flex-wrap: wrap; justify-content: center; }
+  .footer-logo { display: flex; justify-content: center; }
+  .footer-logo .nav-wordmark-top { font-size: 13px; letter-spacing: 0.16em; }
+  .footer-logo .nav-wordmark-sub { font-size: 6.5px; letter-spacing: 0.24em; }
+  .footer-logo .nav-wordmark-rule { margin: 2px 0; }
+  .footer-links a { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--charcoal); }
+  .footer-divider { width: 40px; height: 1px; background: #D8D0C4; }
+  .footer-legal { font-size: 10px; letter-spacing: 0.08em; color: var(--muted); }
+
+  /* ─── PROCESS ENHANCED ─── */
+  .process-step { display: flex; gap: 24px; padding: 0 28px 0 0; position: relative; z-index: 1; }
+  .process-step-inner { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+  .process-connector { flex: 1; width: 1px; background: linear-gradient(to bottom, rgba(160,124,48,0.3), transparent); margin: 8px 0; min-height: 40px; }
+  .process-content { padding-bottom: 16px; }
+  .process-tag { font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; font-weight: 500; }
+  .process-detail { display: flex; gap: 16px; margin-top: 14px; flex-wrap: wrap; }
+  .process-detail span { font-size: 10px; letter-spacing: 0.08em; color: var(--muted); text-transform: uppercase; }
+
+  /* ─── TESTIMONIALS ENHANCED ─── */
+  .testimonial-featured { background: #1A1614; padding: 52px 56px; margin-bottom: 40px; position: relative; overflow: hidden; }
+  .testimonial-featured::before { content: ''; position: absolute; top: -40px; right: -40px; width: 180px; height: 180px; border: 1px solid rgba(184,154,90,0.15); border-radius: 50%; }
+  .testimonial-featured-mark { font-family: 'Cormorant Garamond', serif; font-size: 80px; font-weight: 300; color: var(--gold); line-height: 0.6; opacity: 0.6; margin-bottom: 24px; }
+  .testimonial-featured-text { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-style: italic; color: rgba(255,255,255,0.88); line-height: 1.7; margin-bottom: 32px; }
+  .testimonial-featured-name { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+  .testimonial-featured-stars { color: var(--gold); font-size: 11px; letter-spacing: 3px; margin-bottom: 6px; }
+  .testimonial-featured-treatment { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
+  .testimonial-footer { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+  .testimonial-treatment-tag { display: inline-block; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(160,124,48,0.3); padding: 4px 10px; }
+  .testimonial-metrics { display: flex; align-items: center; justify-content: center; gap: 0; margin-top: 48px; padding: 36px; background: #1A1614; }
+  .testimonial-metric { text-align: center; flex: 1; }
+  .metric-num { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 300; color: rgba(255,255,255,0.9); line-height: 1; }
+  .metric-num span { font-size: 20px; color: var(--gold); }
+  .metric-label { font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-top: 6px; }
+  .metric-divider { width: 1px; height: 40px; background: rgba(255,255,255,0.1); flex-shrink: 0; }
+
+  /* ─── CONTACT FORM ─── */
+  .contact-details { margin-top: 32px; display: flex; flex-direction: column; gap: 20px; }
+  .contact-icon-gold { color: var(--gold); font-size: 10px; margin-top: 3px; flex-shrink: 0; }
+  .contact-form-header { margin-bottom: 28px; }
+  .contact-form-sub { font-size: 13px; color: var(--muted); margin-top: 8px; line-height: 1.6; }
+  .contact-form { display: flex; flex-direction: column; gap: 16px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-label { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--deep); font-weight: 500; }
+  .form-input { background: #F5EFE6; border: 1px solid #D8D0C4; padding: 12px 16px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--deep); outline: none; transition: border-color 0.2s; width: 100%; box-sizing: border-box; -webkit-appearance: none; }
+  .form-input:focus { border-color: var(--gold); }
+  .form-input::placeholder { color: #B0A898; }
+  .form-select { cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23A07C30' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
+  .form-textarea { min-height: 100px; resize: vertical; }
+  .form-submit { margin-top: 8px; width: 100%; text-align: center; cursor: pointer; border: none; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeLeft {
+    from { opacity: 0; transform: translateX(-14px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  /* Reveal — content visible by default; JS enhances with animation */
+  .reveal { opacity: 1; transform: none; transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.hidden { opacity: 0; transform: translateY(22px); }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+
+  /* ═══════════════════════════════
+     TABLET (≤ 1024px)
+  ═══════════════════════════════ */
+  @media (max-width: 1024px) {
+    nav { padding: 16px 32px; }
+    nav.scrolled { padding: 12px 32px; }
+    .nav-links, .nav-cta { display: none; }
+    .nav-hamburger { display: flex; }
+
+    .hero { grid-template-columns: 1fr; min-height: unset; }
+    .hero-right { display: none; }
+    .hero-left { padding: 32px 32px 40px; }
+    .hero-stats { position: static; transform: none; display: flex; gap: 36px; justify-content: flex-start; margin-top: 40px; padding-top: 32px; width: 100%; }
+
+    .hero { padding-top: 64px; min-height: 100svh; }
+    .trust-divider { display: none; }
+
+    .section { padding: 80px 32px; }
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .about-split { grid-template-columns: 1fr; }
+    .about-visual { min-height: unset; }
+    .about-content { padding: 48px 32px; }
+    .process-steps { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+    .process-steps::before { display: none; }
+    .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+    .cta-band { grid-template-columns: 1fr; padding: 70px 32px; }
+    footer { padding: 30px 32px; }
+  }
+
+  /* ═══════════════════════════════
+     MOBILE (≤ 600px)
+  ═══════════════════════════════ */
+  @media (max-width: 600px) {
+    nav { padding: 14px 18px; }
+    nav.scrolled { padding: 12px 18px; }
+    .nav-logo img { height: 36px; }
+
+    .hero { padding-top: 60px; min-height: calc(100svh - 120px); display: flex; flex-direction: column; position: relative; }
+    .hero-left { padding: 0 18px; text-align: center; display: flex; flex-direction: column; justify-content: center; flex: 1; }
+    .hero-eyebrow { display: none; }
+    .hero-title { font-size: clamp(28px, 8.5vw, 42px); margin-top: 12px; margin-bottom: 32px; padding: 0 18px; }
+    .hero-sub { font-size: 14px; max-width: 100%; margin-left: auto; margin-right: auto; margin-bottom: 24px; line-height: 1.7; padding: 0 18px; }
+    .hero-actions { flex-direction: column; align-items: center; gap: 16px; padding: 0 18px; }
+    .hero-actions .btn-ghost { display: none; }
+    .btn-primary { width: 100%; text-align: center; padding: 16px 24px; }
+    .hero-stats { position: static; width: 100%; display: flex; gap: 0; justify-content: space-around; align-items: center; padding: 16px 0 20px; margin: 0; text-align: center; background: #F0E8DC; flex-shrink: 0; }
+    .hero-badge { display: none; }
+    .hero-right { display: none; }
+    .stat-num { font-size: 22px; }
+    .stat-label { font-size: 8px; letter-spacing: 0.06em; }
+    .trust-bar-desktop { display: flex; }
+    .trust-bar-inline { display: none; }
+    .trust-bar { margin-top: 0; padding: 12px 18px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 8px; justify-items: start; border-top: none; }
+    .trust-divider { display: none; }
+    .trust-item { font-size: 9px; gap: 6px; letter-spacing: 0.06em; }
+    .trust-icon { width: 20px; height: 20px; font-size: 8px; flex-shrink: 0; }
+
+    .section { padding: 48px 18px 32px; }
+    section[id], div[id] { scroll-margin-top: 64px; }
+    .section-header { flex-direction: column; align-items: flex-start; }
+    .section-header .btn-ghost { display: none; }
+    .section-title { font-size: clamp(28px, 8vw, 38px); max-width: 100%; }
+
+    .services-grid { grid-template-columns: 1fr; }
+    .service-card { padding: 32px 26px; }
+    .service-title { font-size: 22px; }
+
+    .about-content { padding: 36px 18px; }
+    .about-content p { font-size: 14px; }
+
+    .testimonial-featured { padding: 32px 24px; }
+    .testimonial-featured-text { font-size: 17px; }
+    .testimonial-metrics { flex-direction: column; gap: 24px; padding: 28px; }
+    .metric-divider { width: 40px; height: 1px; }
+    .form-row { grid-template-columns: 1fr; }
+    .process-steps { grid-template-columns: 1fr; gap: 32px; }
+    .process-step { padding: 0; }
+    .process-dot { width: 64px; height: 64px; font-size: 18px; }
+
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .testimonial-card { padding: 28px 22px; }
+
+    .cta-band { padding: 52px 18px; gap: 36px; }
+    .contact-row { padding: 16px 18px; gap: 14px; }
+    .contact-icon { width: 32px; height: 32px; font-size: 12px; }
+    .contact-value { font-size: 14px; }
+
+    footer { padding: 36px 18px 28px; gap: 20px; }
+    .footer-links { gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MOBILE NAV DRAWER -->
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-close" onclick="closeMobileNav()">✕</button>
+  <a href="#">Home</a>
+  <a href="about.html">About</a>
+  <a href="aesthetics.html">Aesthetics</a>
+  <a href="services.html">Services</a>
+  <a href="specials.html">Specials</a>
+  <a href="downloads.html">Downloads</a>
+  <a href="#contact">Contact</a>
+  <a class="mobile-cta" href="#contact">Book a Consultation</a>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="nav-logo" href="index.html" aria-label="Turner and Goldrich home">
+    <div class="nav-wordmark">
+      <div class="nav-wordmark-top">Turner <span class="amp">&amp;</span> Goldrich</div>
+      <div class="nav-wordmark-rule"></div>
+      <div class="nav-wordmark-sub">Dental Laboratory · Est. 1973</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="aesthetics.html">Aesthetics</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="specials.html">Specials</a></li>
+    <li><a href="downloads.html">Downloads</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a class="nav-cta" href="#contact">Book Consultation</a>
+  <button class="nav-hamburger" id="hamburger" onclick="openMobileNav()" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <!-- Background anatomy illustration -->
+    <div class="hero-bg-illustration" aria-hidden="true">
+      <svg viewBox="0 0 600 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g opacity="0.2">
+        <circle cx="300" cy="210" r="190" stroke="#A07C30" stroke-width="0.6" opacity="0.2" stroke-dasharray="2 10"/>
+        <circle cx="300" cy="210" r="170" stroke="#A07C30" stroke-width="0.4" opacity="0.12"/>
+
+        <!-- === MOLAR (left, large) === -->
+        <!-- Crown -->
+        <path d="M110 175 Q105 150 112 132 Q120 114 134 110 Q148 106 158 116 Q166 106 178 108 Q192 110 198 128 Q204 148 198 175 Q193 200 186 225 Q180 245 170 255 Q160 260 150 255 Q140 248 134 228 Q126 203 110 175Z" stroke="#A07C30" stroke-width="1.4" fill="rgba(160,124,48,0.04)" opacity="0.7"/>
+        <!-- Cusp details -->
+        <path d="M134 118 Q142 108 154 112" stroke="#A07C30" stroke-width="0.8" opacity="0.4"/>
+        <path d="M166 110 Q176 106 184 114" stroke="#A07C30" stroke-width="0.8" opacity="0.4"/>
+        <!-- Root 1 -->
+        <path d="M138 255 Q133 285 128 315 Q123 340 125 365 Q127 382 135 390" stroke="#A07C30" stroke-width="1.2" fill="none" opacity="0.55"/>
+        <!-- Root 2 -->
+        <path d="M162 255 Q165 285 168 315 Q171 342 169 368 Q167 385 160 393" stroke="#A07C30" stroke-width="1.2" fill="none" opacity="0.55"/>
+        <!-- Root tip details -->
+        <path d="M125 388 Q130 395 135 390" stroke="#A07C30" stroke-width="0.8" opacity="0.4"/>
+        <path d="M158 392 Q163 398 168 393" stroke="#A07C30" stroke-width="0.8" opacity="0.4"/>
+        <!-- Pulp chamber -->
+        <path d="M145 140 Q148 130 154 128 Q160 126 164 132 Q168 140 166 160 Q164 175 160 188 Q156 196 152 196 Q148 194 146 186 Q142 172 143 155Z" stroke="#A07C30" stroke-width="0.7" fill="none" opacity="0.3" stroke-dasharray="2 3"/>
+        <!-- Root canal lines -->
+        <line x1="148" y1="196" x2="138" y2="380" stroke="#A07C30" stroke-width="0.6" opacity="0.2" stroke-dasharray="3 4"/>
+        <line x1="158" y1="196" x2="166" y2="375" stroke="#A07C30" stroke-width="0.6" opacity="0.2" stroke-dasharray="3 4"/>
+
+        <!-- === CENTRAL INCISOR (centre, tall) === -->
+        <!-- Crown -->
+        <path d="M252 120 Q250 92 258 72 Q266 52 280 48 Q294 44 308 50 Q320 56 326 76 Q332 96 328 124 Q324 155 316 188 Q308 218 300 238 Q292 254 284 258 Q276 252 270 236 Q262 212 256 180 Q250 150 252 120Z" stroke="#A07C30" stroke-width="1.6" fill="rgba(160,124,48,0.05)" opacity="0.8"/>
+        <!-- Incisal edge highlight -->
+        <path d="M262 74 Q280 58 298 66" stroke="#A07C30" stroke-width="1" opacity="0.5"/>
+        <path d="M266 80 Q282 66 296 72" stroke="#A07C30" stroke-width="0.6" opacity="0.25"/>
+        <!-- Single root -->
+        <path d="M276 258 Q272 295 268 330 Q264 362 262 390 Q260 412 264 428" stroke="#A07C30" stroke-width="1.3" fill="none" opacity="0.6"/>
+        <path d="M292 258 Q294 295 295 330 Q296 364 294 392 Q292 414 288 430" stroke="#A07C30" stroke-width="1.3" fill="none" opacity="0.6"/>
+        <!-- Root tips -->
+        <path d="M262 426 Q266 434 272 430" stroke="#A07C30" stroke-width="0.8" opacity="0.4"/>
+        <path d="M286 428 Q290 436 296 432" stroke="#A07C30" stroke-width="0.8" opacity="0.4"/>
+        <!-- Pulp -->
+        <path d="M278 85 Q282 72 288 70 Q294 68 298 76 Q302 86 300 110 Q298 135 294 165 Q290 188 284 200 Q278 195 274 170 Q270 142 272 112Z" stroke="#A07C30" stroke-width="0.7" fill="none" opacity="0.28" stroke-dasharray="2 3"/>
+        <!-- Root canal -->
+        <line x1="280" y1="200" x2="268" y2="422" stroke="#A07C30" stroke-width="0.6" opacity="0.18" stroke-dasharray="3 5"/>
+        <line x1="288" y1="200" x2="292" y2="424" stroke="#A07C30" stroke-width="0.6" opacity="0.18" stroke-dasharray="3 5"/>
+
+        <!-- === PREMOLAR (right) === -->
+        <!-- Crown -->
+        <path d="M382 158 Q380 136 388 118 Q396 100 410 96 Q424 92 436 100 Q448 108 450 130 Q452 154 446 180 Q440 206 430 228 Q422 244 412 248 Q402 244 396 228 Q388 206 384 180 Q380 164 382 158Z" stroke="#A07C30" stroke-width="1.4" fill="rgba(160,124,48,0.04)" opacity="0.7"/>
+        <!-- Cusps -->
+        <path d="M396 104 Q406 94 416 98" stroke="#A07C30" stroke-width="0.8" opacity="0.4"/>
+        <path d="M420 98 Q430 92 440 100" stroke="#A07C30" stroke-width="0.8" opacity="0.4"/>
+        <!-- Bifurcated roots -->
+        <path d="M400 248 Q394 278 388 308 Q382 335 382 358 Q382 375 388 385" stroke="#A07C30" stroke-width="1.2" fill="none" opacity="0.55"/>
+        <path d="M424 248 Q428 278 432 308 Q436 336 436 360 Q436 377 430 387" stroke="#A07C30" stroke-width="1.2" fill="none" opacity="0.55"/>
+        <path d="M386 384 Q390 392 396 387" stroke="#A07C30" stroke-width="0.8" opacity="0.4"/>
+        <path d="M428 386 Q432 394 438 389" stroke="#A07C30" stroke-width="0.8" opacity="0.4"/>
+        <!-- Pulp -->
+        <path d="M406 116 Q410 106 416 104 Q422 102 426 110 Q430 120 428 142 Q426 162 420 178 Q414 186 410 186 Q406 184 404 170 Q400 148 404 128Z" stroke="#A07C30" stroke-width="0.7" fill="none" opacity="0.28" stroke-dasharray="2 3"/>
+
+        <!-- === GUMLINE === -->
+        <path d="M95 262 Q155 270 220 266 Q280 270 300 268 Q340 272 400 268 Q450 264 510 258" stroke="#A07C30" stroke-width="1.2" fill="none" opacity="0.35" stroke-linecap="round"/>
+        <!-- Gum shading above line -->
+        <path d="M95 262 Q155 270 220 266 Q280 270 300 268 Q340 272 400 268 Q450 264 510 258 L510 240 Q450 248 400 252 Q340 256 300 252 Q260 256 220 250 Q155 254 95 246Z" fill="rgba(160,124,48,0.04)" opacity="0.6"/>
+
+        <!-- === PDL / bone boundary === -->
+        <path d="M120 285 Q155 280 220 282 Q280 284 300 282 Q340 284 400 280 Q450 276 500 270" stroke="#A07C30" stroke-width="0.6" opacity="0.18" stroke-dasharray="4 6"/>
+
+        <!-- Fine measurement/anatomy lines -->
+        <line x1="88" y1="110" x2="88" y2="400" stroke="#A07C30" stroke-width="0.5" opacity="0.12" stroke-dasharray="2 6"/>
+        <line x1="512" y1="96" x2="512" y2="390" stroke="#A07C30" stroke-width="0.5" opacity="0.12" stroke-dasharray="2 6"/>
+        <line x1="88" y1="265" x2="512" y2="265" stroke="#A07C30" stroke-width="0.5" opacity="0.1" stroke-dasharray="3 7"/>
+
+        </g>
+      </svg>
+      </svg>
+    </div>
+    <div class="hero-eyebrow">Aesthetic Solutions · London</div>
+    <h1 class="hero-title">
+      Blending hand skills<br>
+      with technology,<br>
+      we create <em>art</em> so your<br>
+      patients can <em>smile.</em>
+    </h1>
+    <p class="hero-sub">
+      Turner & Goldrich are elite dental implant specialists dedicated to the craft of smile restoration — where clinical precision meets artistic vision, every time.
+    </p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="#contact">Book a Consultation</a>
+      <a class="btn-ghost" href="#services">Our Services</a>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div>
+      <div class="stat-num">20<span>+</span></div>
+      <div class="stat-label">Years Experience</div>
+    </div>
+    <div>
+      <div class="stat-num">3<span>k+</span></div>
+      <div class="stat-label">Implants Placed</div>
+    </div>
+    <div>
+      <div class="stat-num">98<span>%</span></div>
+      <div class="stat-label">Satisfaction</div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-image-bg"></div>
+    <div class="hero-tooth-graphic">
+      <div class="tooth-svg-wrap">
+        <svg width="290" height="350" viewBox="0 0 290 350" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="145" cy="145" r="100" stroke="#B89A5A" stroke-width="0.8" stroke-dasharray="4 8" fill="none" opacity="0.45"/>
+          <circle cx="145" cy="145" r="120" stroke="#B89A5A" stroke-width="0.5" fill="none" opacity="0.2"/>
+          <path d="M88 108 Q68 68 88 48 Q108 28 128 44 Q145 28 162 44 Q182 28 202 48 Q222 68 202 108 Q192 138 182 168 Q172 198 167 224 Q162 248 145 251 Q128 248 123 224 Q118 198 108 168 Q98 138 88 108Z"
+                fill="rgba(255,255,255,0.82)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+          <line x1="132" y1="244" x2="126" y2="292" stroke="rgba(255,255,255,0.28)" stroke-width="1.5"/>
+          <line x1="145" y1="251" x2="145" y2="298" stroke="rgba(255,255,255,0.28)" stroke-width="1.5"/>
+          <line x1="158" y1="244" x2="164" y2="290" stroke="rgba(255,255,255,0.28)" stroke-width="1.5"/>
+          <ellipse cx="124" cy="82" rx="11" ry="18" fill="rgba(255,255,255,0.3)" transform="rotate(-15 124 82)"/>
+        </svg>
+      </div>
+    </div>
+    <div class="hero-badge">
+      <div class="hero-badge-title">GDC Registered</div>
+      <div class="hero-badge-sub">Certified Implant Specialist</div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR (also shown below hero for desktop) -->
+<div class="trust-bar trust-bar-desktop">
+  <div class="trust-item"><div class="trust-icon">✦</div>GDC Registered Practice</div>
+  <div class="trust-divider"></div>
+  <div class="trust-item"><div class="trust-icon">✦</div>Interest-Free Finance</div>
+  <div class="trust-divider"></div>
+  <div class="trust-item"><div class="trust-icon">✦</div>Same-Day Consultations</div>
+  <div class="trust-divider"></div>
+  <div class="trust-item"><div class="trust-icon">✦</div>Lifetime Aftercare Guarantee</div>
+</div>
+
+<!-- SERVICES -->
+<section class="section" id="services">
+  <div class="section-header">
+    <div>
+      <div class="section-eyebrow">What We Offer</div>
+      <h2 class="section-title">Precision implant <em>treatments</em> tailored for you</h2>
+    </div>
+    <a class="btn-ghost" href="#contact">View All Services</a>
+  </div>
+  <div class="services-grid">
+
+    <!-- 01 Single Tooth Implants -->
+    <div class="service-card reveal">
+      <div class="service-num">01</div><div class="service-bar"></div>
+      <div class="service-title-row">
+        <div class="service-icon">
+          <svg width="44" height="44" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 28 Q14 18 18 11 Q22 4 28 8 Q32 4 36 8 Q42 4 46 11 Q50 18 44 28 Q41 36 39 43 Q37 50 35 54 Q33 57 32 57 Q31 57 29 54 Q27 50 25 43 Q23 36 20 28Z" stroke="#A07C30" stroke-width="1.2" fill="none"/>
+          <line x1="32" y1="57" x2="32" y2="62" stroke="#A07C30" stroke-width="1.5"/>
+          <rect x="28" y="60" width="8" height="3" rx="1" stroke="#A07C30" stroke-width="1" fill="none"/>
+          <path d="M22 16 Q22 12 26 11" stroke="#A07C30" stroke-width="0.8" stroke-linecap="round" opacity="0.5"/>
+          <circle cx="32" cy="32" r="28" stroke="#A07C30" stroke-width="0.5" stroke-dasharray="3 5" opacity="0.3"/>
+          </svg>
+        </div>
+        <h3 class="service-title">Single Tooth<br>Implants</h3>
+      </div>
+      <p class="service-desc">Replace a single missing tooth with a natural-looking, permanent implant that integrates seamlessly with your existing teeth.</p>
+      <a class="service-link" href="#">Learn More →</a>
+    </div>
+
+    <!-- 02 Full Arch Restoration -->
+    <div class="service-card reveal reveal-delay-1">
+      <div class="service-num">02</div><div class="service-bar"></div>
+      <div class="service-title-row">
+        <div class="service-icon">
+          <svg width="44" height="44" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 38 Q32 58 56 38" stroke="#A07C30" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+          <rect x="13" y="24" width="8" height="16" rx="4" stroke="#A07C30" stroke-width="1.1" fill="none"/>
+          <rect x="23" y="20" width="9" height="20" rx="4.5" stroke="#A07C30" stroke-width="1.1" fill="none"/>
+          <rect x="34" y="20" width="9" height="20" rx="4.5" stroke="#A07C30" stroke-width="1.1" fill="none"/>
+          <rect x="45" y="24" width="8" height="16" rx="4" stroke="#A07C30" stroke-width="1.1" fill="none"/>
+          <line x1="27" y1="40" x2="27" y2="48" stroke="#A07C30" stroke-width="1" opacity="0.6"/>
+          <line x1="38" y1="40" x2="38" y2="48" stroke="#A07C30" stroke-width="1" opacity="0.6"/>
+          <circle cx="27" cy="50" r="2" stroke="#A07C30" stroke-width="1" fill="none" opacity="0.6"/>
+          <circle cx="38" cy="50" r="2" stroke="#A07C30" stroke-width="1" fill="none" opacity="0.6"/>
+          <path d="M12 22 Q32 10 52 22" stroke="#A07C30" stroke-width="0.5" fill="none" opacity="0.3" stroke-dasharray="2 4"/>
+          </svg>
+        </div>
+        <h3 class="service-title">Full Arch<br>Restoration</h3>
+      </div>
+      <p class="service-desc">All-on-4 and All-on-6 solutions for patients requiring complete upper or lower arch replacement with just four to six implants.</p>
+      <a class="service-link" href="#">Learn More →</a>
+    </div>
+
+    <!-- 03 Implant-Supported Bridges -->
+    <div class="service-card reveal reveal-delay-2">
+      <div class="service-num">03</div><div class="service-bar"></div>
+      <div class="service-title-row">
+        <div class="service-icon">
+          <svg width="44" height="44" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 26 Q6 18 9 13 Q12 8 16 10 Q18 8 20 10 Q24 8 26 13 Q28 18 26 26 Q25 31 24 36 Q23 40 22 42 Q21 44 20 44 Q19 44 18 42 Q17 40 16 36 Q15 31 8 26Z" stroke="#A07C30" stroke-width="1.1" fill="none"/>
+          <path d="M38 26 Q36 18 39 13 Q42 8 46 10 Q48 8 50 10 Q54 8 56 13 Q58 18 56 26 Q55 31 54 36 Q53 40 52 42 Q51 44 50 44 Q49 44 48 42 Q47 40 46 36 Q45 31 38 26Z" stroke="#A07C30" stroke-width="1.1" fill="none"/>
+          <path d="M24 20 Q32 14 40 20" stroke="#A07C30" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+          <path d="M24 26 L40 26" stroke="#A07C30" stroke-width="0.8" fill="none" opacity="0.4"/>
+          <path d="M27 18 Q32 15 37 18 L37 30 Q32 33 27 30Z" stroke="#A07C30" stroke-width="1" fill="none" opacity="0.7"/>
+          <line x1="20" y1="44" x2="20" y2="50" stroke="#A07C30" stroke-width="1.2"/>
+          <line x1="50" y1="44" x2="50" y2="50" stroke="#A07C30" stroke-width="1.2"/>
+          </svg>
+        </div>
+        <h3 class="service-title">Implant-Supported<br>Bridges</h3>
+      </div>
+      <p class="service-desc">Multiple missing teeth replaced using a secure, implant-anchored bridge — no adhesives, no slipping, just a beautiful fixed result.</p>
+      <a class="service-link" href="#">Learn More →</a>
+    </div>
+
+    <!-- 04 Bone Grafting -->
+    <div class="service-card reveal">
+      <div class="service-num">04</div><div class="service-bar"></div>
+      <div class="service-title-row">
+        <div class="service-icon">
+          <svg width="44" height="44" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 42 Q10 52 20 54 Q32 56 44 54 Q54 52 54 42 L52 28 Q50 20 44 18 Q38 16 32 16 Q26 16 20 18 Q14 20 12 28Z" stroke="#A07C30" stroke-width="1.2" fill="none"/>
+          <path d="M18 30 Q22 27 26 30" stroke="#A07C30" stroke-width="0.8" fill="none" opacity="0.5" stroke-linecap="round"/>
+          <path d="M38 30 Q42 27 46 30" stroke="#A07C30" stroke-width="0.8" fill="none" opacity="0.5" stroke-linecap="round"/>
+          <path d="M28 38 Q32 35 36 38" stroke="#A07C30" stroke-width="0.8" fill="none" opacity="0.5" stroke-linecap="round"/>
+          <line x1="32" y1="16" x2="32" y2="6" stroke="#A07C30" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="32" y1="2" x2="32" y2="10" stroke="#A07C30" stroke-width="1" opacity="0.6"/>
+          <line x1="28" y1="6" x2="36" y2="6" stroke="#A07C30" stroke-width="1" opacity="0.6"/>
+          <circle cx="22" cy="46" r="1.5" fill="#A07C30" opacity="0.4"/>
+          <circle cx="32" cy="48" r="1.5" fill="#A07C30" opacity="0.4"/>
+          <circle cx="42" cy="46" r="1.5" fill="#A07C30" opacity="0.4"/>
+          </svg>
+        </div>
+        <h3 class="service-title">Bone Grafting<br>&amp; Augmentation</h3>
+      </div>
+      <p class="service-desc">Where bone loss has occurred, we rebuild the foundation for successful implant placement with advanced grafting techniques.</p>
+      <a class="service-link" href="#">Learn More →</a>
+    </div>
+
+    <!-- 05 Aesthetic Dentistry -->
+    <div class="service-card reveal reveal-delay-1">
+      <div class="service-num">05</div><div class="service-bar"></div>
+      <div class="service-title-row">
+        <div class="service-icon">
+          <svg width="44" height="44" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 30 Q18 24 32 27 Q46 24 52 30 Q46 44 32 46 Q18 44 12 30Z" stroke="#A07C30" stroke-width="1.2" fill="none" stroke-linejoin="round"/>
+          <path d="M12 30 Q20 26 26 28 Q32 24 38 28 Q44 26 52 30" stroke="#A07C30" stroke-width="0.8" fill="none" opacity="0.5"/>
+          <rect x="21" y="29" width="5" height="9" rx="2.5" stroke="#A07C30" stroke-width="1.1" fill="none"/>
+          <rect x="27.5" y="27" width="4.5" height="11" rx="2.25" stroke="#A07C30" stroke-width="1.1" fill="none"/>
+          <rect x="33" y="27" width="4.5" height="11" rx="2.25" stroke="#A07C30" stroke-width="1.1" fill="none"/>
+          <rect x="39" y="29" width="5" height="9" rx="2.5" stroke="#A07C30" stroke-width="1.1" fill="none"/>
+          <line x1="8" y1="13" x2="8" y2="19" stroke="#A07C30" stroke-width="0.9" stroke-linecap="round" opacity="0.7"/>
+          <line x1="5" y1="16" x2="11" y2="16" stroke="#A07C30" stroke-width="0.9" stroke-linecap="round" opacity="0.7"/>
+          <line x1="56" y1="13" x2="56" y2="19" stroke="#A07C30" stroke-width="0.9" stroke-linecap="round" opacity="0.7"/>
+          <line x1="53" y1="16" x2="59" y2="16" stroke="#A07C30" stroke-width="0.9" stroke-linecap="round" opacity="0.7"/>
+          <line x1="16" y1="8" x2="16" y2="12" stroke="#A07C30" stroke-width="0.7" stroke-linecap="round" opacity="0.45"/>
+          <line x1="14" y1="10" x2="18" y2="10" stroke="#A07C30" stroke-width="0.7" stroke-linecap="round" opacity="0.45"/>
+          <line x1="48" y1="8" x2="48" y2="12" stroke="#A07C30" stroke-width="0.7" stroke-linecap="round" opacity="0.45"/>
+          <line x1="46" y1="10" x2="50" y2="10" stroke="#A07C30" stroke-width="0.7" stroke-linecap="round" opacity="0.45"/>
+          <circle cx="32" cy="8" r="1.2" fill="#A07C30" opacity="0.5"/>
+          </svg>
+        </div>
+        <h3 class="service-title">Aesthetic<br>Dentistry</h3>
+      </div>
+      <p class="service-desc">Complement your implants with veneers, whitening and smile design services for a truly complete, radiant result.</p>
+      <a class="service-link" href="#">Learn More →</a>
+    </div>
+
+    <!-- 06 Immediate Loading -->
+    <div class="service-card reveal reveal-delay-2">
+      <div class="service-num">06</div><div class="service-bar"></div>
+      <div class="service-title-row">
+        <div class="service-icon">
+          <svg width="44" height="44" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="32" cy="32" r="22" stroke="#A07C30" stroke-width="1.2" fill="none"/>
+          <circle cx="32" cy="32" r="17" stroke="#A07C30" stroke-width="0.5" fill="none" opacity="0.3"/>
+          <line x1="32" y1="32" x2="24" y2="16" stroke="#A07C30" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="32" y1="32" x2="44" y2="26" stroke="#A07C30" stroke-width="1" stroke-linecap="round"/>
+          <circle cx="32" cy="32" r="2" fill="#A07C30"/>
+          <line x1="32" y1="11" x2="32" y2="14" stroke="#A07C30" stroke-width="1" stroke-linecap="round"/>
+          <line x1="32" y1="50" x2="32" y2="53" stroke="#A07C30" stroke-width="1" stroke-linecap="round"/>
+          <line x1="11" y1="32" x2="14" y2="32" stroke="#A07C30" stroke-width="1" stroke-linecap="round"/>
+          <line x1="50" y1="32" x2="53" y2="32" stroke="#A07C30" stroke-width="1" stroke-linecap="round"/>
+          <path d="M27 6 Q28 3 30 4 Q32 2 34 4 Q36 3 37 6 Q38 8 37 10 Q36 11 35 10.5 Q33 12 32 12 Q31 12 29 10.5 Q28 11 27 10 Q26 8 27 6Z" stroke="#A07C30" stroke-width="0.9" fill="none"/>
+          </svg>
+        </div>
+        <h3 class="service-title">Immediate<br>Loading Implants</h3>
+      </div>
+      <p class="service-desc">Walk in with gaps, walk out with teeth. Our same-day implant protocol means you never have to go without a smile.</p>
+      <a class="service-link" href="#">Learn More →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section section-alt" id="about">
+  <div class="about-split">
+    <div class="about-visual">
+      <div class="about-visual-inner">
+        <svg width="240" height="150" viewBox="0 80 240 165" fill="none">
+          <circle cx="120" cy="175" r="88" stroke="#B89A5A" stroke-width="0.8" opacity="0.4"/>
+          <circle cx="120" cy="175" r="66" stroke="#B89A5A" stroke-width="0.8" opacity="0.3"/>
+          <path d="M58 180 Q120 228 182 180" stroke="rgba(255,255,255,0.6)" stroke-width="2" fill="none"/>
+          <rect x="76" y="158" width="20" height="30" rx="10" fill="rgba(255,255,255,0.8)"/>
+          <rect x="98" y="152" width="22" height="38" rx="11" fill="rgba(255,255,255,0.92)"/>
+          <rect x="122" y="152" width="22" height="38" rx="11" fill="rgba(255,255,255,0.92)"/>
+          <rect x="146" y="158" width="20" height="30" rx="10" fill="rgba(255,255,255,0.8)"/>
+          <line x1="133" y1="190" x2="133" y2="222" stroke="#B89A5A" stroke-width="2.5"/>
+          <rect x="127" y="218" width="13" height="16" rx="2" fill="#B89A5A" opacity="0.7"/>
+          <text x="120" y="130" text-anchor="middle" font-family="serif" font-size="22" fill="rgba(255,255,255,0.82)" font-style="italic" font-weight="600">T&amp;G</text>
+        </svg>
+      </div>
+    </div>
+    <div class="about-content">
+      <div class="section-eyebrow">About the Practice</div>
+      <h2 class="section-title" style="margin-bottom:22px">London's <em>trusted</em><br>implant specialists</h2>
+      <p>Turner & Goldrich is an elite dental implant practice based in the heart of North London. We have been dedicated to restoring smiles for over two decades, combining surgical expertise with an unwavering commitment to patient comfort and care.</p>
+      <p>Our principal specialists hold advanced qualifications in implantology and undergo continuous professional development to bring you the very latest in implant technology. Every treatment plan is designed around you — your anatomy, your goals, your life.</p>
+      <p>We believe every patient deserves a smile they're proud of, and we'll guide you from first consultation through to your final result, every step of the way.</p>
+      <div style="margin-top:28px; padding-top:28px; border-top:1px solid var(--border); text-align:center;">
+        <div class="about-signature">Turner & Goldrich</div>
+        <div class="about-signature-title">Dental Implant Specialists · Est. London</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="section" id="process">
+  <div class="section-header">
+    <div>
+      <div class="section-eyebrow">How It Works</div>
+      <h2 class="section-title">A clear, guided <em>journey</em> to your new smile</h2>
+    </div>
+  </div>
+  <div class="process-steps">
+    <div class="process-step reveal">
+      <div class="process-step-inner">
+        <div class="process-dot">01</div>
+        <div class="process-connector"></div>
+      </div>
+      <div class="process-content">
+        <div class="process-tag">Initial Visit</div>
+        <h3 class="process-step-title">Free Consultation</h3>
+        <p class="process-step-desc">Meet with our specialist to discuss your concerns, examine your oral health, and explore your options — all with no obligation and no pressure.</p>
+        <div class="process-detail">
+          <span>✦ No obligation</span>
+          <span>✦ Same-day availability</span>
+        </div>
+      </div>
+    </div>
+    <div class="process-step reveal reveal-delay-1">
+      <div class="process-step-inner">
+        <div class="process-dot">02</div>
+        <div class="process-connector"></div>
+      </div>
+      <div class="process-content">
+        <div class="process-tag">Digital Planning</div>
+        <h3 class="process-step-title">Treatment Planning</h3>
+        <p class="process-step-desc">Using advanced 3D CBCT scanning and digital imaging, we design a precise, personalised treatment plan built entirely around your anatomy and goals.</p>
+        <div class="process-detail">
+          <span>✦ 3D CBCT scanning</span>
+          <span>✦ Digital smile design</span>
+        </div>
+      </div>
+    </div>
+    <div class="process-step reveal reveal-delay-2">
+      <div class="process-step-inner">
+        <div class="process-dot">03</div>
+        <div class="process-connector"></div>
+      </div>
+      <div class="process-content">
+        <div class="process-tag">Surgical Day</div>
+        <h3 class="process-step-title">Implant Placement</h3>
+        <p class="process-step-desc">Your implant is placed with precision under local anaesthetic. Guided surgical protocols ensure accuracy. Most patients are surprised by how comfortable the experience is.</p>
+        <div class="process-detail">
+          <span>✦ Guided surgery</span>
+          <span>✦ Sedation available</span>
+        </div>
+      </div>
+    </div>
+    <div class="process-step reveal reveal-delay-3">
+      <div class="process-step-inner">
+        <div class="process-dot">04</div>
+      </div>
+      <div class="process-content">
+        <div class="process-tag">Your New Smile</div>
+        <h3 class="process-step-title">Final Restoration</h3>
+        <p class="process-step-desc">Once healed, your custom-crafted crown, bridge or prosthesis is fitted — precision-milled to match your natural teeth. You leave with a smile that's entirely your own.</p>
+        <div class="process-detail">
+          <span>✦ Lab-crafted crowns</span>
+          <span>✦ Lifetime aftercare</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section section-alt" id="testimonials">
+  <div class="section-header">
+    <div>
+      <div class="section-eyebrow">Patient Stories</div>
+      <h2 class="section-title">What our patients <em>say</em></h2>
+    </div>
+  </div>
+
+  <!-- Featured testimonial -->
+  <div class="testimonial-featured reveal">
+    <div class="testimonial-featured-mark">"</div>
+    <p class="testimonial-featured-text">Turner & Goldrich restored not just my smile, but my confidence. After years of hiding my teeth, I finally feel like myself again. The artistry and care they brought to my treatment was extraordinary — I genuinely cannot recommend them highly enough.</p>
+    <div class="testimonial-featured-author">
+      <div class="testimonial-featured-name">Catherine W.</div>
+      <div class="testimonial-featured-stars">★★★★★</div>
+      <div class="testimonial-featured-treatment">Full Arch Restoration</div>
+    </div>
+  </div>
+
+  <div class="testimonials-grid">
+    <div class="testimonial-card reveal">
+      <div class="testimonial-quote">"</div>
+      <p class="testimonial-text">I was nervous for years about getting implants, but the team at Turner & Goldrich made the whole experience straightforward and reassuring. My new teeth look and feel completely natural.</p>
+      <div class="testimonial-footer">
+        <div class="testimonial-author">Margaret T.</div>
+        <div class="testimonial-stars">★★★★★</div>
+      </div>
+      <div class="testimonial-treatment-tag">Single Tooth Implant</div>
+    </div>
+    <div class="testimonial-card reveal reveal-delay-1">
+      <div class="testimonial-quote">"</div>
+      <p class="testimonial-text">From the first consultation to the final fitting, I was in excellent hands. The standard of care here is truly exceptional — I wouldn't hesitate to recommend them to anyone.</p>
+      <div class="testimonial-footer">
+        <div class="testimonial-author">David R.</div>
+        <div class="testimonial-stars">★★★★★</div>
+      </div>
+      <div class="testimonial-treatment-tag">Implant-Supported Bridge</div>
+    </div>
+    <div class="testimonial-card reveal reveal-delay-2">
+      <div class="testimonial-quote">"</div>
+      <p class="testimonial-text">After losing several teeth in an accident, I was devastated. Turner & Goldrich restored not just my smile but my confidence. The results are simply incredible.</p>
+      <div class="testimonial-footer">
+        <div class="testimonial-author">Priya M.</div>
+        <div class="testimonial-stars">★★★★★</div>
+      </div>
+      <div class="testimonial-treatment-tag">Full Arch Restoration</div>
+    </div>
+  </div>
+
+  <!-- Trust metrics -->
+  <div class="testimonial-metrics">
+    <div class="testimonial-metric">
+      <div class="metric-num">4.9<span>/5</span></div>
+      <div class="metric-label">Average Rating</div>
+    </div>
+    <div class="metric-divider"></div>
+    <div class="testimonial-metric">
+      <div class="metric-num">3k<span>+</span></div>
+      <div class="metric-label">Patients Treated</div>
+    </div>
+    <div class="metric-divider"></div>
+    <div class="testimonial-metric">
+      <div class="metric-num">98<span>%</span></div>
+      <div class="metric-label">Would Recommend</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT / CTA -->
+<section class="cta-band" id="contact">
+  <div class="cta-band-left">
+    <div class="cta-band-eyebrow">Get in Touch</div>
+    <h2 class="section-title">Ready to begin your <em>journey</em>?</h2>
+    <p>Book a no-obligation consultation and take the first step towards the smile you deserve. Our team will get back to you within one working day.</p>
+    <div class="contact-details">
+      <div class="contact-row">
+        <div class="contact-icon-gold">✦</div>
+        <div><div class="contact-label">Telephone</div><div class="contact-value">+44 (0)20 7625 4591</div></div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-icon-gold">✦</div>
+        <div><div class="contact-label">Email</div><div class="contact-value">hello@turnergoldrich.co.uk</div></div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-icon-gold">✦</div>
+        <div><div class="contact-label">Address</div><div class="contact-value">Elite House, 100 Villiers Road<br>London NW2 5PJ</div></div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-icon-gold">✦</div>
+        <div><div class="contact-label">Opening Hours</div><div class="contact-value">Mon–Fri 9:00–18:00 · Sat 9:00–14:00</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta-band-right">
+    <div class="contact-form-header">
+      <div class="section-eyebrow">Book a Consultation</div>
+      <p class="contact-form-sub">Complete the form and we'll be in touch to confirm your appointment.</p>
+    </div>
+    <div class="contact-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">First Name</label>
+          <input type="text" class="form-input" placeholder="Margaret">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Last Name</label>
+          <input type="text" class="form-input" placeholder="Thompson">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email Address</label>
+        <input type="email" class="form-input" placeholder="your@email.com">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Telephone</label>
+        <input type="tel" class="form-input" placeholder="+44 (0)7700 000000">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Treatment of Interest</label>
+        <select class="form-input form-select">
+          <option value="" disabled selected>Select a treatment…</option>
+          <option>Single Tooth Implant</option>
+          <option>Full Arch Restoration</option>
+          <option>Implant-Supported Bridge</option>
+          <option>Bone Grafting</option>
+          <option>Aesthetic Dentistry</option>
+          <option>Immediate Loading Implants</option>
+          <option>Not sure — I'd like advice</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Message <span style="opacity:0.5;font-weight:400">(optional)</span></label>
+        <textarea class="form-input form-textarea" placeholder="Tell us a little about your situation…"></textarea>
+      </div>
+      <button class="btn-primary form-submit">Request Consultation →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <div class="nav-wordmark">
+      <div class="nav-wordmark-top">Turner <span class="amp">&amp;</span> Goldrich</div>
+      <div class="nav-wordmark-rule"></div>
+      <div class="nav-wordmark-sub">Dental Implant Specialists</div>
+    </div>
+  </div>
+  <div class="footer-divider"></div>
+  <ul class="footer-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="aesthetics.html">Aesthetics</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="specials.html">Specials</a></li>
+    <li><a href="downloads.html">Downloads</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="footer-legal">© 2025 Turner &amp; Goldrich Ltd &nbsp;·&nbsp; GDC Registered Practice &nbsp;·&nbsp; All rights reserved</div>
+</footer>
+
+<script>
+  // Nav scroll effect
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Mobile nav
+  const mobileNav = document.getElementById('mobileNav');
+  function openMobileNav() {
+    mobileNav.style.display = 'flex';
+    requestAnimationFrame(() => mobileNav.classList.add('open'));
+  }
+  function closeMobileNav() {
+    mobileNav.classList.remove('open');
+    setTimeout(() => { mobileNav.style.display = 'none'; }, 300);
+  }
+
+  // Handle nav link clicks — close drawer then scroll
+  mobileNav.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const href = this.getAttribute('href');
+      mobileNav.classList.remove('open');
+      setTimeout(() => {
+        mobileNav.style.display = 'none';
+        if (href === '#') {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          const target = document.querySelector(href);
+          if (target) target.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 300);
+    });
+  });
+
+  // Scroll reveal — hide first, then show on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  reveals.forEach(el => el.classList.add('hidden'));
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.remove('hidden');
+        e.target.classList.add('visible');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.05, rootMargin: '0px 0px -30px 0px' });
+  reveals.forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "routes": [
+    { "src": "/", "dest": "/index.html" },
+    { "src": "/about", "dest": "/about.html" },
+    { "src": "/aesthetics", "dest": "/aesthetics.html" },
+    { "src": "/services", "dest": "/services.html" },
+    { "src": "/specials", "dest": "/specials.html" },
+    { "src": "/downloads", "dest": "/downloads.html" },
+    { "src": "/contact", "dest": "/contact.html" },
+    { "src": "/admin", "dest": "/tg-admin.html" },
+    { "src": "/(.*)\\.html", "dest": "/$1.html" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+        { "key": "X-XSS-Protection", "value": "1; mode=block" }
+      ]
+    },
+    {
+      "source": "/(.*)\\.(html|css|js)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=3600, must-revalidate" }
+      ]
+    }
+  ]
+}

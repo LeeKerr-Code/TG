@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
+<title>Services — Turner &amp; Goldrich</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  /* Force light mode — prevent iOS/Android dark mode from overriding colours */
+  @media (prefers-color-scheme: dark) {
+    html { filter: none !important; }
+    body { background: #F0E8DC !important; color: #1A1614 !important; }
+    .hero-left, .hero, section, .section, .trust-bar, footer, nav { background-color: revert; }
+  }
+
+  :root {
+    --ivory: #F7F3EE;
+    --warm-white: #FEFCF9;
+    --soft-grey: #F2EEE9;
+    --charcoal: #1A1614;
+    --deep: #0F0D0C;
+    --gold: #A07C30;
+    --gold-light: #E8C87A;
+    --muted: #5A5450;
+    --border: #D8D0C4;
+    --accent-bg: #EDE6DB;
+    --navy-soft: #3D5070;
+  }
+
+  html { scroll-behavior: smooth; }
+  section[id], div[id] { scroll-margin-top: 82px; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #E8DDD0;
+    color: #1A1614;
+    font-size: 16px;
+    line-height: 1.75;
+    overflow-x: hidden;
+    color-scheme: light;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 18px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #F0E8DC;
+    backdrop-filter: blur(14px);
+    transition: padding 0.3s;
+    -webkit-backdrop-filter: blur(14px);
+  }
+  nav.scrolled { padding: 13px 60px; }
+
+  .nav-logo { display: flex; align-items: center; text-decoration: none; gap: 0; }
+  .nav-logo img { height: 46px; width: auto; display: block; }
+  .nav-wordmark {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+    gap: 2px;
+  }
+  .nav-wordmark-top {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #0F0D0C;
+  }
+  .nav-wordmark-top .amp {
+    color: #A07C30;
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: 0;
+    margin: 0 2px;
+  }
+  .nav-wordmark-rule {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, #A07C30, transparent);
+    margin: 3px 0;
+  }
+  .nav-wordmark-sub {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 8px;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: #A07C30;
+  }
+
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--charcoal); }
+
+  .nav-cta {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+    background: var(--navy-soft);
+    padding: 11px 24px;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+  .nav-cta:hover { background: var(--gold); }
+
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 6px;
+    background: none;
+    border: none;
+  }
+  .nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--charcoal); }
+
+  /* Mobile drawer */
+  .mobile-nav {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: var(--warm-white);
+    z-index: 99;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .mobile-nav.open { opacity: 1; pointer-events: all; }
+  .mobile-nav a {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px;
+    font-weight: 300;
+    color: var(--deep);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+  }
+  .mobile-nav a:hover { color: var(--gold); }
+  .mobile-nav .mobile-cta {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+    background: var(--navy-soft);
+    padding: 15px 40px;
+    border-radius: 2px;
+    margin-top: 8px;
+  }
+  .mobile-close {
+    position: absolute;
+    top: 20px; right: 20px;
+    font-size: 26px;
+    cursor: pointer;
+    color: var(--muted);
+    background: none;
+    border: none;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+    background: #F0E8DC;
+  }
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 56px 150px 60px;
+    position: relative;
+    background: #F0E8DC;
+    overflow: hidden;
+  }
+  .hero-bg-illustration {
+    position: absolute;
+    top: -8%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 110%;
+    max-width: 680px;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .hero-bg-illustration svg {
+    width: 100%;
+    height: auto;
+  }
+  .hero-left > *:not(.hero-bg-illustration) { position: relative; z-index: 1; }
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 26px;
+    height: 1px;
+    background: var(--gold);
+    flex-shrink: 0;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(38px, 3.8vw, 60px);
+    font-weight: 300;
+    line-height: 1.1;
+    color: #0F0D0C;
+    margin-bottom: 22px;
+    animation: fadeUp 0.8s 0.1s ease both;
+  }
+  .hero-title em { font-style: italic; color: var(--gold); }
+  .hero-sub {
+    font-size: 16px;
+    font-weight: 400;
+    color: #4A4540;
+    max-width: 420px;
+    line-height: 1.85;
+    margin-bottom: 42px;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    flex-wrap: wrap;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+  .btn-primary {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+    background: var(--navy-soft);
+    padding: 16px 34px;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: background 0.25s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--gold); }
+  .btn-ghost {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--charcoal);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: gap 0.2s;
+  }
+  .btn-ghost:hover { gap: 16px; }
+  .btn-ghost::after { content: '→'; font-size: 14px; }
+
+  .hero-stats {
+    position: absolute;
+    bottom: 54px;
+    left: 60px;
+    display: flex;
+    gap: 44px;
+    animation: fadeUp 0.8s 0.4s ease both;
+  }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--deep);
+    line-height: 1;
+  }
+  .stat-num span { color: var(--gold); font-size: 20px; }
+  .stat-label {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 5px;
+  }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+    background: var(--accent-bg);
+    min-height: 480px;
+  }
+  .hero-image-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(140deg, #EDE6DB 0%, #DDD0BC 50%, #CFC0A6 100%);
+  }
+  .hero-tooth-graphic {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .tooth-svg-wrap { animation: fadeUp 1s 0.3s ease both; }
+  .hero-badge {
+    position: absolute;
+    bottom: 50px;
+    left: -18px;
+    background: var(--warm-white);
+    padding: 16px 24px;
+    box-shadow: 0 5px 28px rgba(0,0,0,0.07);
+    border-left: 3px solid var(--gold);
+    animation: fadeLeft 0.8s 0.5s ease both;
+  }
+  .hero-badge-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--deep);
+  }
+  .hero-badge-sub {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-top: 3px;
+  }
+
+  .trust-bar-inline { display: none; }
+
+  /* ─── TRUST BAR ─── */
+  .trust-bar {
+    background: #E8DDD0;
+    border-top: 1px solid #D8D0C4;
+    border-bottom: 1px solid #D8D0C4;
+    padding: 18px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #2A2420;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .trust-icon {
+    width: 28px;
+    height: 28px;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold);
+    font-size: 10px;
+    flex-shrink: 0;
+  }
+  .trust-divider { width: 1px; height: 16px; background: var(--border); }
+
+  /* ─── SECTIONS ─── */
+  .section { padding: 80px 60px; background: #FEFCF9; }
+  .section-alt { background: #E8DDD0; }
+
+  .section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 56px;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .section-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-eyebrow::before {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 1px;
+    background: var(--gold);
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 3vw, 48px);
+    font-weight: 300;
+    line-height: 1.12;
+    color: var(--deep);
+    max-width: 500px;
+  }
+  .section-title em { font-style: italic; color: var(--gold); }
+
+  /* ─── SERVICES ─── */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+  }
+  .service-card {
+    background: #FEFCF9;
+    padding: 42px 38px;
+    transition: background 0.3s;
+    cursor: default;
+  }
+  .service-card:hover { background: var(--navy-soft); }
+  .service-card:hover .service-title { color: #ffffff; }
+  .service-card:hover .service-desc { color: rgba(255,255,255,0.82); }
+  .service-card:hover .service-num { color: rgba(255,255,255,0.5); }
+  .service-card:hover .service-link { color: var(--gold-light); }
+  .service-card:hover .service-bar { background: var(--gold-light); }
+
+  .service-icon {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    transition: transform 0.3s;
+  }
+  .service-card:hover .service-icon { transform: scale(1.08); }
+  .service-card:hover .service-icon svg * { stroke: #E8C87A !important; }
+  .service-card:hover .service-icon svg [fill="#A07C30"] { fill: #E8C87A !important; stroke: none !important; }
+
+  .service-title-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 13px;
+  }
+
+  .service-num {
+    letter-spacing: 0.1em;
+    margin-bottom: 14px;
+    font-family: 'Cormorant Garamond', serif;
+    transition: color 0.3s;
+  }
+  .service-bar { width: 26px; height: 2px; background: var(--border); margin-bottom: 20px; transition: background 0.3s; }
+  .service-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--deep);
+    margin-bottom: 0;
+    transition: color 0.3s;
+  }
+  .service-desc {
+    font-size: 14px;
+    font-weight: 400;
+    color: #4A4540;
+    line-height: 1.85;
+    margin-bottom: 24px;
+    transition: color 0.3s;
+  }
+  .service-link {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--charcoal);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  /* ─── ABOUT ─── */
+  .about-split { display: grid; grid-template-columns: 1fr 1fr; }
+  .about-visual {
+    background: transparent;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 32px 0;
+  }
+  .about-visual-inner {
+    width: 240px;
+    height: 260px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .about-content { padding: 66px 60px; display: flex; flex-direction: column; justify-content: center; }
+  #about { padding: 0; }
+  #about .about-content { padding: 80px 60px; }
+  .about-content p { font-size: 15px; font-weight: 400; color: #3A3530; line-height: 1.9; margin-bottom: 16px; }
+  .about-signature { font-family: 'Cormorant Garamond', serif; font-size: 25px; font-style: italic; color: var(--deep); margin-top: 6px; }
+  .about-signature-title { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-top: 3px; }
+
+  /* ─── PROCESS ─── */
+  .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; position: relative; }
+  .process-steps::before {
+    content: '';
+    position: absolute;
+    top: 40px; left: 40px; right: 40px;
+    height: 1px;
+    background: var(--border);
+    z-index: 0;
+  }
+  .process-step { padding: 0 28px 0 0; position: relative; z-index: 1; }
+  .process-dot {
+    width: 80px; height: 80px;
+    border: 1px solid #D8D0C4;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 26px;
+    background: #FEFCF9;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 300;
+    color: #A07C30;
+    transition: all 0.3s;
+  }
+  .process-step:hover .process-dot { background: var(--gold); color: white; border-color: var(--gold); }
+  .process-step-title { font-family: 'Cormorant Garamond', serif; font-size: 21px; font-weight: 400; color: #0F0D0C; margin-bottom: 10px; }
+  .process-step-desc { font-size: 14px; font-weight: 400; color: #4A4540; line-height: 1.85; }
+
+  /* ─── TESTIMONIALS ─── */
+  .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .testimonial-card { background: #F5EFE6; padding: 38px; border: 1px solid #D8D0C4; }
+  .testimonial-quote { font-family: 'Cormorant Garamond', serif; font-size: 52px; font-weight: 300; color: var(--gold); line-height: 0.6; margin-bottom: 16px; opacity: 0.5; }
+  .testimonial-text { font-size: 14px; font-weight: 400; color: #2A2420; line-height: 1.9; margin-bottom: 22px; font-style: italic; }
+  .testimonial-author { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--deep); }
+  .testimonial-stars { color: var(--gold); font-size: 11px; letter-spacing: 2px; margin-top: 4px; }
+
+  /* ─── CTA BAND ─── */
+  .cta-band {
+    background: #FEFCF9;
+    border-top: 1px solid #D8D0C4;
+    padding: 90px 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+  .cta-band-eyebrow {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 14px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .cta-band-eyebrow::before { content: ''; display: block; width: 20px; height: 1px; background: var(--gold); flex-shrink: 0; }
+  .cta-band-left p { font-size: 15px; font-weight: 400; color: #4A4540; line-height: 1.85; margin-top: 18px; max-width: 420px; }
+  .cta-band-right { background: #F5EFE6; border: 1px solid #D8D0C4; }
+  .contact-row { display: flex; align-items: flex-start; gap: 16px; padding: 20px 26px; border-bottom: 1px solid var(--border); }
+  .contact-row:last-of-type { border-bottom: none; }
+  .contact-icon { width: 36px; height: 36px; border: 1px solid var(--gold); display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 13px; flex-shrink: 0; margin-top: 2px; }
+  .contact-label { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
+  .contact-value { font-size: 15px; color: var(--deep); font-weight: 400; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: #E8DDD0;
+    border-top: 1px solid #D8D0C4;
+    padding: 48px 60px 36px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+    text-align: center;
+  }
+  .footer-links { display: flex; gap: 28px; list-style: none; flex-wrap: wrap; justify-content: center; }
+  .footer-logo { display: flex; justify-content: center; }
+  .footer-logo .nav-wordmark-top { font-size: 13px; letter-spacing: 0.16em; }
+  .footer-logo .nav-wordmark-sub { font-size: 6.5px; letter-spacing: 0.24em; }
+  .footer-logo .nav-wordmark-rule { margin: 2px 0; }
+  .footer-links a { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--charcoal); }
+  .footer-divider { width: 40px; height: 1px; background: #D8D0C4; }
+  .footer-legal { font-size: 10px; letter-spacing: 0.08em; color: var(--muted); }
+
+  /* ─── PROCESS ENHANCED ─── */
+  .process-step { display: flex; gap: 24px; padding: 0 28px 0 0; position: relative; z-index: 1; }
+  .process-step-inner { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+  .process-connector { flex: 1; width: 1px; background: linear-gradient(to bottom, rgba(160,124,48,0.3), transparent); margin: 8px 0; min-height: 40px; }
+  .process-content { padding-bottom: 16px; }
+  .process-tag { font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; font-weight: 500; }
+  .process-detail { display: flex; gap: 16px; margin-top: 14px; flex-wrap: wrap; }
+  .process-detail span { font-size: 10px; letter-spacing: 0.08em; color: var(--muted); text-transform: uppercase; }
+
+  /* ─── TESTIMONIALS ENHANCED ─── */
+  .testimonial-featured { background: #1A1614; padding: 52px 56px; margin-bottom: 40px; position: relative; overflow: hidden; }
+  .testimonial-featured::before { content: ''; position: absolute; top: -40px; right: -40px; width: 180px; height: 180px; border: 1px solid rgba(184,154,90,0.15); border-radius: 50%; }
+  .testimonial-featured-mark { font-family: 'Cormorant Garamond', serif; font-size: 80px; font-weight: 300; color: var(--gold); line-height: 0.6; opacity: 0.6; margin-bottom: 24px; }
+  .testimonial-featured-text { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-style: italic; color: rgba(255,255,255,0.88); line-height: 1.7; margin-bottom: 32px; }
+  .testimonial-featured-name { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+  .testimonial-featured-stars { color: var(--gold); font-size: 11px; letter-spacing: 3px; margin-bottom: 6px; }
+  .testimonial-featured-treatment { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
+  .testimonial-footer { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+  .testimonial-treatment-tag { display: inline-block; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(160,124,48,0.3); padding: 4px 10px; }
+  .testimonial-metrics { display: flex; align-items: center; justify-content: center; gap: 0; margin-top: 48px; padding: 36px; background: #1A1614; }
+  .testimonial-metric { text-align: center; flex: 1; }
+  .metric-num { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 300; color: rgba(255,255,255,0.9); line-height: 1; }
+  .metric-num span { font-size: 20px; color: var(--gold); }
+  .metric-label { font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-top: 6px; }
+  .metric-divider { width: 1px; height: 40px; background: rgba(255,255,255,0.1); flex-shrink: 0; }
+
+  /* ─── CONTACT FORM ─── */
+  .contact-details { margin-top: 32px; display: flex; flex-direction: column; gap: 20px; }
+  .contact-icon-gold { color: var(--gold); font-size: 10px; margin-top: 3px; flex-shrink: 0; }
+  .contact-form-header { margin-bottom: 28px; }
+  .contact-form-sub { font-size: 13px; color: var(--muted); margin-top: 8px; line-height: 1.6; }
+  .contact-form { display: flex; flex-direction: column; gap: 16px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-label { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--deep); font-weight: 500; }
+  .form-input { background: #F5EFE6; border: 1px solid #D8D0C4; padding: 12px 16px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--deep); outline: none; transition: border-color 0.2s; width: 100%; box-sizing: border-box; -webkit-appearance: none; }
+  .form-input:focus { border-color: var(--gold); }
+  .form-input::placeholder { color: #B0A898; }
+  .form-select { cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23A07C30' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
+  .form-textarea { min-height: 100px; resize: vertical; }
+  .form-submit { margin-top: 8px; width: 100%; text-align: center; cursor: pointer; border: none; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeLeft {
+    from { opacity: 0; transform: translateX(-14px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  /* Reveal — content visible by default; JS enhances with animation */
+  .reveal { opacity: 1; transform: none; transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.hidden { opacity: 0; transform: translateY(22px); }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+
+  /* ═══════════════════════════════
+     TABLET (≤ 1024px)
+  ═══════════════════════════════ */
+  @media (max-width: 1024px) {
+    nav { padding: 16px 32px; }
+    nav.scrolled { padding: 12px 32px; }
+    .nav-links, .nav-cta { display: none; }
+    .nav-hamburger { display: flex; }
+
+    .hero { grid-template-columns: 1fr; min-height: unset; }
+    .hero-right { display: none; }
+    .hero-left { padding: 32px 32px 40px; }
+    .hero-stats { position: static; transform: none; display: flex; gap: 36px; justify-content: flex-start; margin-top: 40px; padding-top: 32px; width: 100%; }
+
+    .hero { padding-top: 64px; min-height: 100svh; }
+    .trust-divider { display: none; }
+
+    .section { padding: 80px 32px; }
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .about-split { grid-template-columns: 1fr; }
+    .about-visual { min-height: unset; }
+    .about-content { padding: 48px 32px; }
+    .process-steps { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+    .process-steps::before { display: none; }
+    .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+    .cta-band { grid-template-columns: 1fr; padding: 70px 32px; }
+    footer { padding: 30px 32px; }
+  }
+
+  /* ═══════════════════════════════
+     MOBILE (≤ 600px)
+  ═══════════════════════════════ */
+  @media (max-width: 600px) {
+    nav { padding: 14px 18px; }
+    nav.scrolled { padding: 12px 18px; }
+    .nav-logo img { height: 36px; }
+
+    .hero { padding-top: 60px; min-height: calc(100svh - 120px); display: flex; flex-direction: column; position: relative; }
+    .hero-left { padding: 0 18px; text-align: center; display: flex; flex-direction: column; justify-content: center; flex: 1; }
+    .hero-eyebrow { display: none; }
+    .hero-title { font-size: clamp(28px, 8.5vw, 42px); margin-top: 12px; margin-bottom: 32px; padding: 0 18px; }
+    .hero-sub { font-size: 14px; max-width: 100%; margin-left: auto; margin-right: auto; margin-bottom: 24px; line-height: 1.7; padding: 0 18px; }
+    .hero-actions { flex-direction: column; align-items: center; gap: 16px; padding: 0 18px; }
+    .hero-actions .btn-ghost { display: none; }
+    .btn-primary { width: 100%; text-align: center; padding: 16px 24px; }
+    .hero-stats { position: static; width: 100%; display: flex; gap: 0; justify-content: space-around; align-items: center; padding: 16px 0 20px; margin: 0; text-align: center; background: #F0E8DC; flex-shrink: 0; }
+    .hero-badge { display: none; }
+    .hero-right { display: none; }
+    .stat-num { font-size: 22px; }
+    .stat-label { font-size: 8px; letter-spacing: 0.06em; }
+    .trust-bar-desktop { display: flex; }
+    .trust-bar-inline { display: none; }
+    .trust-bar { margin-top: 0; padding: 12px 18px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 8px; justify-items: start; border-top: none; }
+    .trust-divider { display: none; }
+    .trust-item { font-size: 9px; gap: 6px; letter-spacing: 0.06em; }
+    .trust-icon { width: 20px; height: 20px; font-size: 8px; flex-shrink: 0; }
+
+    .section { padding: 48px 18px 32px; }
+    section[id], div[id] { scroll-margin-top: 64px; }
+    .section-header { flex-direction: column; align-items: flex-start; }
+    .section-header .btn-ghost { display: none; }
+    .section-title { font-size: clamp(28px, 8vw, 38px); max-width: 100%; }
+
+    .services-grid { grid-template-columns: 1fr; }
+    .service-card { padding: 32px 26px; }
+    .service-title { font-size: 22px; }
+
+    .about-content { padding: 36px 18px; }
+    .about-content p { font-size: 14px; }
+
+    .testimonial-featured { padding: 32px 24px; }
+    .testimonial-featured-text { font-size: 17px; }
+    .testimonial-metrics { flex-direction: column; gap: 24px; padding: 28px; }
+    .metric-divider { width: 40px; height: 1px; }
+    .form-row { grid-template-columns: 1fr; }
+    .process-steps { grid-template-columns: 1fr; gap: 32px; }
+    .process-step { padding: 0; }
+    .process-dot { width: 64px; height: 64px; font-size: 18px; }
+
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .testimonial-card { padding: 28px 22px; }
+
+    .cta-band { padding: 52px 18px; gap: 36px; }
+    .contact-row { padding: 16px 18px; gap: 14px; }
+    .contact-icon { width: 32px; height: 32px; font-size: 12px; }
+    .contact-value { font-size: 14px; }
+
+    footer { padding: 36px 18px 28px; gap: 20px; }
+    .footer-links { gap: 16px; }
+  }
+
+  .nav-active { color: var(--charcoal) !important; }
+  .nav-active::after { content: ''; display: block; width: 100%; height: 1px; background: var(--gold); margin-top: 2px; }
+  /* Page Hero */
+  .page-hero {
+    padding: 140px 60px 80px;
+    background: #F0E8DC;
+    position: relative;
+    overflow: hidden;
+  }
+  .page-hero::before {
+    content: '';
+    position: absolute;
+    right: -80px; top: -80px;
+    width: 500px; height: 500px;
+    border: 1px solid rgba(160,124,48,0.08);
+    border-radius: 50%;
+  }
+  .page-hero::after {
+    content: '';
+    position: absolute;
+    right: 20px; top: -20px;
+    width: 320px; height: 320px;
+    border: 1px solid rgba(160,124,48,0.06);
+    border-radius: 50%;
+  }
+  .page-hero-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+    animation: fadeUp 0.7s ease both;
+  }
+  .page-hero-eyebrow::before { content: ''; display: block; width: 26px; height: 1px; background: var(--gold); }
+  .page-hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(42px, 5vw, 72px);
+    font-weight: 300;
+    line-height: 1.05;
+    color: #0F0D0C;
+    max-width: 780px;
+    animation: fadeUp 0.7s 0.1s ease both;
+  }
+  .page-hero h1 em { font-style: italic; color: var(--gold); }
+  .page-hero-sub {
+    font-size: 16px;
+    color: #4A4540;
+    max-width: 580px;
+    line-height: 1.85;
+    margin-top: 22px;
+    animation: fadeUp 0.7s 0.2s ease both;
+  }
+  /* Content blocks */
+  .content-section { padding: 80px 60px; background: #FEFCF9; }
+  .content-section-alt { padding: 80px 60px; background: #E8DDD0; }
+  .content-section-dark { padding: 80px 60px; background: #1A1614; color: rgba(255,255,255,0.85); }
+  .content-section-dark h2, .content-section-dark h3 { color: rgba(255,255,255,0.95); }
+  .content-section-dark p { color: rgba(255,255,255,0.7); }
+  .prose h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 3vw, 42px);
+    font-weight: 300;
+    color: #0F0D0C;
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+  .prose h2 em { font-style: italic; color: var(--gold); }
+  .prose h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: #0F0D0C;
+    margin: 36px 0 12px;
+    padding-top: 36px;
+    border-top: 1px solid var(--border);
+  }
+  .prose p { font-size: 15px; line-height: 1.9; color: #3A3530; margin-bottom: 18px; max-width: 740px; }
+  .prose ul { margin: 16px 0 24px 0; display: flex; flex-direction: column; gap: 10px; max-width: 740px; }
+  .prose ul li { font-size: 14px; line-height: 1.7; color: #3A3530; padding-left: 20px; position: relative; }
+  .prose ul li::before { content: '✦'; position: absolute; left: 0; color: var(--gold); font-size: 9px; top: 4px; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .two-col-wide { display: grid; grid-template-columns: 2fr 3fr; gap: 80px; align-items: start; }
+  .sticky-label {
+    position: sticky;
+    top: 120px;
+  }
+  .sticky-label .section-eyebrow { margin-bottom: 14px; }
+  .sticky-label h2 { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 300; line-height: 1.2; color: #0F0D0C; }
+  .sticky-label h2 em { font-style: italic; color: var(--gold); }
+  .sticky-label p { font-size: 14px; line-height: 1.85; color: var(--muted); margin-top: 16px; }
+  .material-block {
+    border-top: 1px solid var(--border);
+    padding: 40px 0;
+  }
+  .material-block:first-child { border-top: none; padding-top: 0; }
+  .material-block h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 400;
+    color: #0F0D0C;
+    margin-bottom: 16px;
+  }
+  .material-tag {
+    display: inline-block;
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid rgba(160,124,48,0.3);
+    padding: 4px 12px;
+    margin-bottom: 16px;
+  }
+  .indications-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 40px; margin-top: 16px; }
+  .indication-item { font-size: 13px; line-height: 1.6; color: #3A3530; padding-left: 18px; position: relative; }
+  .indication-item::before { content: '✦'; position: absolute; left: 0; color: var(--gold); font-size: 8px; top: 3px; }
+  .highlight-box {
+    background: #F0E8DC;
+    border-left: 2px solid var(--gold);
+    padding: 24px 28px;
+    margin: 28px 0;
+  }
+  .highlight-box p { color: #2A2420; font-size: 15px; font-style: italic; margin: 0; }
+  /* Specials */
+  .special-card {
+    background: #1A1614;
+    padding: 52px;
+    position: relative;
+    overflow: hidden;
+  }
+  .special-card::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 240px; height: 240px;
+    border: 1px solid rgba(160,124,48,0.12);
+    border-radius: 50%;
+  }
+  .special-price-old { font-size: 13px; color: rgba(255,255,255,0.35); text-decoration: line-through; letter-spacing: 0.05em; }
+  .special-price-new { font-family: 'Cormorant Garamond', serif; font-size: 56px; font-weight: 300; color: var(--gold); line-height: 1; margin: 8px 0; }
+  .special-name { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; color: rgba(255,255,255,0.9); margin-bottom: 12px; }
+  .special-desc { font-size: 14px; line-height: 1.8; color: rgba(255,255,255,0.55); max-width: 460px; }
+  .newsletter-box {
+    border: 1px solid var(--border);
+    padding: 48px;
+    text-align: center;
+    background: #F5EFE6;
+  }
+  /* Downloads */
+  .download-card {
+    background: #F5EFE6;
+    border: 1px solid var(--border);
+    padding: 40px;
+    display: flex;
+    gap: 28px;
+    align-items: flex-start;
+    transition: border-color 0.2s;
+  }
+  .download-card:hover { border-color: var(--gold); }
+  .download-icon {
+    width: 56px; height: 56px;
+    border: 1px solid rgba(160,124,48,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+    color: var(--gold);
+  }
+  .download-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; color: #0F0D0C; margin-bottom: 8px; }
+  .download-desc { font-size: 14px; color: var(--muted); line-height: 1.7; }
+  .download-link { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); text-decoration: none; margin-top: 16px; }
+  /* Contact form (reuse from main) */
+  @media (max-width: 900px) {
+    .two-col, .two-col-wide { grid-template-columns: 1fr; gap: 40px; }
+    .indications-grid { grid-template-columns: 1fr; }
+    .sticky-label { position: static; }
+    .content-section, .content-section-alt, .content-section-dark { padding: 52px 24px; }
+    .page-hero { padding: 120px 24px 60px; }
+    .special-card { padding: 32px 24px; }
+    .newsletter-box { padding: 32px 24px; }
+    .download-card { flex-direction: column; padding: 28px 24px; }
+  }
+
+</style>
+</head>
+<body>
+
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-close" onclick="closeMobileNav()">✕</button>
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="aesthetics.html">Aesthetics</a>
+  <a href="services.html">Services</a>
+  <a href="specials.html">Specials</a>
+  <a href="downloads.html">Downloads</a>
+  <a href="contact.html">Contact</a>
+  
+</div>
+
+<nav id="nav">
+  <a class="nav-logo" href="index.html">
+    <div class="nav-wordmark">
+      <div class="nav-wordmark-top">Turner <span class="amp">&amp;</span> Goldrich</div>
+      <div class="nav-wordmark-rule"></div>
+      <div class="nav-wordmark-sub">Dental Laboratory · Est. 1973</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="aesthetics.html">Aesthetics</a></li>
+    <li><a href="services.html" class="nav-active">Services</a></li>
+    <li><a href="specials.html">Specials</a></li>
+    <li><a href="downloads.html">Downloads</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    
+  </ul>
+  <a class="nav-cta" href="contact.html">Get In Touch</a>
+  <button class="nav-hamburger" onclick="openMobileNav()"><span></span><span></span><span></span></button>
+</nav>
+
+
+<div class="page-hero">
+  <div class="page-hero-eyebrow">Laboratory Services</div>
+  <h1>Crown &amp; bridge<br>restorations, <em>reimagined</em></h1>
+  <p class="page-hero-sub">Turner &amp; Goldrich offers crown and bridge restorations in both traditional metal based construction techniques and a range of all ceramic options that will meet all our clients' requirements. With CAD/CAM being the future of dentistry it has become a large part of our laboratory.</p>
+</div>
+
+<div class="content-section">
+  <div class="highlight-box reveal">
+    <p>For our aesthetically challenging cases, we encourage patients to attend the lab for a personal consultation by one of our highly skilled technicians to ascertain the exact shade (colour) required for the restoration. Other aspects that form part of this appointment would be to establish patient preferences, smile-line assessment, facial measurements and a photographic record. The patient may need to return to the lab after the dentist does the try-in of the crown or bridge, if necessary, for a final colourisation.</p>
+  </div>
+
+  <div class="material-block reveal">
+    <div class="material-tag">PFM</div>
+    <h3 style="border:none; padding:0; margin-top:0; margin-bottom:16px; font-family:'Cormorant Garamond',serif; font-size:26px; font-weight:400; color:#0F0D0C;">Porcelain Bonded to Metal</h3>
+    <div class="prose">
+      <p>Porcelain bonded to metal has been the main-stay of dental technology and the first choice of dentistry as a treatment option for the past forty years. It has longevity, is stable and requires little to basic equipment to produce. In comparison PFM today cannot match all porcelain alternatives in most indications. They are growing in popularity providing, far superior aesthetic results. In many cases PFM will remain a reasonable option for some time to come.</p>
+    </div>
+    <p style="font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold); margin:24px 0 12px;">Indications</p>
+    <div class="indications-grid">
+      <div class="indication-item">All restorative procedures — a material offering lower cost</div>
+      <div class="indication-item">Excellent where devitalized teeth are present</div>
+      <div class="indication-item">Where partial dentures need to be retained</div>
+      <div class="indication-item">Where precision attachments are required — still the first choice</div>
+      <div class="indication-item">Very suited where paranormal function exists</div>
+      <div class="indication-item">Excellent solution for excessive heavy bite history or TMJ joint issues</div>
+      <div class="indication-item">Can be compromised aesthetically owing to the metal base</div>
+      <div class="indication-item">May lack vitality when there is lack of room</div>
+    </div>
+  </div>
+
+  <div class="material-block reveal">
+    <div class="material-tag">IPS e.max</div>
+    <h3 style="border:none; padding:0; margin-top:0; margin-bottom:16px; font-family:'Cormorant Garamond',serif; font-size:26px; font-weight:400; color:#0F0D0C;">IPS e.max Lithium Disilicate</h3>
+    <div class="prose">
+      <p>IPS e.max is offered in both single unit veneers and as bridges. The material offers a superior aesthetic solution to both anteriors and posteriors applications with a strength of 400 MPa where preparations are cut with shoulders.</p>
+      <p>All IPS e.max restorations are etched with 9.5% hydrofluoric acid before leaving the laboratory.</p>
+    </div>
+    <p style="font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold); margin:24px 0 12px;">Guidelines for Crowns &amp; Bridges</p>
+    <div class="indications-grid">
+      <div class="indication-item">Almost all restorative procedures including implants can be constructed using IPS e.max porcelain on Lithium Disilicate or Zirconia</div>
+      <div class="indication-item">Preparations should be cut with classic shoulder design for vertical support for optimal transition of light into the tissue</div>
+      <div class="indication-item">IPS e.max requires adequate room palatally, lingually, occlusally with 2mm clearance for occlusal strength</div>
+      <div class="indication-item">Bridges are ideally restricted to three unit spans</div>
+      <div class="indication-item">A requirement for bridges is to allow sufficient clinical height for adequate connectors — approximately 3mm to 4mm in height</div>
+      <div class="indication-item">IPS e.max offers superior aesthetics over conventional porcelain bonded restorations, although sometimes the strength can be compromised</div>
+      <div class="indication-item">Use IPS e.max on Zirconia for long span bridgework as an alternative to porcelain bonded bridgework</div>
+      <div class="indication-item">In conjunction with Zirconia abutments, IPS e.max offers superior restorations for implant applications</div>
+    </div>
+    <p style="font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold); margin:28px 0 12px;">Guidelines for Full Contour or Facial Veneers</p>
+    <div class="indications-grid">
+      <div class="indication-item">Can be used as full contour stained where space is at a minimum, or fully layered where space is available</div>
+      <div class="indication-item">Where a form change is required, "open or clear the inter-proximal areas" so the IPS e.max veneer can re-contour inter-dental areas</div>
+      <div class="indication-item">If no form change is required leave inter-dental contacts intact to maintain tooth enamel for bonding</div>
+    </div>
+    <p style="font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold); margin:28px 0 12px;">Guidelines for Inlays</p>
+    <div class="indications-grid">
+      <div class="indication-item">IPS e.max inlays, onlays, one, two or three surface either clear glazed or stained offers excellent aesthetic results</div>
+      <div class="indication-item">Avoid cutting internal sharp corners within internal boxes as this may create pressure points or increased friction on cementing</div>
+      <div class="indication-item">For internal box cutting use a round nosed diamond or tungsten cutter, not a square tipped</div>
+      <div class="indication-item">Avoid long bevels as these may distort while firing the ceramic — cut bevels at thirty degrees and 1mm in length maximum</div>
+    </div>
+  </div>
+</div>
+
+<div class="content-section-alt reveal">
+  <div class="material-block">
+    <div class="material-tag">Zirconia</div>
+    <h3 style="border:none; padding:0; margin-top:0; margin-bottom:16px; font-family:'Cormorant Garamond',serif; font-size:26px; font-weight:400; color:#0F0D0C;">Zirconia</h3>
+    <div class="prose">
+      <p>Zirconia has changed the face of dentistry in a way that years past was only a dream. This material can be fabricated into a variety of dental solutions that brings aesthetics and tremendous strength that challenges metal based solutions. Manufactured by technology that delivers unquestionable fit, the latest developments have solved many of the earlier issues related to translucency, colour and light reaction.</p>
+      <p>In its present development Zirconia offers outstanding quality restorations for a wide range of dental procedures, complete reconstructions and implant configurations that are virtually impossible to create by traditional methods.</p>
+      <p>IPS e.max in our opinion is the softest and most aesthetic solution when using Zirconia for your patient's treatments. IPS e.max overlaying ceramic has a low firing temperature which pays dividends in reducing stress and brittleness usually associated with the Zirconia higher fusing alternatives. It simply creates superb quality in all respects of its use.</p>
+    </div>
+    <p style="font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold); margin:24px 0 12px;">Overview</p>
+    <div class="indications-grid">
+      <div class="indication-item">Milled Zirconia offers strength values between 900 to 1100 MPa</div>
+      <div class="indication-item">Extremely strong but more expensive as a restorative option</div>
+      <div class="indication-item">Can be prescribed for cases with little vertical dimension</div>
+      <div class="indication-item">Zirconia is abrasive in its natural form — always cover with layered ceramic where possible</div>
+      <div class="indication-item">When exposed to opposing dentition ensure it is completely polished after adjustment using diamond polishing pastes or wheels</div>
+      <div class="indication-item">Zirconia as a material is guaranteed for ten years against breakage by the manufacturers</div>
+      <div class="indication-item">Five axis scanning allows tremendous design possibilities and milling options</div>
+      <div class="indication-item">Try and avoid undercuts near margins when preparing</div>
+    </div>
+    <p style="font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold); margin:28px 0 12px;">Guidelines for Crowns &amp; Bridges</p>
+    <div class="indications-grid">
+      <div class="indication-item">Ideal material for all crown indications anterior to posterior</div>
+      <div class="indication-item">More expensive than porcelain fused to metal or IPS e.max</div>
+      <div class="indication-item">Where aesthetics and very close colour matching is required, preps need to accommodate an allowance for 0.3mm for the Zirconia coping on all surfaces</div>
+      <div class="indication-item">A good selection of shoulder porcelains are available to colour match marginal transition to facial tooth surfaces when required</div>
+      <div class="indication-item">For anterior bridge work where bite and leverage issues are concentrated, consider connectors being thicker than metal to increase strength</div>
+      <div class="indication-item">The IPS e.max overlaying ceramic is easy to correct and polish in situ — available in all commercial shades</div>
+    </div>
+    <p style="font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold); margin:28px 0 12px;">Guidelines for Large Reconstructions</p>
+    <div class="indications-grid">
+      <div class="indication-item">The software allows for pre-diagnosis waxing to be scanned and copied into the design phase</div>
+      <div class="indication-item">The software allows for complete internal design if preferred</div>
+      <div class="indication-item">Can be milled in one piece up to twelve unit spans, cement retained or implant supported</div>
+    </div>
+    <p style="font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold); margin:28px 0 12px;">Guidelines for Implants</p>
+    <div class="indications-grid">
+      <div class="indication-item">Excellent in the design phase to evaluate implant bed contouring and custom abutment design</div>
+      <div class="indication-item">Design issues can be communicated to the dental office for evaluation, approval or discussion</div>
+      <div class="indication-item">Excellent fit to all types of clinical implants</div>
+      <div class="indication-item">Two part implant solutions are possible on difficult case designs</div>
+      <div class="indication-item">Excellent material to fabricate primary telescopes for removable dentures</div>
+      <div class="indication-item">Complete fabrication of fixed or removable Zirconia bars are possible for fixed or removable prosthetics</div>
+      <div class="indication-item">Complete Prettau (ZirconZahn) one piece reconstructions are possible from pre-set-up templates</div>
+    </div>
+  </div>
+</div>
+
+
+<footer>
+  <div class="footer-logo">
+    <div class="nav-wordmark">
+      <div class="nav-wordmark-top">Turner <span class="amp">&amp;</span> Goldrich</div>
+      <div class="nav-wordmark-rule"></div>
+      <div class="nav-wordmark-sub">Dental Laboratory · Est. 1973</div>
+    </div>
+  </div>
+  <div class="footer-divider"></div>
+  <ul class="footer-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="aesthetics.html">Aesthetics</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="specials.html">Specials</a></li>
+    <li><a href="downloads.html">Downloads</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="footer-legal">© 2025 Turner &amp; Goldrich Ltd &nbsp;·&nbsp; Elite House, 100 Villiers Road, London NW2 5PJ &nbsp;·&nbsp; GDC Registered</div>
+</footer>
+
+<script>
+function openMobileNav() {
+  const nav = document.getElementById('mobileNav');
+  nav.style.display = 'flex';
+  setTimeout(() => nav.classList.add('open'), 10);
+}
+function closeMobileNav() {
+  const nav = document.getElementById('mobileNav');
+  nav.classList.remove('open');
+  setTimeout(() => nav.style.display = 'none', 300);
+}
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 40);
+});
+document.querySelectorAll('.reveal').forEach(el => {
+  new IntersectionObserver(([e]) => { if(e.isIntersecting) el.classList.add('visible'); }, {threshold:0.1}).observe(el);
+});
+</script>
+</body>
+</html>
