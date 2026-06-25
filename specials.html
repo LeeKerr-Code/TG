@@ -50,18 +50,18 @@
     position: fixed;
     top: 0; left: 0; right: 0;
     z-index: 100;
-    padding: 18px 60px;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
     align-items: center;
-    justify-content: space-between;
+    padding: 18px 0;
     background: #F0E8DC;
     backdrop-filter: blur(14px);
     transition: padding 0.3s;
     -webkit-backdrop-filter: blur(14px);
   }
-  nav.scrolled { padding: 13px 60px; }
+  nav.scrolled { padding: 13px 0; }
 
-  .nav-logo { display: flex; align-items: center; text-decoration: none; gap: 0; flex-shrink: 0; }
+  .nav-logo { display: flex; align-items: center; text-decoration: none; gap: 0; flex-shrink: 0; padding-left: 60px; }
   .nav-logo img { height: 46px; width: auto; display: block; }
   .nav-wordmark {
     display: flex;
@@ -71,7 +71,7 @@
   }
   .nav-wordmark-top {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 43px;
+    font-size: 50px;
     font-weight: 600;
     letter-spacing: 0.18em;
     text-transform: uppercase;
@@ -99,7 +99,7 @@
     color: #A07C30;
   }
 
-  .nav-links { display: flex; flex-wrap: wrap; row-gap: 8px; gap: 28px; list-style: none; justify-content: flex-end; flex: 1 1 auto; min-width: 0; }
+  .nav-links { display: flex; flex-wrap: wrap; row-gap: 8px; gap: 28px; list-style: none; justify-content: flex-start; padding-right: 60px; grid-column: 2; min-width: 0; }
   .nav-links a {
     font-size: 14px;
     font-weight: 500;
@@ -118,6 +118,9 @@
     gap: 5px;
     cursor: pointer;
     padding: 6px;
+    margin-right: 60px;
+    justify-self: end;
+    grid-column: 2;
     background: none;
     border: none;
   }
@@ -662,11 +665,10 @@
      so the logo and links never collide.
   ═══════════════════════════════ */
   @media (max-width: 1480px) and (min-width: 1025px) {
-    nav { padding: 18px clamp(20px, 4vw, 60px); }
-    nav.scrolled { padding: 13px clamp(20px, 4vw, 60px); }
-    .nav-wordmark-top { font-size: clamp(26px, 2.6vw, 43px); }
+    .nav-logo { padding-left: clamp(20px, 4vw, 60px); }
+    .nav-links { padding-right: clamp(20px, 4vw, 60px); gap: clamp(14px, 1.6vw, 28px); }
+    .nav-wordmark-top { font-size: clamp(28px, 3vw, 50px); }
     .nav-wordmark-sub { letter-spacing: 0.16em; font-size: 9px; }
-    .nav-links { gap: clamp(14px, 1.6vw, 28px); }
     .nav-links a { font-size: 12px; letter-spacing: 0.08em; }
   }
 
@@ -674,10 +676,11 @@
      TABLET (≤ 1024px)
   ═══════════════════════════════ */
   @media (max-width: 1024px) {
-    nav { padding: 16px 32px; }
-    nav.scrolled { padding: 12px 32px; }
+    nav { padding: 16px 0; }
+    nav.scrolled { padding: 12px 0; }
+    .nav-logo { padding-left: 32px; }
     .nav-links { display: none; }
-    .nav-hamburger { display: flex; }
+    .nav-hamburger { display: flex; margin-right: 32px; }
 
     .hero { grid-template-columns: 1fr; min-height: unset; }
     .hero-right { display: none; }
@@ -703,8 +706,10 @@
      MOBILE (≤ 600px)
   ═══════════════════════════════ */
   @media (max-width: 600px) {
-    nav { padding: 14px 18px; }
-    nav.scrolled { padding: 12px 18px; }
+    nav { padding: 14px 0; }
+    nav.scrolled { padding: 12px 0; }
+    .nav-logo { padding-left: 18px; }
+    .nav-hamburger { margin-right: 18px; }
     .nav-logo img { height: 36px; }
 
     .hero { padding-top: 60px; min-height: calc(100svh - 120px); display: flex; flex-direction: column; position: relative; }
