@@ -643,6 +643,65 @@
   .form-select { cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23A07C30' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
   .form-textarea { min-height: 100px; resize: vertical; }
   .form-submit { margin-top: 8px; width: 100%; text-align: center; cursor: pointer; border: none; }
+
+  /* ═══════════════════════════════════════════════════════════
+     REUSABLE PICTURE TREATMENT — for continuity on future pages
+     ───────────────────────────────────────────────────────────
+     Use this whenever adding a photo alongside text in a
+     two-column split (the same pattern used in the homepage
+     hero). It guarantees:
+       • The text/photo divide lines up exactly with the nav's
+         own 1.15fr / 1fr grid split (so nav links and the photo
+         share the same left/right edges at every screen width)
+       • The photo is inset slightly from the right edge to match
+         the nav's right padding — never fully bleeds to the edge
+       • A small bottom border so the photo never touches the
+         very bottom of its section
+       • Automatically hides below 1024px (where nav also
+         switches to the hamburger menu) so mobile/tablet just
+         shows the text column full-width
+
+     HOW TO USE:
+       <section class="split-section">
+         <div class="split-text"> ...your text/content... </div>
+         <div class="split-photo">
+           <div class="split-photo-bg" style="background-image:url('your-image.jpg')"></div>
+         </div>
+       </section>
+  ═══════════════════════════════════════════════════════════ */
+  .split-section {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    background: #F0E8DC;
+  }
+  .split-text {
+    position: relative;
+    padding: 80px 56px 80px 60px;
+  }
+  .split-photo {
+    position: relative;
+    overflow: hidden;
+    background: var(--accent-bg);
+    min-height: 420px;
+  }
+  .split-photo-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 60px;
+    bottom: 28px;
+    background-size: cover;
+    background-position: center;
+  }
+  @media (max-width: 1480px) and (min-width: 1025px) {
+    .split-photo-bg { right: clamp(20px, 4vw, 60px); }
+  }
+  @media (max-width: 1024px) {
+    .split-section { grid-template-columns: 1fr; }
+    .split-photo { display: none; }
+    .split-text { padding: 48px 32px; }
+  }
+
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(18px); }
     to { opacity: 1; transform: translateY(0); }

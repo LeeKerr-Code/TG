@@ -631,6 +631,65 @@
   .form-select { cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23A07C30' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
   .form-textarea { min-height: 100px; resize: vertical; }
   .form-submit { margin-top: 8px; width: 100%; text-align: center; cursor: pointer; border: none; }
+
+  /* ═══════════════════════════════════════════════════════════
+     REUSABLE PICTURE TREATMENT — for continuity on future pages
+     ───────────────────────────────────────────────────────────
+     Use this whenever adding a photo alongside text in a
+     two-column split (the same pattern used in the homepage
+     hero). It guarantees:
+       • The text/photo divide lines up exactly with the nav's
+         own 1.15fr / 1fr grid split (so nav links and the photo
+         share the same left/right edges at every screen width)
+       • The photo is inset slightly from the right edge to match
+         the nav's right padding — never fully bleeds to the edge
+       • A small bottom border so the photo never touches the
+         very bottom of its section
+       • Automatically hides below 1024px (where nav also
+         switches to the hamburger menu) so mobile/tablet just
+         shows the text column full-width
+
+     HOW TO USE:
+       <section class="split-section">
+         <div class="split-text"> ...your text/content... </div>
+         <div class="split-photo">
+           <div class="split-photo-bg" style="background-image:url('your-image.jpg')"></div>
+         </div>
+       </section>
+  ═══════════════════════════════════════════════════════════ */
+  .split-section {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    background: #F0E8DC;
+  }
+  .split-text {
+    position: relative;
+    padding: 80px 56px 80px 60px;
+  }
+  .split-photo {
+    position: relative;
+    overflow: hidden;
+    background: var(--accent-bg);
+    min-height: 420px;
+  }
+  .split-photo-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 60px;
+    bottom: 28px;
+    background-size: cover;
+    background-position: center;
+  }
+  @media (max-width: 1480px) and (min-width: 1025px) {
+    .split-photo-bg { right: clamp(20px, 4vw, 60px); }
+  }
+  @media (max-width: 1024px) {
+    .split-section { grid-template-columns: 1fr; }
+    .split-photo { display: none; }
+    .split-text { padding: 48px 32px; }
+  }
+
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(18px); }
     to { opacity: 1; transform: translateY(0); }
@@ -935,7 +994,6 @@
         <h3 class="service-title">Single Tooth<br>Implants</h3>
       </div>
       <p class="service-desc">Replace a single missing tooth with a natural-looking, permanent implant that integrates seamlessly with your existing teeth.</p>
-      <a class="service-link" href="#">Learn More →</a>
     </div>
 
     <!-- 02 Full Arch Restoration -->
@@ -983,27 +1041,23 @@
       <a class="service-link" href="#">Learn More →</a>
     </div>
 
-    <!-- 04 Bone Grafting -->
+    <!-- 04 Prosthetic Services -->
     <div class="service-card reveal">
       <div class="service-num">04</div><div class="service-bar"></div>
       <div class="service-title-row">
         <div class="service-icon">
           <svg width="44" height="44" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M10 42 Q10 52 20 54 Q32 56 44 54 Q54 52 54 42 L52 28 Q50 20 44 18 Q38 16 32 16 Q26 16 20 18 Q14 20 12 28Z" stroke="#A07C30" stroke-width="1.2" fill="none"/>
-          <path d="M18 30 Q22 27 26 30" stroke="#A07C30" stroke-width="0.8" fill="none" opacity="0.5" stroke-linecap="round"/>
-          <path d="M38 30 Q42 27 46 30" stroke="#A07C30" stroke-width="0.8" fill="none" opacity="0.5" stroke-linecap="round"/>
-          <path d="M28 38 Q32 35 36 38" stroke="#A07C30" stroke-width="0.8" fill="none" opacity="0.5" stroke-linecap="round"/>
-          <line x1="32" y1="16" x2="32" y2="6" stroke="#A07C30" stroke-width="1.5" stroke-linecap="round"/>
-          <line x1="32" y1="2" x2="32" y2="10" stroke="#A07C30" stroke-width="1" opacity="0.6"/>
-          <line x1="28" y1="6" x2="36" y2="6" stroke="#A07C30" stroke-width="1" opacity="0.6"/>
-          <circle cx="22" cy="46" r="1.5" fill="#A07C30" opacity="0.4"/>
-          <circle cx="32" cy="48" r="1.5" fill="#A07C30" opacity="0.4"/>
-          <circle cx="42" cy="46" r="1.5" fill="#A07C30" opacity="0.4"/>
+          <path d="M10 36 Q10 48 22 50 Q32 52 42 50 Q54 48 54 36 Q54 28 48 26 Q40 23 32 23 Q24 23 16 26 Q10 28 10 36Z" stroke="#A07C30" stroke-width="1.2" fill="none"/>
+          <rect x="18" y="32" width="6" height="9" rx="2" stroke="#A07C30" stroke-width="1" fill="none"/>
+          <rect x="25" y="30" width="6" height="11" rx="2" stroke="#A07C30" stroke-width="1" fill="none"/>
+          <rect x="33" y="30" width="6" height="11" rx="2" stroke="#A07C30" stroke-width="1" fill="none"/>
+          <rect x="40" y="32" width="6" height="9" rx="2" stroke="#A07C30" stroke-width="1" fill="none"/>
+          <path d="M16 26 Q32 16 48 26" stroke="#A07C30" stroke-width="0.6" fill="none" opacity="0.35" stroke-dasharray="2 4"/>
           </svg>
         </div>
-        <h3 class="service-title">Bone Grafting<br>&amp; Augmentation</h3>
+        <h3 class="service-title">Prosthetic<br>Services</h3>
       </div>
-      <p class="service-desc">Where bone loss has occurred, we rebuild the foundation for successful implant placement with advanced grafting techniques.</p>
+      <p class="service-desc">Full and partial dentures, crowns and custom prosthetic appliances — precision-crafted to restore comfort, function and a natural smile.</p>
       <a class="service-link" href="#">Learn More →</a>
     </div>
 
@@ -1057,6 +1111,26 @@
         <h3 class="service-title">Immediate<br>Loading Implants</h3>
       </div>
       <p class="service-desc">Walk in with gaps, walk out with teeth. Our same-day implant protocol means you never have to go without a smile.</p>
+      <a class="service-link" href="#">Learn More →</a>
+    </div>
+
+    <!-- 07 Bleaching Trays, Mouth Guards & Orthodontics -->
+    <div class="service-card reveal">
+      <div class="service-num">07</div><div class="service-bar"></div>
+      <div class="service-title-row">
+        <div class="service-icon">
+          <svg width="44" height="44" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M14 26 Q12 34 16 40 Q22 48 32 48 Q42 48 48 40 Q52 34 50 26 Q48 18 32 18 Q16 18 14 26Z" stroke="#A07C30" stroke-width="1.2" fill="none"/>
+          <path d="M19 27 Q32 21 45 27" stroke="#A07C30" stroke-width="0.9" fill="none" opacity="0.5"/>
+          <rect x="22" y="28" width="5" height="8" rx="2" stroke="#A07C30" stroke-width="0.9" fill="none" opacity="0.7"/>
+          <rect x="29.5" y="27" width="5" height="9" rx="2" stroke="#A07C30" stroke-width="0.9" fill="none" opacity="0.7"/>
+          <rect x="37" y="28" width="5" height="8" rx="2" stroke="#A07C30" stroke-width="0.9" fill="none" opacity="0.7"/>
+          <path d="M16 26 Q32 12 48 26" stroke="#A07C30" stroke-width="0.6" fill="none" opacity="0.3" stroke-dasharray="2 4"/>
+          </svg>
+        </div>
+        <h3 class="service-title">Bleaching Trays, Mouth<br>Guards &amp; Orthodontics</h3>
+      </div>
+      <p class="service-desc">We collaborate with prescribing dentists to provide custom-fitted bleaching trays, mouth guards and orthodontic appliances tailored to each patient.</p>
       <a class="service-link" href="#">Learn More →</a>
     </div>
 
@@ -1292,9 +1366,10 @@
           <option>Single Tooth Implant</option>
           <option>Full Arch Restoration</option>
           <option>Implant-Supported Bridge</option>
-          <option>Bone Grafting</option>
+          <option>Prosthetic Services</option>
           <option>Aesthetic Dentistry</option>
           <option>Immediate Loading Implants</option>
+          <option>Bleaching Trays, Mouth Guards & Orthodontics</option>
           <option>Not sure — I'd like advice</option>
         </select>
       </div>
