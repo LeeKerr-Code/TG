@@ -2,6 +2,7 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "routes": [
+    { "handle": "filesystem" },
     { "src": "/", "dest": "/index.html" },
     { "src": "/about", "dest": "/about.html" },
     { "src": "/aesthetics", "dest": "/aesthetics.html" },
@@ -30,3 +31,4 @@
     }
   ]
 }
+
