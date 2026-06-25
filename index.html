@@ -326,7 +326,10 @@
   }
   .hero-image-bg {
     position: absolute;
-    inset: 0;
+    top: 0;
+    left: 0;
+    right: 60px;
+    bottom: 28px;
     background-image: url('hero-smile.jpg');
     background-size: cover;
     background-position: center 38%;
@@ -655,6 +658,7 @@
     .nav-wordmark-top { font-size: clamp(28px, 3vw, 50px); }
     .nav-wordmark-sub { letter-spacing: 0.16em; font-size: 9px; }
     .nav-links a { font-size: 12px; letter-spacing: 0.08em; }
+    .hero-image-bg { right: clamp(20px, 4vw, 60px); }
   }
 
   /* ═══════════════════════════════
