@@ -5,6 +5,7 @@
     { "src": "/", "dest": "/index.html" },
     { "src": "/about", "dest": "/about.html" },
     { "src": "/aesthetics", "dest": "/aesthetics.html" },
+    { "src": "/gallery", "dest": "/gallery.html" },
     { "src": "/services", "dest": "/services.html" },
     { "src": "/specials", "dest": "/specials.html" },
     { "src": "/downloads", "dest": "/downloads.html" },

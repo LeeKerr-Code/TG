@@ -238,9 +238,9 @@
   }
   .hero-title {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(38px, 3.8vw, 60px);
+    font-size: clamp(30px, 2.8vw, 46px);
     font-weight: 300;
-    line-height: 1.1;
+    line-height: 1.15;
     color: #0F0D0C;
     margin-bottom: 22px;
     animation: fadeUp 0.8s 0.1s ease both;
@@ -291,28 +291,41 @@
   .btn-ghost:hover { gap: 16px; }
   .btn-ghost::after { content: '→'; font-size: 14px; }
 
-  .hero-stats {
-    position: absolute;
-    bottom: 54px;
-    left: 60px;
-    display: flex;
-    gap: 44px;
+  .hero-credential {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 48px;
+    padding: 14px 18px;
+    width: 248px;
+    box-sizing: border-box;
+    background: var(--warm-white);
+    border-left: 3px solid var(--gold);
+    box-shadow: 0 5px 28px rgba(0,0,0,0.06);
     animation: fadeUp 0.8s 0.4s ease both;
+    align-self: flex-start;
   }
-  .stat-num {
+  .hero-credential-mark {
+    color: var(--gold);
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+  .hero-credential-title {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 32px;
-    font-weight: 300;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
     color: var(--deep);
-    line-height: 1;
+    line-height: 1.2;
+    white-space: nowrap;
   }
-  .stat-num span { color: var(--gold); font-size: 20px; }
-  .stat-label {
-    font-size: 10px;
-    letter-spacing: 0.1em;
+  .hero-credential-sub {
+    font-size: 7px;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--muted);
-    margin-top: 5px;
+    color: var(--gold);
+    margin-top: 2px;
+    white-space: nowrap;
   }
 
   .hero-right {
@@ -324,38 +337,9 @@
   .hero-image-bg {
     position: absolute;
     inset: 0;
-    background: linear-gradient(140deg, #EDE6DB 0%, #DDD0BC 50%, #CFC0A6 100%);
-  }
-  .hero-tooth-graphic {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .tooth-svg-wrap { animation: fadeUp 1s 0.3s ease both; }
-  .hero-badge {
-    position: absolute;
-    bottom: 50px;
-    left: -18px;
-    background: var(--warm-white);
-    padding: 16px 24px;
-    box-shadow: 0 5px 28px rgba(0,0,0,0.07);
-    border-left: 3px solid var(--gold);
-    animation: fadeLeft 0.8s 0.5s ease both;
-  }
-  .hero-badge-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 20px;
-    font-weight: 400;
-    color: var(--deep);
-  }
-  .hero-badge-sub {
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-top: 3px;
+    background-image: url('hero-smile.jpg');
+    background-size: cover;
+    background-position: center;
   }
 
   .trust-bar-inline { display: none; }
@@ -682,7 +666,7 @@
     .hero { grid-template-columns: 1fr; min-height: unset; }
     .hero-right { display: none; }
     .hero-left { padding: 32px 32px 40px; }
-    .hero-stats { position: static; transform: none; display: flex; gap: 36px; justify-content: flex-start; margin-top: 40px; padding-top: 32px; width: 100%; }
+    .hero-credential { margin-top: 32px; }
 
     .hero { padding-top: 64px; min-height: 100svh; }
     .trust-divider { display: none; }
@@ -715,11 +699,8 @@
     .hero-actions { flex-direction: column; align-items: center; gap: 16px; padding: 0 18px; }
     .hero-actions .btn-ghost { display: none; }
     .btn-primary { width: 100%; text-align: center; padding: 16px 24px; }
-    .hero-stats { position: static; width: 100%; display: flex; gap: 0; justify-content: space-around; align-items: center; padding: 16px 0 20px; margin: 0; text-align: center; background: #F0E8DC; flex-shrink: 0; }
-    .hero-badge { display: none; }
+    .hero-credential { width: calc(100% - 36px); margin: 24px 18px 20px; }
     .hero-right { display: none; }
-    .stat-num { font-size: 22px; }
-    .stat-label { font-size: 8px; letter-spacing: 0.06em; }
     .trust-bar-desktop { display: flex; }
     .trust-bar-inline { display: none; }
     .trust-bar { margin-top: 0; padding: 12px 18px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 8px; justify-items: start; border-top: none; }
@@ -770,6 +751,7 @@
   <a href="#">Home</a>
   <a href="about.html">About</a>
   <a href="aesthetics.html">Aesthetics</a>
+  <a href="gallery.html">Gallery</a>
   <a href="services.html">Services</a>
   <a href="specials.html">Specials</a>
   <a href="downloads.html">Downloads</a>
@@ -789,6 +771,7 @@
   <ul class="nav-links">
     <li><a href="about.html">About</a></li>
     <li><a href="aesthetics.html">Aesthetics</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
     <li><a href="services.html">Services</a></li>
     <li><a href="specials.html">Specials</a></li>
     <li><a href="downloads.html">Downloads</a></li>
@@ -878,7 +861,7 @@
       </svg>
       </svg>
     </div>
-    <div class="hero-eyebrow">Aesthetic Solutions · London</div>
+    <div class="hero-eyebrow">Dental Implant Specialists</div>
     <h1 class="hero-title">
       Blending hand skills<br>
       with technology,<br>
@@ -886,51 +869,43 @@
       patients can <em>smile.</em>
     </h1>
     <p class="hero-sub">
-      Turner & Goldrich are elite dental implant specialists dedicated to the craft of smile restoration — where clinical precision meets artistic vision, every time.
+      Turner & Goldrich are elite dental implant specialists and full service laboratory dedicated to the craft of smile restoration — where clinical precision meets artistic vision, every time.
     </p>
     <div class="hero-actions">
-      <a class="btn-primary" href="#contact">Book a Consultation</a>
+      <a class="btn-primary" id="heroBookBtn" href="#contact">Book a Consultation</a>
       <a class="btn-ghost" href="#services">Our Services</a>
     </div>
-  </div>
 
-  <div class="hero-stats">
-    <div>
-      <div class="stat-num">20<span>+</span></div>
-      <div class="stat-label">Years Experience</div>
-    </div>
-    <div>
-      <div class="stat-num">3<span>k+</span></div>
-      <div class="stat-label">Implants Placed</div>
-    </div>
-    <div>
-      <div class="stat-num">98<span>%</span></div>
-      <div class="stat-label">Satisfaction</div>
+    <div class="hero-credential" id="heroCredential" style="width:auto;">
+      <div class="hero-credential-mark">✦</div>
+      <div>
+        <div class="hero-credential-title">GDC Registered</div>
+        <div class="hero-credential-sub">Certified Implant Specialist</div>
+      </div>
     </div>
   </div>
 
   <div class="hero-right">
     <div class="hero-image-bg"></div>
-    <div class="hero-tooth-graphic">
-      <div class="tooth-svg-wrap">
-        <svg width="290" height="350" viewBox="0 0 290 350" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="145" cy="145" r="100" stroke="#B89A5A" stroke-width="0.8" stroke-dasharray="4 8" fill="none" opacity="0.45"/>
-          <circle cx="145" cy="145" r="120" stroke="#B89A5A" stroke-width="0.5" fill="none" opacity="0.2"/>
-          <path d="M88 108 Q68 68 88 48 Q108 28 128 44 Q145 28 162 44 Q182 28 202 48 Q222 68 202 108 Q192 138 182 168 Q172 198 167 224 Q162 248 145 251 Q128 248 123 224 Q118 198 108 168 Q98 138 88 108Z"
-                fill="rgba(255,255,255,0.82)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
-          <line x1="132" y1="244" x2="126" y2="292" stroke="rgba(255,255,255,0.28)" stroke-width="1.5"/>
-          <line x1="145" y1="251" x2="145" y2="298" stroke="rgba(255,255,255,0.28)" stroke-width="1.5"/>
-          <line x1="158" y1="244" x2="164" y2="290" stroke="rgba(255,255,255,0.28)" stroke-width="1.5"/>
-          <ellipse cx="124" cy="82" rx="11" ry="18" fill="rgba(255,255,255,0.3)" transform="rotate(-15 124 82)"/>
-        </svg>
-      </div>
-    </div>
-    <div class="hero-badge">
-      <div class="hero-badge-title">GDC Registered</div>
-      <div class="hero-badge-sub">Certified Implant Specialist</div>
-    </div>
   </div>
 </section>
+
+<script>
+  // Match the GDC credential box width to the Book a Consultation button's rendered width
+  (function() {
+    function syncWidth() {
+      var btn = document.getElementById('heroBookBtn');
+      var cred = document.getElementById('heroCredential');
+      if (btn && cred) {
+        var w = btn.getBoundingClientRect().width;
+        if (w > 0) cred.style.width = w + 'px';
+      }
+    }
+    if (document.readyState === 'complete') syncWidth();
+    else window.addEventListener('load', syncWidth);
+    window.addEventListener('resize', syncWidth);
+  })();
+</script>
 
 <!-- TRUST BAR (also shown below hero for desktop) -->
 <div class="trust-bar trust-bar-desktop">
@@ -1355,6 +1330,7 @@
   <ul class="footer-links">
     <li><a href="about.html">About</a></li>
     <li><a href="aesthetics.html">Aesthetics</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
     <li><a href="services.html">Services</a></li>
     <li><a href="specials.html">Specials</a></li>
     <li><a href="downloads.html">Downloads</a></li>

@@ -4,10 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="light">
-<title>About — Turner &amp; Goldrich</title>
+<title>Gallery — Turner &amp; Goldrich</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
+
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -945,6 +946,26 @@
     .download-card { flex-direction: column; padding: 28px 24px; }
   }
 
+
+
+  .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 40px; }
+  .gallery-card { background: var(--white); border: 1px solid var(--border); overflow: hidden; transition: border-color 0.2s; }
+  .gallery-card:hover { border-color: var(--gold); }
+  .gallery-card-image { aspect-ratio: 4/3; background-size: cover; background-position: center; position: relative; }
+  .gallery-img-1 { background: linear-gradient(140deg, #EDE6DB 0%, #C9B896 100%); }
+  .gallery-img-2 { background: linear-gradient(140deg, #E8DDD0 0%, #B89A5A 100%); }
+  .gallery-img-3 { background: linear-gradient(140deg, #F0E8DC 0%, #8A6820 100%); }
+  .gallery-img-4 { background: linear-gradient(140deg, #DDD0BC 0%, #A07C30 100%); }
+  .gallery-img-5 { background: linear-gradient(140deg, #EDE6DB 0%, #CFC0A6 100%); }
+  .gallery-img-6 { background: linear-gradient(140deg, #E8DDD0 0%, #C9A55A 100%); }
+  .gallery-card-body { padding: 22px 24px; }
+  .gallery-tag { display: inline-block; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(160,124,48,0.3); padding: 4px 10px; margin-bottom: 12px; }
+  .gallery-card-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 400; color: #0F0D0C; margin-bottom: 8px; }
+  .gallery-card-desc { font-size: 13px; line-height: 1.7; color: var(--muted); }
+  @media (max-width: 900px) {
+    .gallery-grid { grid-template-columns: 1fr; }
+  }
+
 </style>
 </head>
 <body>
@@ -959,7 +980,6 @@
   <a href="specials.html">Specials</a>
   <a href="downloads.html">Downloads</a>
   <a href="contact.html">Contact</a>
-  
 </div>
 
 <nav id="nav">
@@ -971,14 +991,13 @@
     </div>
   </a>
   <ul class="nav-links">
-    <li><a href="about.html" class="nav-active">About</a></li>
+    <li><a href="about.html">About</a></li>
     <li><a href="aesthetics.html">Aesthetics</a></li>
     <li><a href="gallery.html">Gallery</a></li>
     <li><a href="services.html">Services</a></li>
     <li><a href="specials.html">Specials</a></li>
     <li><a href="downloads.html">Downloads</a></li>
     <li><a href="contact.html">Contact</a></li>
-    
   </ul>
   <a class="nav-cta" href="contact.html">Get In Touch</a>
   <button class="nav-hamburger" onclick="openMobileNav()"><span></span><span></span><span></span></button>
@@ -986,53 +1005,77 @@
 
 
 <div class="page-hero">
-  <div class="page-hero-eyebrow">Est. 1973</div>
-  <h1>The <em>laboratory</em></h1>
-  <p class="page-hero-sub">Over fifty years of specialist crown and bridge work — built on craftsmanship, precision and long-lasting partnerships with dentists across London and beyond.</p>
+  <div class="page-hero-eyebrow">Our Work</div>
+  <h1>The <em>gallery</em></h1>
+  <p class="page-hero-sub">A showcase of crown and bridge restorations, aesthetic case studies and laboratory craftsmanship — built up over fifty years of specialist dental technology.</p>
 </div>
 
 <div class="content-section">
-  <div class="two-col-wide reveal">
-    <div class="sticky-label">
-      <div class="section-eyebrow">Our Story</div>
-      <h2>A laboratory <em>built</em> on trust</h2>
-      <p>Founded in 1973 and still delivering exceptional technical dental work over fifty years later.</p>
+  <div class="section-header reveal">
+    <div>
+      <div class="section-eyebrow">Case Studies</div>
+      <h2 class="section-title">Selected <em>restorations</em></h2>
     </div>
-    <div class="prose">
-      <p>Turner and Goldrich was founded by David Turner and Shraga Goldrich in 1973 and since that time has been specialising in crown and bridge work. We have over the years, become a highly respected and reputable laboratory and have maintained a long list of regular clients during those years for whom cosmetic work is our speciality.</p>
-      <p>After 12 years in Harley Street, the laboratory re-located to St. John's Wood, North West London. Preyesh Khatri has been with Turner and Goldrich since 2000 and has always maintained an important position at the lab and since October 2011 has become Managing Director, and recently relocated to Willesden Green.</p>
-      <p>The aim of the laboratory from the beginning was to produce high quality, custom-made dental appliances according to the required prescription, which will satisfy all technical, anatomical and aesthetic criteria.</p>
-      <p>We have a specialist team of dedicated Dental Technicians, all of whom are registered with the GDC and all of whom have over fifteen years of experience. Most of us have been working together for many years, and in combination with other supporting staff, we form a close-knit and extremely reliable work force that is Turner and Goldrich Limited.</p>
-      <p>The laboratory does work for dental surgeons throughout the London area, the British Isles, including the Channel Islands.</p>
-      <div class="highlight-box">
-        <p>As we are a manufacturer of custom-made products, keeping up-to-date with the latest developments in Dentistry helps us maintain a high standard, especially as the dental field is constantly changing and evolving. It is our aim to grow and develop the laboratory by attending courses provided by top educators, introducing new products, materials and operating systems into the laboratory and thereby keeping ourselves on the cutting edge of high quality aesthetic dentistry.</p>
+  </div>
+
+  <div class="gallery-grid">
+    <div class="gallery-card reveal">
+      <div class="gallery-card-image gallery-img-1"></div>
+      <div class="gallery-card-body">
+        <div class="gallery-tag">PFM</div>
+        <h3 class="gallery-card-title">Anterior Bridgework</h3>
+        <p class="gallery-card-desc">Canine to canine porcelain fused to metal bridge, gold alloy substructure with five ceramic shoulders.</p>
+      </div>
+    </div>
+    <div class="gallery-card reveal reveal-delay-1">
+      <div class="gallery-card-image gallery-img-2"></div>
+      <div class="gallery-card-body">
+        <div class="gallery-tag">IPS e.max</div>
+        <h3 class="gallery-card-title">Full Contour Veneers</h3>
+        <p class="gallery-card-desc">Layered lithium disilicate veneers, hand-finished for natural light transmission and shade matching.</p>
+      </div>
+    </div>
+    <div class="gallery-card reveal reveal-delay-2">
+      <div class="gallery-card-image gallery-img-3"></div>
+      <div class="gallery-card-body">
+        <div class="gallery-tag">Zirconia</div>
+        <h3 class="gallery-card-title">Full Arch Reconstruction</h3>
+        <p class="gallery-card-desc">Twelve-unit milled Zirconia bridge on implant abutments, complete reconstruction case.</p>
+      </div>
+    </div>
+    <div class="gallery-card reveal">
+      <div class="gallery-card-image gallery-img-4"></div>
+      <div class="gallery-card-body">
+        <div class="gallery-tag">Implants</div>
+        <h3 class="gallery-card-title">Lower Implant Section</h3>
+        <p class="gallery-card-desc">Metal fused to porcelain implant crowns, custom abutment design and shade-matched ceramics.</p>
+      </div>
+    </div>
+    <div class="gallery-card reveal reveal-delay-1">
+      <div class="gallery-card-image gallery-img-5"></div>
+      <div class="gallery-card-body">
+        <div class="gallery-tag">Aesthetics</div>
+        <h3 class="gallery-card-title">Diagnostic Wax-Up</h3>
+        <p class="gallery-card-desc">Pre-treatment wax-up used to plan form, function and aesthetics before final restoration.</p>
+      </div>
+    </div>
+    <div class="gallery-card reveal reveal-delay-2">
+      <div class="gallery-card-image gallery-img-6"></div>
+      <div class="gallery-card-body">
+        <div class="gallery-tag">PFM</div>
+        <h3 class="gallery-card-title">Posterior Crown &amp; Bridge</h3>
+        <p class="gallery-card-desc">Conventional metal-based crown and bridge work for a heavy-bite posterior case.</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="content-section-alt reveal">
-  <div class="two-col-wide">
-    <div class="sticky-label">
-      <div class="section-eyebrow">About Our Clients</div>
-      <h2>Partnerships that <em>last</em> decades</h2>
-      <p>Our continued success is based on our provision of excellent service which is only possible through good communications.</p>
-    </div>
-    <div class="prose">
-      <p>We have a very loyal client base that has been established over the laboratory's 40 years of providing a consistent service. Our continued success is based on our provision of excellent service which is only possible through good communications between us and our dentists. The one's existence is dependent on the other and it is only together that we are capable of great things.</p>
-      <p>We welcome new clients to join us and our team in providing patients with restorations that they are happy with. Some cases require us working together from the very beginning, helping with treatment planning, materials to be used and ideas on the best type of restoration for each individual case.</p>
-      <p>We are also more than happy to come out to the surgery to see the patient in the chair to get a better idea of what the case entails. The mutual respect between ourselves and our clients with positive results achieves a mutual confidence and good foundation for a long term co-existence.</p>
-      <p>We pride ourselves in achieving long-lasting relationships built with our current clients, and endeavour to do so with all our new clients as well.</p>
-    </div>
-  </div>
-</div>
-
-<div class="content-section-dark reveal">
-  <div style="text-align:center; max-width:600px; margin:0 auto;">
-    <div class="section-eyebrow" style="justify-content:center; color:var(--gold);">Case Study</div>
-    <h2 style="font-family:'Cormorant Garamond',serif; font-size:clamp(28px,3vw,42px); font-weight:300; color:rgba(255,255,255,0.9); margin:16px 0;">PFM Bridgework</h2>
-    <p style="color:rgba(255,255,255,0.55); font-size:14px; line-height:1.8;">Canine to Canine / Gold alloy with five ceramic shoulders</p>
-    <a href="services.html" class="btn-primary" style="margin-top:32px; display:inline-block;">View Our Services</a>
+<div class="content-section-dark reveal" style="text-align:center;">
+  <div style="max-width:600px; margin:0 auto;">
+    <div class="section-eyebrow" style="justify-content:center; color:var(--gold);">Want to See More?</div>
+    <h2 style="font-family:'Cormorant Garamond',serif; font-size:clamp(26px,3vw,40px); font-weight:300; color:rgba(255,255,255,0.9); margin:16px 0 12px;">Request our full case portfolio</h2>
+    <p style="color:rgba(255,255,255,0.5); font-size:14px;">Get in touch and we'll share further examples of our laboratory work relevant to your case.</p>
+    <a href="contact.html" class="btn-primary" style="margin-top:32px; display:inline-block;">Contact the Laboratory</a>
   </div>
 </div>
 
