@@ -187,8 +187,9 @@
   /* ─── HERO ─── */
   .hero {
     min-height: 100vh;
+    max-height: 760px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.15fr 1fr;
     padding-top: 80px;
     background: #F0E8DC;
   }
@@ -307,24 +308,24 @@
   }
   .hero-credential-mark {
     color: var(--gold);
-    font-size: 12px;
+    font-size: 17px;
     flex-shrink: 0;
   }
   .hero-credential-title {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 12px;
+    font-size: 17px;
     font-weight: 500;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.02em;
     color: var(--deep);
-    line-height: 1.2;
+    line-height: 1.25;
     white-space: nowrap;
   }
   .hero-credential-sub {
-    font-size: 7px;
+    font-size: 9.5px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--gold);
-    margin-top: 2px;
+    margin-top: 3px;
     white-space: nowrap;
   }
 
@@ -332,14 +333,14 @@
     position: relative;
     overflow: hidden;
     background: var(--accent-bg);
-    min-height: 480px;
+    min-height: 420px;
   }
   .hero-image-bg {
     position: absolute;
     inset: 0;
     background-image: url('hero-smile.jpg');
     background-size: cover;
-    background-position: center;
+    background-position: center 38%;
   }
 
   .trust-bar-inline { display: none; }
@@ -663,12 +664,12 @@
     .nav-links, .nav-cta { display: none; }
     .nav-hamburger { display: flex; }
 
-    .hero { grid-template-columns: 1fr; min-height: unset; }
+    .hero { grid-template-columns: 1fr; min-height: unset; max-height: unset; }
     .hero-right { display: none; }
     .hero-left { padding: 32px 32px 40px; }
     .hero-credential { margin-top: 32px; }
 
-    .hero { padding-top: 64px; min-height: 100svh; }
+    .hero { padding-top: 64px; min-height: 100svh; max-height: unset; }
     .trust-divider { display: none; }
 
     .section { padding: 80px 32px; }
@@ -691,7 +692,7 @@
     nav.scrolled { padding: 12px 18px; }
     .nav-logo img { height: 36px; }
 
-    .hero { padding-top: 60px; min-height: calc(100svh - 120px); display: flex; flex-direction: column; position: relative; }
+    .hero { padding-top: 60px; min-height: calc(100svh - 120px); max-height: unset; display: flex; flex-direction: column; position: relative; }
     .hero-left { padding: 0 18px; text-align: center; display: flex; flex-direction: column; justify-content: center; flex: 1; }
     .hero-eyebrow { display: none; }
     .hero-title { font-size: clamp(28px, 8.5vw, 42px); margin-top: 12px; margin-bottom: 32px; padding: 0 18px; }
@@ -876,7 +877,7 @@
       <a class="btn-ghost" href="#services">Our Services</a>
     </div>
 
-    <div class="hero-credential" id="heroCredential" style="width:auto;">
+    <div class="hero-credential" id="heroCredential">
       <div class="hero-credential-mark">✦</div>
       <div>
         <div class="hero-credential-title">GDC Registered</div>
@@ -889,23 +890,6 @@
     <div class="hero-image-bg"></div>
   </div>
 </section>
-
-<script>
-  // Match the GDC credential box width to the Book a Consultation button's rendered width
-  (function() {
-    function syncWidth() {
-      var btn = document.getElementById('heroBookBtn');
-      var cred = document.getElementById('heroCredential');
-      if (btn && cred) {
-        var w = btn.getBoundingClientRect().width;
-        if (w > 0) cred.style.width = w + 'px';
-      }
-    }
-    if (document.readyState === 'complete') syncWidth();
-    else window.addEventListener('load', syncWidth);
-    window.addEventListener('resize', syncWidth);
-  })();
-</script>
 
 <!-- TRUST BAR (also shown below hero for desktop) -->
 <div class="trust-bar trust-bar-desktop">
