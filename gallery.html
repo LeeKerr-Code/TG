@@ -948,22 +948,109 @@
 
 
 
-  .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 40px; }
-  .gallery-card { background: var(--white); border: 1px solid var(--border); overflow: hidden; transition: border-color 0.2s; }
-  .gallery-card:hover { border-color: var(--gold); }
-  .gallery-card-image { aspect-ratio: 4/3; background-size: cover; background-position: center; position: relative; }
-  .gallery-img-1 { background: linear-gradient(140deg, #EDE6DB 0%, #C9B896 100%); }
-  .gallery-img-2 { background: linear-gradient(140deg, #E8DDD0 0%, #B89A5A 100%); }
-  .gallery-img-3 { background: linear-gradient(140deg, #F0E8DC 0%, #8A6820 100%); }
-  .gallery-img-4 { background: linear-gradient(140deg, #DDD0BC 0%, #A07C30 100%); }
-  .gallery-img-5 { background: linear-gradient(140deg, #EDE6DB 0%, #CFC0A6 100%); }
-  .gallery-img-6 { background: linear-gradient(140deg, #E8DDD0 0%, #C9A55A 100%); }
-  .gallery-card-body { padding: 22px 24px; }
   .gallery-tag { display: inline-block; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(160,124,48,0.3); padding: 4px 10px; margin-bottom: 12px; }
-  .gallery-card-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 400; color: #0F0D0C; margin-bottom: 8px; }
-  .gallery-card-desc { font-size: 13px; line-height: 1.7; color: var(--muted); }
+
+  /* ─── SLIDESHOW ─── */
+  .slideshow {
+    position: relative;
+    margin-top: 40px;
+    background: var(--white);
+    border: 1px solid var(--border);
+  }
+  .slideshow-viewport { overflow: hidden; width: 100%; }
+  .slideshow-track {
+    display: flex;
+    transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  .slide {
+    flex: 0 0 100%;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    min-height: 460px;
+  }
+  .slide-image { background-size: cover; background-position: center; position: relative; }
+  .slide-caption {
+    padding: 56px 52px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: var(--white);
+  }
+  .slide-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 300;
+    color: #0F0D0C;
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+  .slide-desc { font-size: 14px; line-height: 1.85; color: var(--muted); max-width: 380px; }
+
+  .slide-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: var(--white);
+    border: 1px solid var(--border);
+    color: var(--deep);
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    z-index: 5;
+  }
+  .slide-arrow:hover { background: var(--gold); color: #fff; border-color: var(--gold); }
+  .slide-arrow-prev { left: 20px; }
+  .slide-arrow-next { right: 20px; }
+
+  .slide-counter {
+    position: absolute;
+    bottom: 22px;
+    left: 52px;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    background: rgba(255,255,255,0.9);
+    padding: 5px 12px;
+    z-index: 5;
+  }
+  .slide-counter span:first-child { color: var(--gold); font-weight: 600; }
+
+  .slide-dots {
+    position: absolute;
+    bottom: 24px;
+    right: 52px;
+    display: flex;
+    gap: 8px;
+    z-index: 5;
+  }
+  .slide-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.18);
+    cursor: pointer;
+    transition: all 0.25s;
+    border: none;
+    padding: 0;
+  }
+  .slide-dot.active { background: var(--gold); width: 20px; border-radius: 4px; }
+
   @media (max-width: 900px) {
-    .gallery-grid { grid-template-columns: 1fr; }
+    .slide { grid-template-columns: 1fr; min-height: unset; }
+    .slide-image { aspect-ratio: 4/3; }
+    .slide-caption { padding: 28px 24px; }
+    .slide-title { font-size: 24px; }
+    .slide-arrow { width: 38px; height: 38px; font-size: 17px; }
+    .slide-arrow-prev { left: 10px; }
+    .slide-arrow-next { right: 10px; }
+    .slide-counter { left: 24px; bottom: auto; top: 12px; }
+    .slide-dots { right: 24px; bottom: auto; top: 12px; }
   }
 
 </style>
@@ -1019,55 +1106,91 @@
     </div>
   </div>
 
-  <div class="gallery-grid">
-    <div class="gallery-card reveal">
-      <div class="gallery-card-image gallery-img-1"></div>
-      <div class="gallery-card-body">
-        <div class="gallery-tag">PFM</div>
-        <h3 class="gallery-card-title">Anterior Bridgework</h3>
-        <p class="gallery-card-desc">Canine to canine porcelain fused to metal bridge, gold alloy substructure with five ceramic shoulders.</p>
+  <div class="slideshow reveal" id="slideshow">
+    <div class="slideshow-viewport">
+      <div class="slideshow-track" id="slideTrack">
+
+        <div class="slide">
+          <div class="slide-image" style="background-image:url('gallery-images/case-1.jpg')"></div>
+          <div class="slide-caption">
+            <div class="gallery-tag">PFM</div>
+            <h3 class="slide-title">Anterior Crown Restoration</h3>
+            <p class="slide-desc">Shade-matched anterior crown work on a working model, finished with natural gum contouring for a seamless transition.</p>
+          </div>
+        </div>
+
+        <div class="slide">
+          <div class="slide-image" style="background-image:url('gallery-images/case-2.jpg')"></div>
+          <div class="slide-caption">
+            <div class="gallery-tag">Implants</div>
+            <h3 class="slide-title">Implant-Supported Bridge</h3>
+            <p class="slide-desc">Screw-retained full arch bridge with precision access channels, designed for a secure, removable fit over implant abutments.</p>
+          </div>
+        </div>
+
+        <div class="slide">
+          <div class="slide-image" style="background-image:url('gallery-images/case-3.jpg')"></div>
+          <div class="slide-caption">
+            <div class="gallery-tag">IPS e.max</div>
+            <h3 class="slide-title">Full Contour Veneers</h3>
+            <p class="slide-desc">Layered lithium disilicate veneers, hand-finished for natural light transmission and shade matching.</p>
+          </div>
+        </div>
+
+        <div class="slide">
+          <div class="slide-image" style="background-image:url('gallery-images/case-4.jpg')"></div>
+          <div class="slide-caption">
+            <div class="gallery-tag">Implants</div>
+            <h3 class="slide-title">Implant Bar Framework</h3>
+            <p class="slide-desc">Precision-milled metal substructure with multiple implant abutment channels, the foundation for a full-arch implant restoration.</p>
+          </div>
+        </div>
+
+        <div class="slide">
+          <div class="slide-image" style="background-image:url('gallery-images/case-5.jpg')"></div>
+          <div class="slide-caption">
+            <div class="gallery-tag">PFM</div>
+            <h3 class="slide-title">Full Arch Bridgework</h3>
+            <p class="slide-desc">Conventional metal-based bridge mounted on a working model, demonstrating full arch coverage and natural contouring.</p>
+          </div>
+        </div>
+
+        <div class="slide">
+          <div class="slide-image" style="background-image:url('gallery-images/case-6.jpg')"></div>
+          <div class="slide-caption">
+            <div class="gallery-tag">Zirconia</div>
+            <h3 class="slide-title">Zirconia Framework</h3>
+            <p class="slide-desc">Milled Zirconia framework prior to ceramic layering, shaped from a precision digital scan for an exact anatomical fit.</p>
+          </div>
+        </div>
+
+        <div class="slide">
+          <div class="slide-image" style="background-image:url('gallery-images/case-7.jpg')"></div>
+          <div class="slide-caption">
+            <div class="gallery-tag">Our Laboratory</div>
+            <h3 class="slide-title">Crafted In-House</h3>
+            <p class="slide-desc">Every restoration that leaves our laboratory is hand-finished and quality checked before it reaches the surgery.</p>
+          </div>
+        </div>
+
+        <div class="slide">
+          <div class="slide-image" style="background-image:url('gallery-images/case-8.jpg')"></div>
+          <div class="slide-caption">
+            <div class="gallery-tag">Aesthetics</div>
+            <h3 class="slide-title">Hand-Finished Anterior Bridge</h3>
+            <p class="slide-desc">Final quality check on a hand-finished anterior bridge, checked for shade, contour and fit before dispatch.</p>
+          </div>
+        </div>
+
       </div>
     </div>
-    <div class="gallery-card reveal reveal-delay-1">
-      <div class="gallery-card-image gallery-img-2"></div>
-      <div class="gallery-card-body">
-        <div class="gallery-tag">IPS e.max</div>
-        <h3 class="gallery-card-title">Full Contour Veneers</h3>
-        <p class="gallery-card-desc">Layered lithium disilicate veneers, hand-finished for natural light transmission and shade matching.</p>
-      </div>
-    </div>
-    <div class="gallery-card reveal reveal-delay-2">
-      <div class="gallery-card-image gallery-img-3"></div>
-      <div class="gallery-card-body">
-        <div class="gallery-tag">Zirconia</div>
-        <h3 class="gallery-card-title">Full Arch Reconstruction</h3>
-        <p class="gallery-card-desc">Twelve-unit milled Zirconia bridge on implant abutments, complete reconstruction case.</p>
-      </div>
-    </div>
-    <div class="gallery-card reveal">
-      <div class="gallery-card-image gallery-img-4"></div>
-      <div class="gallery-card-body">
-        <div class="gallery-tag">Implants</div>
-        <h3 class="gallery-card-title">Lower Implant Section</h3>
-        <p class="gallery-card-desc">Metal fused to porcelain implant crowns, custom abutment design and shade-matched ceramics.</p>
-      </div>
-    </div>
-    <div class="gallery-card reveal reveal-delay-1">
-      <div class="gallery-card-image gallery-img-5"></div>
-      <div class="gallery-card-body">
-        <div class="gallery-tag">Aesthetics</div>
-        <h3 class="gallery-card-title">Diagnostic Wax-Up</h3>
-        <p class="gallery-card-desc">Pre-treatment wax-up used to plan form, function and aesthetics before final restoration.</p>
-      </div>
-    </div>
-    <div class="gallery-card reveal reveal-delay-2">
-      <div class="gallery-card-image gallery-img-6"></div>
-      <div class="gallery-card-body">
-        <div class="gallery-tag">PFM</div>
-        <h3 class="gallery-card-title">Posterior Crown &amp; Bridge</h3>
-        <p class="gallery-card-desc">Conventional metal-based crown and bridge work for a heavy-bite posterior case.</p>
-      </div>
-    </div>
+
+    <button class="slide-arrow slide-arrow-prev" id="slidePrev" aria-label="Previous slide">&#8249;</button>
+    <button class="slide-arrow slide-arrow-next" id="slideNext" aria-label="Next slide">&#8250;</button>
+
+    <div class="slide-counter"><span id="slideCurrent">1</span> / <span id="slideTotal">6</span></div>
+
+    <div class="slide-dots" id="slideDots"></div>
   </div>
 </div>
 
@@ -1119,6 +1242,82 @@ window.addEventListener('scroll', () => {
 document.querySelectorAll('.reveal').forEach(el => {
   new IntersectionObserver(([e]) => { if(e.isIntersecting) el.classList.add('visible'); }, {threshold:0.1}).observe(el);
 });
+
+/* ─── SLIDESHOW ─── */
+(function() {
+  const track = document.getElementById('slideTrack');
+  const slideshow = document.getElementById('slideshow');
+  if (!track || !slideshow) return;
+
+  const slides = track.querySelectorAll('.slide');
+  const total = slides.length;
+  let current = 0;
+  let autoplayTimer = null;
+
+  const dotsWrap = document.getElementById('slideDots');
+  const currentLabel = document.getElementById('slideCurrent');
+  const totalLabel = document.getElementById('slideTotal');
+  totalLabel.textContent = total;
+
+  // Build dots
+  for (let i = 0; i < total; i++) {
+    const dot = document.createElement('button');
+    dot.className = 'slide-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+    dot.addEventListener('click', () => goTo(i));
+    dotsWrap.appendChild(dot);
+  }
+  const dots = dotsWrap.querySelectorAll('.slide-dot');
+
+  function render() {
+    track.style.transform = `translateX(-${current * 100}%)`;
+    currentLabel.textContent = current + 1;
+    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+  }
+
+  function goTo(index) {
+    current = (index + total) % total;
+    render();
+    restartAutoplay();
+  }
+
+  function next() { goTo(current + 1); }
+  function prev() { goTo(current - 1); }
+
+  document.getElementById('slideNext').addEventListener('click', next);
+  document.getElementById('slidePrev').addEventListener('click', prev);
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    const rect = slideshow.getBoundingClientRect();
+    const inView = rect.top < window.innerHeight && rect.bottom > 0;
+    if (!inView) return;
+    if (e.key === 'ArrowRight') next();
+    if (e.key === 'ArrowLeft') prev();
+  });
+
+  // Swipe support
+  let startX = 0, isDragging = false;
+  track.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; isDragging = true; }, {passive:true});
+  track.addEventListener('touchend', (e) => {
+    if (!isDragging) return;
+    const diff = e.changedTouches[0].clientX - startX;
+    if (diff > 50) prev();
+    else if (diff < -50) next();
+    isDragging = false;
+  }, {passive:true});
+
+  // Autoplay
+  function restartAutoplay() {
+    clearInterval(autoplayTimer);
+    autoplayTimer = setInterval(next, 6000);
+  }
+  slideshow.addEventListener('mouseenter', () => clearInterval(autoplayTimer));
+  slideshow.addEventListener('mouseleave', restartAutoplay);
+  restartAutoplay();
+
+  render();
+})();
 </script>
 </body>
 </html>
