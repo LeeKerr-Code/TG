@@ -553,7 +553,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 60px;
-    align-items: start;
+    align-items: stretch;
   }
   .cta-band-eyebrow {
     font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
@@ -562,7 +562,7 @@
   }
   .cta-band-eyebrow::before { content: ''; display: block; width: 20px; height: 1px; background: var(--gold); flex-shrink: 0; }
   .cta-band-left p { font-size: 15px; font-weight: 400; color: #4A4540; line-height: 1.85; margin-top: 18px; max-width: 420px; }
-  .cta-band-right { background: #F5EFE6; border: 1px solid #D8D0C4; }
+  .cta-band-right { background: #F5EFE6; border: 1px solid #D8D0C4; display: flex; flex-direction: column; justify-content: space-between; padding: 44px 48px; }
   .contact-row { display: flex; align-items: flex-start; gap: 16px; padding: 20px 26px; border-bottom: 1px solid var(--border); }
   .contact-row:last-of-type { border-bottom: none; }
   .contact-icon { width: 36px; height: 36px; border: 1px solid var(--gold); display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 13px; flex-shrink: 0; margin-top: 2px; }
@@ -727,6 +727,8 @@
     nav { padding: 16px 0; }
     nav.scrolled { padding: 12px 0; }
     .nav-logo { padding-left: 32px; }
+    .nav-wordmark-top { font-size: 30px; }
+    .nav-wordmark-sub { font-size: 8px; letter-spacing: 0.18em; }
     .nav-links { display: none; }
     .nav-hamburger { display: flex; margin-right: 32px; }
 
@@ -759,10 +761,12 @@
     nav { padding: 14px 0; }
     nav.scrolled { padding: 12px 0; }
     .nav-logo { padding-left: 18px; }
+    .nav-wordmark-top { font-size: 22px; }
+    .nav-wordmark-sub { font-size: 6.5px; letter-spacing: 0.14em; }
     .nav-hamburger { margin-right: 18px; }
     .nav-logo img { height: 36px; }
 
-    .hero { padding-top: 60px; min-height: calc(100svh - 120px); max-height: unset; display: flex; flex-direction: column; position: relative; }
+    .hero { padding-top: 78px; min-height: calc(100svh - 120px); max-height: unset; display: flex; flex-direction: column; position: relative; }
     .hero-left { padding: 0 18px; text-align: center; display: flex; flex-direction: column; justify-content: center; flex: 1; }
     .hero-eyebrow { display: none; }
     .hero-title { font-size: clamp(28px, 8.5vw, 42px); margin-top: 12px; margin-bottom: 32px; padding: 0 18px; }
