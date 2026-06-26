@@ -489,28 +489,27 @@
   /* ─── ABOUT ─── */
   .about-split { display: grid; grid-template-columns: 1fr 1fr; }
   .about-visual {
-    background: transparent;
     position: relative;
     overflow: hidden;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    padding: 32px 0;
+    background: var(--accent-bg);
+    min-height: 420px;
   }
-  .about-visual-inner {
-    width: 240px;
-    height: 260px;
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .about-photo-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 60px;
+    bottom: 28px;
+    background-size: cover;
+    background-position: center;
+  }
+  @media (max-width: 1480px) and (min-width: 1025px) {
+    .about-photo-bg { right: clamp(20px, 4vw, 60px); }
   }
   .about-content { padding: 66px 60px; display: flex; flex-direction: column; justify-content: center; }
   #about { padding: 0; }
   #about .about-content { padding: 80px 60px; }
   .about-content p { font-size: 15px; font-weight: 400; color: #3A3530; line-height: 1.9; margin-bottom: 16px; }
-  .about-signature { font-family: 'Cormorant Garamond', serif; font-size: 25px; font-style: italic; color: var(--deep); margin-top: 6px; }
-  .about-signature-title { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-top: 3px; }
 
   /* ─── PROCESS ─── */
   .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; position: relative; }
@@ -743,7 +742,7 @@
     .services-grid { grid-template-columns: repeat(2, 1fr); }
     .services-grid .service-card:last-child { grid-column: 1 / -1; max-width: 50%; margin: 0 auto; }
     .about-split { grid-template-columns: 1fr; }
-    .about-visual { min-height: unset; }
+    .about-visual { min-height: 340px; }
     .about-content { padding: 48px 32px; }
     .process-steps { grid-template-columns: repeat(2, 1fr); gap: 40px; }
     .process-steps::before { display: none; }
@@ -1138,20 +1137,7 @@
 <section class="section section-alt" id="about">
   <div class="about-split">
     <div class="about-visual">
-      <div class="about-visual-inner">
-        <svg width="240" height="150" viewBox="0 80 240 165" fill="none">
-          <circle cx="120" cy="175" r="88" stroke="#B89A5A" stroke-width="0.8" opacity="0.4"/>
-          <circle cx="120" cy="175" r="66" stroke="#B89A5A" stroke-width="0.8" opacity="0.3"/>
-          <path d="M58 180 Q120 228 182 180" stroke="rgba(255,255,255,0.6)" stroke-width="2" fill="none"/>
-          <rect x="76" y="158" width="20" height="30" rx="10" fill="rgba(255,255,255,0.8)"/>
-          <rect x="98" y="152" width="22" height="38" rx="11" fill="rgba(255,255,255,0.92)"/>
-          <rect x="122" y="152" width="22" height="38" rx="11" fill="rgba(255,255,255,0.92)"/>
-          <rect x="146" y="158" width="20" height="30" rx="10" fill="rgba(255,255,255,0.8)"/>
-          <line x1="133" y1="190" x2="133" y2="222" stroke="#B89A5A" stroke-width="2.5"/>
-          <rect x="127" y="218" width="13" height="16" rx="2" fill="#B89A5A" opacity="0.7"/>
-          <text x="120" y="130" text-anchor="middle" font-family="serif" font-size="22" fill="rgba(255,255,255,0.82)" font-style="italic" font-weight="600">T&amp;G</text>
-        </svg>
-      </div>
+      <div class="about-photo-bg" style="background-image:url('about-photo.jpg')"></div>
     </div>
     <div class="about-content">
       <div class="section-eyebrow">About the Practice</div>
@@ -1159,10 +1145,6 @@
       <p>Turner & Goldrich is an elite dental laboratory based in the heart of North London. We have been dedicated to restoring smiles for over five decades, combining experience and expertise with an unwavering commitment to providing restorations for patients through dentists that are of the highest quality and made with love and care. I know that sounds like pie in sky but that is just how we do things here.</p>
       <p>Our principal specialists hold advanced qualifications and undergo continuous professional development to bring you the very latest in dental technology. Every case is dealt with individually and each case is given the greatest care and attention.</p>
       <p>We believe every patient deserves a smile they're proud of.</p>
-      <div style="margin-top:28px; padding-top:28px; border-top:1px solid var(--border); text-align:center;">
-        <div class="about-signature">Turner & Goldrich</div>
-        <div class="about-signature-title">Dental Implant Specialists · Est. London</div>
-      </div>
     </div>
   </div>
 </section>
