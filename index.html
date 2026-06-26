@@ -117,8 +117,8 @@
     flex-direction: column;
     gap: 5px;
     cursor: pointer;
-    padding: 6px;
-    margin-right: 60px;
+    padding: 12px;
+    margin-right: 52px;
     justify-self: end;
     grid-column: 2;
     background: none;
@@ -743,6 +743,7 @@
     .services-grid .service-card:last-child { grid-column: 1 / -1; max-width: 50%; margin: 0 auto; }
     .about-split { grid-template-columns: 1fr; }
     .about-visual { min-height: 340px; }
+    .about-photo-bg { left: 24px; right: 24px; top: 24px; bottom: 24px; }
     .about-content { padding: 48px 32px; }
     .process-steps { grid-template-columns: repeat(2, 1fr); gap: 40px; }
     .process-steps::before { display: none; }
@@ -790,6 +791,7 @@
     .service-title { font-size: 22px; }
 
     .about-content { padding: 36px 18px; }
+    .about-photo-bg { left: 18px; right: 18px; top: 18px; bottom: 18px; }
     .about-content p { font-size: 14px; }
 
     .testimonial-featured { padding: 32px 24px; }
@@ -1248,28 +1250,31 @@
       <div class="section-eyebrow">Book a Consultation</div>
       <p class="contact-form-sub">Complete the form and we'll be in touch to confirm your appointment.</p>
     </div>
-    <div class="contact-form">
+    <form class="contact-form" action="https://formsubmit.co/hello@turnergoldrich.co.uk" method="POST">
+      <input type="hidden" name="_subject" value="New Consultation Request — Turner & Goldrich Website">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
       <div class="form-row">
         <div class="form-group">
           <label class="form-label">First Name</label>
-          <input type="text" class="form-input" placeholder="Margaret">
+          <input type="text" name="First Name" required class="form-input" placeholder="Margaret">
         </div>
         <div class="form-group">
           <label class="form-label">Last Name</label>
-          <input type="text" class="form-input" placeholder="Thompson">
+          <input type="text" name="Last Name" required class="form-input" placeholder="Thompson">
         </div>
       </div>
       <div class="form-group">
         <label class="form-label">Email Address</label>
-        <input type="email" class="form-input" placeholder="your@email.com">
+        <input type="email" name="Email" required class="form-input" placeholder="your@email.com">
       </div>
       <div class="form-group">
         <label class="form-label">Telephone</label>
-        <input type="tel" class="form-input" placeholder="+44 (0)7700 000000">
+        <input type="tel" name="Telephone" class="form-input" placeholder="+44 (0)7700 000000">
       </div>
       <div class="form-group">
         <label class="form-label">Treatment of Interest</label>
-        <select class="form-input form-select">
+        <select class="form-input form-select" name="Treatment of Interest">
           <option value="" disabled selected>Select a treatment…</option>
           <option>Single Tooth Implant</option>
           <option>Full Arch Restoration</option>
@@ -1283,10 +1288,10 @@
       </div>
       <div class="form-group">
         <label class="form-label">Message <span style="opacity:0.5;font-weight:400">(optional)</span></label>
-        <textarea class="form-input form-textarea" placeholder="Tell us a little about your situation…"></textarea>
+        <textarea class="form-input form-textarea" name="Message" placeholder="Tell us a little about your situation…"></textarea>
       </div>
-      <button class="btn-primary form-submit">Request Consultation →</button>
-    </div>
+      <button type="submit" class="btn-primary form-submit">Request Consultation →</button>
+    </form>
   </div>
 </section>
 
