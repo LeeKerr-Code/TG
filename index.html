@@ -346,6 +346,7 @@
     background: var(--accent-bg);
     min-height: 420px;
   }
+  .hero-image-mobile { display: none; }
   .hero-image-bg {
     position: absolute;
     top: 0;
@@ -857,8 +858,11 @@
     .nav-logo img { height: 36px; }
 
     .hero { padding-top: 78px; min-height: unset; max-height: unset; display: flex; flex-direction: column; position: relative; }
-    .hero-right { display: block; height: 260px; flex-shrink: 0; }
-    .hero-image-bg { right: 0; bottom: 0; }
+    .hero-right { display: block; position: relative; height: 256px; flex-shrink: 0; background: var(--accent-bg); }
+    .hero-image-bg { position: absolute; top: 18px; left: 18px; right: 18px; bottom: 18px; background-size: cover; background-position: center 38%; }
+    .hero-right { display: none; }
+    .hero-image-mobile { display: block; position: relative; height: 220px; width: calc(100% - 36px); margin: 0 18px 20px; background: var(--accent-bg); flex-shrink: 0; }
+    .hero-image-mobile .hero-image-bg { top: 0; left: 0; right: 0; bottom: 0; background-position: center 38%; }
     .hero-left { padding: 0 18px; text-align: center; display: flex; flex-direction: column; justify-content: center; flex: 1; }
     .hero-eyebrow { display: none; }
     .hero-title { font-size: clamp(28px, 8.5vw, 42px); margin-top: 12px; margin-bottom: 32px; padding: 0 18px; }
@@ -1077,6 +1081,9 @@
     <p class="hero-sub">
       Turner & Goldrich are elite dental implant specialists and full service laboratory dedicated to the craft of smile restoration — where clinical precision meets artistic vision, every time.
     </p>
+    <div class="hero-image-mobile">
+      <div class="hero-image-bg" style="background-image:url('hero-smile.jpg')"></div>
+    </div>
     <div class="hero-actions">
       <a class="btn-primary" id="heroBookBtn" href="#contact">Book a Consultation</a>
       <a class="btn-ghost" href="#services">Our Services</a>
