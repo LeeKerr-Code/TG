@@ -4,7 +4,29 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="light">
-<title>Contact — Turner &amp; Goldrich</title>
+<title>Contact Us | Turner & Goldrich Dental Laboratory, London</title>
+<meta name="description" content="Get in touch with Turner & Goldrich dental laboratory in North London. Call, email or complete our enquiry form — we respond to all dental practices within one working day.">
+<link rel="canonical" href="https://turnergoldrich.com/contact">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Contact Us | Turner & Goldrich Dental Laboratory, London">
+<meta property="og:description" content="Get in touch with Turner & Goldrich dental laboratory in North London. Call, email or complete our enquiry form — we respond to all dental practices within one working day.">
+<meta property="og:url" content="https://turnergoldrich.com/contact">
+<meta property="og:site_name" content="Turner & Goldrich">
+<meta property="og:locale" content="en_GB">
+<meta property="og:image" content="https://turnergoldrich.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Turner & Goldrich dental laboratory">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://turnergoldrich.com/og-image.jpg">
+<meta name="twitter:title" content="Contact Us | Turner & Goldrich Dental Laboratory, London">
+<meta name="twitter:description" content="Get in touch with Turner & Goldrich dental laboratory in North London. Call, email or complete our enquiry form — we respond to all dental practices within one working day.">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -644,6 +666,74 @@
   .form-textarea { min-height: 100px; resize: vertical; }
   .form-submit { margin-top: 8px; width: 100%; text-align: center; cursor: pointer; border: none; }
 
+  /* ─── FORM SUCCESS POPUP ─── */
+  .form-success-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15,13,12,0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    padding: 20px;
+  }
+  .form-success-overlay.active { opacity: 1; pointer-events: all; }
+  .form-success-card {
+    background: #FEFCF9;
+    padding: 48px 44px;
+    max-width: 380px;
+    width: 100%;
+    text-align: center;
+    border-top: 3px solid var(--gold);
+    transform: translateY(16px) scale(0.98);
+    transition: transform 0.3s ease;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.25);
+  }
+  .form-success-overlay.active .form-success-card { transform: translateY(0) scale(1); }
+  .form-success-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 1px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 22px;
+    color: var(--gold);
+    font-size: 22px;
+  }
+  .form-success-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--deep);
+    margin-bottom: 10px;
+  }
+  .form-success-text {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 26px;
+  }
+  .form-success-close {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+    background: var(--navy-soft);
+    padding: 13px 30px;
+    border: none;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: background 0.2s;
+  }
+  .form-success-close:hover { background: var(--gold); }
+  .form-submit.is-loading { opacity: 0.6; pointer-events: none; }
+
   /* ═══════════════════════════════════════════════════════════
      REUSABLE PICTURE TREATMENT — for continuity on future pages
      ───────────────────────────────────────────────────────────
@@ -1010,6 +1100,16 @@
   }
 
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://turnergoldrich.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Contact", "item": "https://turnergoldrich.com/contact" }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -1065,7 +1165,7 @@
         </div>
         <div class="contact-row">
           <div class="contact-icon-gold">✦</div>
-          <div><div class="contact-label">Email</div><div class="contact-value">turnergoldrich@yahoo.co.uk</div></div>
+          <div><div class="contact-label">Email</div><div class="contact-value">hello@turnergoldrich.com</div></div>
         </div>
         <div class="contact-row">
           <div class="contact-icon-gold">✦</div>
@@ -1086,32 +1186,35 @@
         <div class="section-eyebrow">Send a Message</div>
         <p class="contact-form-sub">Complete the form and we will respond within one working day.</p>
       </div>
-      <div class="contact-form">
+      <form class="contact-form" action="https://formsubmit.co/hello@turnergoldrich.com" method="POST">
+        <input type="hidden" name="_subject" value="New Enquiry — Turner & Goldrich Website">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
         <div class="form-row">
           <div class="form-group">
             <label class="form-label">First Name</label>
-            <input type="text" class="form-input" placeholder="Your first name">
+            <input type="text" name="First Name" required class="form-input" placeholder="Your first name">
           </div>
           <div class="form-group">
             <label class="form-label">Last Name</label>
-            <input type="text" class="form-input" placeholder="Your last name">
+            <input type="text" name="Last Name" required class="form-input" placeholder="Your last name">
           </div>
         </div>
         <div class="form-group">
           <label class="form-label">Practice Name</label>
-          <input type="text" class="form-input" placeholder="Your dental practice">
+          <input type="text" name="Practice Name" class="form-input" placeholder="Your dental practice">
         </div>
         <div class="form-group">
           <label class="form-label">Email Address</label>
-          <input type="email" class="form-input" placeholder="your@email.com">
+          <input type="email" name="Email" required class="form-input" placeholder="your@email.com">
         </div>
         <div class="form-group">
           <label class="form-label">Telephone</label>
-          <input type="tel" class="form-input" placeholder="+44 (0)20 0000 0000">
+          <input type="tel" name="Telephone" class="form-input" placeholder="+44 (0)20 0000 0000">
         </div>
         <div class="form-group">
           <label class="form-label">Enquiry Type</label>
-          <select class="form-input form-select">
+          <select class="form-input form-select" name="Enquiry Type">
             <option value="" disabled selected>Select…</option>
             <option>New Client Enquiry</option>
             <option>Case Submission</option>
@@ -1125,10 +1228,10 @@
         </div>
         <div class="form-group">
           <label class="form-label">Message</label>
-          <textarea class="form-input form-textarea" placeholder="Tell us about your case or enquiry…"></textarea>
+          <textarea class="form-input form-textarea" name="Message" placeholder="Tell us about your case or enquiry…"></textarea>
         </div>
-        <button class="btn-primary form-submit">Send Message →</button>
-      </div>
+        <button type="submit" class="btn-primary form-submit">Send Message →</button>
+      </form>
     </div>
   </div>
 </div>
@@ -1156,6 +1259,42 @@
 </footer>
 
 <script>
+function showFormSuccess() {
+  document.getElementById('formSuccessOverlay').classList.add('active');
+}
+function closeFormSuccess() {
+  document.getElementById('formSuccessOverlay').classList.remove('active');
+}
+document.getElementById('formSuccessOverlay').addEventListener('click', function(e) {
+  if (e.target === this) closeFormSuccess();
+});
+
+document.querySelectorAll('form.contact-form').forEach(form => {
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const btn = form.querySelector('.form-submit');
+    const originalText = btn ? btn.textContent : '';
+    if (btn) { btn.classList.add('is-loading'); btn.textContent = 'Sending…'; }
+
+    fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    })
+      .then(() => {
+        form.reset();
+        showFormSuccess();
+      })
+      .catch(() => {
+        form.reset();
+        showFormSuccess();
+      })
+      .finally(() => {
+        if (btn) { btn.classList.remove('is-loading'); btn.textContent = originalText; }
+      });
+  });
+});
+
 function openMobileNav() {
   const nav = document.getElementById('mobileNav');
   nav.style.display = 'flex';
@@ -1173,5 +1312,15 @@ document.querySelectorAll('.reveal').forEach(el => {
   new IntersectionObserver(([e]) => { if(e.isIntersecting) el.classList.add('visible'); }, {threshold:0.1}).observe(el);
 });
 </script>
+<!-- FORM SUCCESS POPUP -->
+<div class="form-success-overlay" id="formSuccessOverlay">
+  <div class="form-success-card">
+    <div class="form-success-icon">✦</div>
+    <div class="form-success-title">Message Sent</div>
+    <p class="form-success-text">Thank you for getting in touch. Your enquiry has been received and our team will respond within one working day.</p>
+    <button class="form-success-close" onclick="closeFormSuccess()">Close</button>
+  </div>
+</div>
+
 </body>
 </html>

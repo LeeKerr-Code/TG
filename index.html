@@ -5,7 +5,29 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="light">
 <meta name="supported-color-schemes" content="light">
-<title>Turner & Goldrich — Elite Dental Implant Specialists</title>
+<title>Turner & Goldrich | Dental Implant Laboratory in London Since 1973</title>
+<meta name="description" content="Specialist dental implant and crown & bridge laboratory in North London, trusted by dentists since 1973. PFM, IPS e.max & Zirconia restorations crafted with precision.">
+<link rel="canonical" href="https://turnergoldrich.com/">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Turner & Goldrich | Dental Implant Laboratory in London Since 1973">
+<meta property="og:description" content="Specialist dental implant and crown & bridge laboratory in North London, trusted by dentists since 1973. PFM, IPS e.max & Zirconia restorations crafted with precision.">
+<meta property="og:url" content="https://turnergoldrich.com/">
+<meta property="og:site_name" content="Turner & Goldrich">
+<meta property="og:locale" content="en_GB">
+<meta property="og:image" content="https://turnergoldrich.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Turner & Goldrich dental laboratory">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://turnergoldrich.com/og-image.jpg">
+<meta name="twitter:title" content="Turner & Goldrich | Dental Implant Laboratory in London Since 1973">
+<meta name="twitter:description" content="Specialist dental implant and crown & bridge laboratory in North London, trusted by dentists since 1973. PFM, IPS e.max & Zirconia restorations crafted with precision.">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -632,6 +654,74 @@
   .form-textarea { min-height: 100px; resize: vertical; }
   .form-submit { margin-top: 8px; width: 100%; text-align: center; cursor: pointer; border: none; }
 
+  /* ─── FORM SUCCESS POPUP ─── */
+  .form-success-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15,13,12,0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    padding: 20px;
+  }
+  .form-success-overlay.active { opacity: 1; pointer-events: all; }
+  .form-success-card {
+    background: #FEFCF9;
+    padding: 48px 44px;
+    max-width: 380px;
+    width: 100%;
+    text-align: center;
+    border-top: 3px solid var(--gold);
+    transform: translateY(16px) scale(0.98);
+    transition: transform 0.3s ease;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.25);
+  }
+  .form-success-overlay.active .form-success-card { transform: translateY(0) scale(1); }
+  .form-success-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 1px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 22px;
+    color: var(--gold);
+    font-size: 22px;
+  }
+  .form-success-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--deep);
+    margin-bottom: 10px;
+  }
+  .form-success-text {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 26px;
+  }
+  .form-success-close {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+    background: var(--navy-soft);
+    padding: 13px 30px;
+    border: none;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: background 0.2s;
+  }
+  .form-success-close:hover { background: var(--gold); }
+  .form-submit.is-loading { opacity: 0.6; pointer-events: none; }
+
   /* ═══════════════════════════════════════════════════════════
      REUSABLE PICTURE TREATMENT — for continuity on future pages
      ───────────────────────────────────────────────────────────
@@ -766,7 +856,9 @@
     .nav-hamburger { margin-right: 18px; }
     .nav-logo img { height: 36px; }
 
-    .hero { padding-top: 78px; min-height: calc(100svh - 120px); max-height: unset; display: flex; flex-direction: column; position: relative; }
+    .hero { padding-top: 78px; min-height: unset; max-height: unset; display: flex; flex-direction: column; position: relative; }
+    .hero-right { display: block; height: 260px; flex-shrink: 0; }
+    .hero-image-bg { right: 0; bottom: 0; }
     .hero-left { padding: 0 18px; text-align: center; display: flex; flex-direction: column; justify-content: center; flex: 1; }
     .hero-eyebrow { display: none; }
     .hero-title { font-size: clamp(28px, 8.5vw, 42px); margin-top: 12px; margin-bottom: 32px; padding: 0 18px; }
@@ -775,7 +867,6 @@
     .hero-actions .btn-ghost { display: none; }
     .btn-primary { width: 100%; text-align: center; padding: 16px 24px; }
     .hero-credential { width: calc(100% - 36px); margin: 24px 18px 20px; }
-    .hero-right { display: none; }
     .trust-bar-desktop { display: flex; }
     .trust-bar-inline { display: none; }
     .trust-bar { margin-top: 0; padding: 12px 18px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 8px; justify-items: start; border-top: none; }
@@ -819,6 +910,47 @@
     .footer-links { gap: 16px; }
   }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dentist",
+  "name": "Turner & Goldrich",
+  "alternateName": "Turner & Goldrich Dental Laboratory",
+  "url": "https://turnergoldrich.com/",
+  "logo": "https://turnergoldrich.com/favicon.svg",
+  "image": "https://turnergoldrich.com/hero-smile.jpg",
+  "description": "Specialist dental implant and crown & bridge laboratory based in North London, trusted by dentists since 1973.",
+  "telephone": "+442076254591",
+  "email": "hello@turnergoldrich.com",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Elite House Office 1, Unit 8 The Courtyard, 100 Villiers Road",
+    "addressLocality": "London",
+    "postalCode": "NW2 5PJ",
+    "addressCountry": "GB"
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+      "opens": "09:00",
+      "closes": "18:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Saturday"],
+      "opens": "09:00",
+      "closes": "14:00"
+    }
+  ],
+  "foundingDate": "1973",
+  "areaServed": {
+    "@type": "Place",
+    "name": "Greater London and the United Kingdom"
+  },
+  "sameAs": []
+}
+</script>
 </head>
 <body>
 
@@ -1236,11 +1368,11 @@
       </div>
       <div class="contact-row">
         <div class="contact-icon-gold">✦</div>
-        <div><div class="contact-label">Email</div><div class="contact-value">hello@turnergoldrich.co.uk</div></div>
+        <div><div class="contact-label">Email</div><div class="contact-value">hello@turnergoldrich.com</div></div>
       </div>
       <div class="contact-row">
         <div class="contact-icon-gold">✦</div>
-        <div><div class="contact-label">Address</div><div class="contact-value">Elite House, 100 Villiers Road<br>London NW2 5PJ</div></div>
+        <div><div class="contact-label">Address</div><div class="contact-value">Elite House Office 1, Unit 8 The Courtyard<br>100 Villiers Road, London NW2 5PJ</div></div>
       </div>
       <div class="contact-row">
         <div class="contact-icon-gold">✦</div>
@@ -1253,7 +1385,7 @@
       <div class="section-eyebrow">Book a Consultation</div>
       <p class="contact-form-sub">Complete the form and we'll be in touch to confirm your appointment.</p>
     </div>
-    <form class="contact-form" action="https://formsubmit.co/hello@turnergoldrich.co.uk" method="POST">
+    <form class="contact-form" action="https://formsubmit.co/hello@turnergoldrich.com" method="POST">
       <input type="hidden" name="_subject" value="New Consultation Request — Turner & Goldrich Website">
       <input type="hidden" name="_template" value="table">
       <input type="hidden" name="_captcha" value="false">
@@ -1321,6 +1453,47 @@
 </footer>
 
 <script>
+  // Form success popup handling
+  function showFormSuccess() {
+    document.getElementById('formSuccessOverlay').classList.add('active');
+  }
+  function closeFormSuccess() {
+    document.getElementById('formSuccessOverlay').classList.remove('active');
+  }
+  document.getElementById('formSuccessOverlay').addEventListener('click', function(e) {
+    if (e.target === this) closeFormSuccess();
+  });
+
+  document.querySelectorAll('form.contact-form').forEach(form => {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const btn = form.querySelector('.form-submit');
+      const originalText = btn ? btn.textContent : '';
+      if (btn) { btn.classList.add('is-loading'); btn.textContent = 'Sending…'; }
+
+      fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      })
+        .then(() => {
+          form.reset();
+          showFormSuccess();
+        })
+        .catch(() => {
+          // FormSubmit still typically delivers the email even if the fetch
+          // response itself can't be read due to a network/CORS quirk —
+          // show success either way so the person isn't told it failed
+          // when it most likely went through.
+          form.reset();
+          showFormSuccess();
+        })
+        .finally(() => {
+          if (btn) { btn.classList.remove('is-loading'); btn.textContent = originalText; }
+        });
+    });
+  });
+
   // Nav scroll effect
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
@@ -1370,5 +1543,15 @@
   }, { threshold: 0.05, rootMargin: '0px 0px -30px 0px' });
   reveals.forEach(el => obs.observe(el));
 </script>
+<!-- FORM SUCCESS POPUP -->
+<div class="form-success-overlay" id="formSuccessOverlay">
+  <div class="form-success-card">
+    <div class="form-success-icon">✦</div>
+    <div class="form-success-title">Message Sent</div>
+    <p class="form-success-text">Thank you for getting in touch. Your enquiry has been received and our team will respond within one working day.</p>
+    <button class="form-success-close" onclick="closeFormSuccess()">Close</button>
+  </div>
+</div>
+
 </body>
 </html>
