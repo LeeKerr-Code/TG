@@ -884,7 +884,8 @@
     animation: fadeUp 0.7s ease both;
   }
   .page-hero-eyebrow::before { content: ''; display: block; width: 26px; height: 1px; background: var(--gold); }
-  .page-hero h1 {
+  .page-hero h1,
+  .split-section .split-text h1 {
     font-family: 'Cormorant Garamond', serif;
     font-size: clamp(42px, 5vw, 72px);
     font-weight: 300;
@@ -893,7 +894,9 @@
     max-width: 780px;
     animation: fadeUp 0.7s 0.1s ease both;
   }
-  .page-hero h1 em { font-style: italic; color: var(--gold); }
+  .page-hero h1 em,
+  .split-section .split-text h1 em { font-style: italic; color: var(--gold); }
+  .split-section:first-of-type .split-text { padding-top: 140px; }
   .page-hero-sub {
     font-size: 16px;
     color: #4A4540;
@@ -1079,11 +1082,16 @@
 </nav>
 
 
-<div class="page-hero">
-  <div class="page-hero-eyebrow">Est. 1973</div>
-  <h1>The <em>laboratory</em></h1>
-  <p class="page-hero-sub">Over fifty years of specialist crown and bridge work — built on craftsmanship, precision and long-lasting partnerships with dentists across London and beyond.</p>
-</div>
+<section class="split-section">
+  <div class="split-text">
+    <div class="page-hero-eyebrow">Est. 1973</div>
+    <h1>The <em>laboratory</em></h1>
+    <p class="page-hero-sub">Over fifty years of specialist crown and bridge work — built on craftsmanship, precision and long-lasting partnerships with dentists across London and beyond.</p>
+  </div>
+  <div class="split-photo">
+    <div class="split-photo-bg" style="background-image:url('about-lab-photo.jpg')"></div>
+  </div>
+</section>
 
 <div class="content-section">
   <div class="two-col-wide reveal">
