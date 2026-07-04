@@ -83,7 +83,7 @@
   }
   nav.scrolled { padding: 13px 0; }
 
-  .nav-logo { display: flex; align-items: center; text-decoration: none; gap: 0; flex-shrink: 0; padding-left: 60px; }
+  .nav-logo { display: flex; align-items: center; text-decoration: none; gap: 0; flex-shrink: 0; padding-left: 60px; position: relative; z-index: 1; }
   .nav-logo img { height: 46px; width: auto; display: block; }
   .nav-wordmark {
     display: flex;
@@ -122,7 +122,7 @@
     color: #A07C30;
   }
 
-  .nav-links { display: flex; flex-wrap: nowrap; gap: 28px; list-style: none; justify-content: space-between; padding-right: 60px; grid-column: 2; min-width: 0; width: 100%; }
+  .nav-links { position: absolute; left: 60px; right: 60px; top: 50%; transform: translateY(-50%); display: flex; flex-wrap: nowrap; gap: 28px; list-style: none; justify-content: space-between; }
   .nav-links a {
     font-size: 16px;
     font-weight: 500;
@@ -817,7 +817,7 @@
   ═══════════════════════════════ */
   @media (max-width: 1480px) and (min-width: 1025px) {
     .nav-logo { padding-left: clamp(20px, 4vw, 60px); }
-    .nav-links { padding-right: clamp(20px, 4vw, 60px); gap: clamp(14px, 1.6vw, 28px); }
+    .nav-links { left: clamp(20px, 4vw, 60px); right: clamp(20px, 4vw, 60px); gap: clamp(14px, 1.6vw, 28px); }
     .nav-wordmark-top { font-size: clamp(28px, 3vw, 50px); }
     .nav-wordmark-sub { letter-spacing: 0.16em; font-size: 9px; }
     .nav-links a { font-size: 13px; letter-spacing: 0.08em; }
