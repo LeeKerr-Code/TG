@@ -1195,19 +1195,13 @@
         <input type="hidden" name="_subject" value="New Enquiry — Turner & Goldrich Website">
         <input type="hidden" name="_template" value="table">
         <input type="hidden" name="_captcha" value="false">
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">First Name</label>
-            <input type="text" name="First Name" required class="form-input" placeholder="Your first name">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Last Name</label>
-            <input type="text" name="Last Name" required class="form-input" placeholder="Your last name">
-          </div>
+        <div class="form-group">
+          <label class="form-label">Surgery</label>
+          <input type="text" name="Surgery" required class="form-input" placeholder="Your dental surgery name">
         </div>
         <div class="form-group">
-          <label class="form-label">Practice Name</label>
-          <input type="text" name="Practice Name" class="form-input" placeholder="Your dental practice">
+          <label class="form-label">Name</label>
+          <input type="text" name="Name" required class="form-input" placeholder="Your name">
         </div>
         <div class="form-group">
           <label class="form-label">Email Address</label>
@@ -1218,22 +1212,8 @@
           <input type="tel" name="Telephone" class="form-input" placeholder="+44 (0)20 0000 0000">
         </div>
         <div class="form-group">
-          <label class="form-label">Enquiry Type</label>
-          <select class="form-input form-select" name="Enquiry Type">
-            <option value="" disabled selected>Select…</option>
-            <option>New Client Enquiry</option>
-            <option>Case Submission</option>
-            <option>Technical Query — PFM</option>
-            <option>Technical Query — IPS e.max</option>
-            <option>Technical Query — Zirconia</option>
-            <option>Specials &amp; Pricing</option>
-            <option>Lab Sheet Request</option>
-            <option>General Enquiry</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Message</label>
-          <textarea class="form-input form-textarea" name="Message" placeholder="Tell us about your case or enquiry…"></textarea>
+          <label class="form-label">Message <span style="opacity:0.5;font-weight:400">(optional)</span></label>
+          <textarea class="form-input form-textarea" name="Message" placeholder="Tell us a little about your situation…"></textarea>
         </div>
         <button type="submit" class="btn-primary form-submit">Send Message →</button>
       </form>
