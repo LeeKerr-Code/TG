@@ -99,6 +99,7 @@
     letter-spacing: 0.18em;
     text-transform: uppercase;
     color: #0F0D0C;
+    white-space: nowrap;
   }
   .nav-wordmark-top .amp {
     color: #A07C30;
@@ -122,9 +123,9 @@
     color: #A07C30;
   }
 
-  .nav-links { display: flex; flex-wrap: wrap; row-gap: 8px; gap: 28px; list-style: none; justify-content: space-between; padding-right: 60px; grid-column: 2; min-width: 0; width: 100%; }
+  .nav-links { display: flex; flex-wrap: nowrap; gap: 28px; list-style: none; justify-content: space-between; padding-right: 60px; grid-column: 2; min-width: 0; width: 100%; }
   .nav-links a {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 500;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -751,7 +752,7 @@
     .nav-links { padding-right: clamp(20px, 4vw, 60px); gap: clamp(14px, 1.6vw, 28px); }
     .nav-wordmark-top { font-size: clamp(28px, 3vw, 50px); }
     .nav-wordmark-sub { letter-spacing: 0.16em; font-size: 9px; }
-    .nav-links a { font-size: 12px; letter-spacing: 0.08em; }
+    .nav-links a { font-size: 13px; letter-spacing: 0.08em; }
   }
 
   /* ═══════════════════════════════

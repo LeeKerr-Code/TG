@@ -98,6 +98,7 @@
     letter-spacing: 0.18em;
     text-transform: uppercase;
     color: #0F0D0C;
+    white-space: nowrap;
   }
   .nav-wordmark-top .amp {
     color: #A07C30;
@@ -121,7 +122,7 @@
     color: #A07C30;
   }
 
-  .nav-links { display: flex; flex-wrap: wrap; row-gap: 8px; gap: 28px; list-style: none; justify-content: space-between; padding-right: 60px; grid-column: 2; min-width: 0; width: 100%; }
+  .nav-links { display: flex; flex-wrap: nowrap; gap: 28px; list-style: none; justify-content: space-between; padding-right: 60px; grid-column: 2; min-width: 0; width: 100%; }
   .nav-links a {
     font-size: 16px;
     font-weight: 500;
@@ -532,14 +533,14 @@
   .about-photo-bg {
     position: absolute;
     top: 0;
-    left: 0;
+    left: 60px;
     right: 60px;
     bottom: 28px;
     background-size: cover;
     background-position: center;
   }
   @media (max-width: 1480px) and (min-width: 1025px) {
-    .about-photo-bg { right: clamp(20px, 4vw, 60px); }
+    .about-photo-bg { left: clamp(20px, 4vw, 60px); right: clamp(20px, 4vw, 60px); }
   }
   .about-content { padding: 66px 60px; display: flex; flex-direction: column; justify-content: center; }
   #about { padding: 0; }
