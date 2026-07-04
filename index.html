@@ -445,7 +445,18 @@
     gap: 1px;
     background: var(--border);
   }
-  .services-grid .service-card:last-child { grid-column: 2; }
+  .services-grid .service-card:last-child { grid-column: auto; }
+  .service-last-row {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    gap: 1px;
+    background: var(--border);
+  }
+  .service-last-row .service-card {
+    flex: 0 0 calc((100% - 2px) / 3);
+    max-width: calc((100% - 2px) / 3);
+  }
   .service-card {
     background: #FEFCF9;
     padding: 42px 38px;
@@ -835,6 +846,8 @@
     .section { padding: 80px 32px; }
     .services-grid { grid-template-columns: repeat(2, 1fr); }
     .services-grid .service-card:last-child { grid-column: auto; max-width: 100%; margin: 0; }
+    .service-last-row { gap: 1px; }
+    .service-last-row .service-card { flex: 0 0 calc(50% - 0.5px); max-width: calc(50% - 0.5px); }
     .about-split { grid-template-columns: 1fr; }
     .about-visual { min-height: 340px; }
     .about-photo-bg { left: 24px; right: 24px; top: 24px; bottom: 24px; }
@@ -887,6 +900,8 @@
 
     .services-grid { grid-template-columns: 1fr; }
     .services-grid .service-card:last-child { grid-column: 1; max-width: 100%; margin: 0; }
+    .service-last-row { flex-direction: column; gap: 1px; }
+    .service-last-row .service-card { flex: 0 0 100%; max-width: 100%; }
     .service-card { padding: 32px 26px; }
     .service-title { font-size: 22px; }
 
@@ -1243,6 +1258,8 @@
       <p class="service-desc">We provide a specialised service for patients where a technician is there at the surgery at placement of implants and provides a restoration that the patient can go home with. These are mainly on All on Four cases.</p>
     </div>
 
+    <div class="service-last-row">
+
     <!-- 07 Bleaching Trays, Mouth Guards & Orthodontics -->
     <div class="service-card reveal">
       <div class="service-num">07</div><div class="service-bar"></div>
@@ -1268,19 +1285,12 @@
       <div class="service-title-row">
         <div class="service-icon">
           <svg width="44" height="44" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- Shade guide tabs fanned out from a pivot point -->
           <circle cx="32" cy="48" r="3" stroke="#A07C30" stroke-width="1" fill="none"/>
-          <!-- Tab 1 — far left -->
           <path d="M32 45 L18 16 Q17 13 19 12 Q21 11 22 14 L32 45Z" stroke="#A07C30" stroke-width="1" fill="rgba(160,124,48,0.04)" opacity="0.8"/>
-          <!-- Tab 2 -->
           <path d="M32 45 L23 14 Q23 11 25 10 Q27 9 28 12 L32 45Z" stroke="#A07C30" stroke-width="1" fill="rgba(160,124,48,0.05)" opacity="0.85"/>
-          <!-- Tab 3 — centre -->
           <path d="M32 45 L29 12 Q29 9 32 9 Q35 9 35 12 L32 45Z" stroke="#A07C30" stroke-width="1.2" fill="rgba(160,124,48,0.07)" opacity="0.9"/>
-          <!-- Tab 4 -->
           <path d="M32 45 L36 12 Q37 9 39 10 Q41 11 41 14 L32 45Z" stroke="#A07C30" stroke-width="1" fill="rgba(160,124,48,0.05)" opacity="0.85"/>
-          <!-- Tab 5 — far right -->
           <path d="M32 45 L42 14 Q43 11 45 12 Q47 13 46 16 L32 45Z" stroke="#A07C30" stroke-width="1" fill="rgba(160,124,48,0.04)" opacity="0.8"/>
-          <!-- Shade markers — small lines on active tab -->
           <line x1="30" y1="20" x2="34" y2="20" stroke="#A07C30" stroke-width="0.7" opacity="0.5"/>
           <line x1="30" y1="25" x2="34" y2="25" stroke="#A07C30" stroke-width="0.7" opacity="0.4"/>
           <line x1="30.5" y1="30" x2="33.5" y2="30" stroke="#A07C30" stroke-width="0.7" opacity="0.3"/>
@@ -1290,6 +1300,8 @@
       </div>
       <p class="service-desc">Patients can attend the lab for a comprehensive colour match. Patients call the lab after consultation with the dentist so we can book an appointment.</p>
     </div>
+
+    </div><!-- end service-last-row -->
 
   </div>
 </section>
